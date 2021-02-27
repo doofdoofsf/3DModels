@@ -2,6 +2,8 @@
  * a tab for my phone case
  */
 
+$fn=30;
+
 thickness = 1;
 
 stalk_width = 7;
@@ -10,8 +12,8 @@ stalk_length = 1;
 tab_width = 40;
 tab_length = 60;
 
-loop_radius = 8;
-loophole_radius = loop_radius - 3;
+loop_radius = 5;
+loophole_radius = loop_radius - 2;
 
 module loophole()
 {
@@ -35,7 +37,7 @@ module loop_stalk()
 
 module tab()
 {
-   cube([thickness, tab_width, tab_length]);
+   cube([thickness+0.5, tab_width, tab_length]);
 }
 
 difference() {
