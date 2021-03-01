@@ -19,6 +19,13 @@ module chair_back() {
 	      chair_height*1.8]);
 }
 
+module chair_hole() {
+   rotate([back_rotation, 0, 0])
+      translate([chair_width / 2, chair_depth / 2.2, -chair_height])
+         cylinder(d=15, h=chair_height*2);
+}
+   
+
 module chair_body() {
    difference() {
       cube([chair_width, chair_depth, chair_height]);
@@ -30,10 +37,10 @@ module chair_body() {
       translate([0, chair_depth, 0])
          rotate([back_rotation, 0, 0])
 	    cube([chair_width, chair_depth, chair_height*2]);
-
-		 	
+      chair_hole();
    }
 }
+
 
 minkowski() {
    $fn = 20;
