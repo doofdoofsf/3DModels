@@ -2,13 +2,13 @@
  * A bracket to mount a phone mount in the van on
  */
 
-slot_height = 77;
+slot_height = 76;
 slot_width = 13.5;
 
 wall_thickness = 2.5;
-bracket_width = 100;
+bracket_width = 60;
 bracket_height = slot_height + (2 * wall_thickness);
-bracket_thickness = 16;
+bracket_thickness = 17;
 bracket_leg_width = 10;
 bracket_top_height = 4;
 bracket_back_leg_shorten = 20;
@@ -20,8 +20,7 @@ cutout_thickness = bracket_thickness - 2  * wall_thickness;
 cutout_cylinder_diameter = bracket_thickness - 2 * wall_thickness;
 cutout_y_offset = (bracket_thickness - cutout_thickness)/2;
 
-slot_depth = wall_thickness * 8;
-
+slot_depth = 40;
 
 module phone_box_cutout()
 {
@@ -73,11 +72,6 @@ difference()
          rotate ([0, 90, 0]) 
             cylinder (h=bracket_width, d=cutout_cylinder_diameter);
 
-   /* round cutout on back */ 
-   translate([bracket_width/2, wall_thickness, bracket_back_height/2])
-      rotate([90, 0, 0]) 
-         cylinder (h=wall_thickness, d=bracket_back_height * 0.8, $fn=50);
-   
    /* shorten back */
    translate([0, 0, bracket_height - bracket_back_leg_shorten])
       cube([bracket_width, wall_thickness, bracket_back_leg_shorten]);
