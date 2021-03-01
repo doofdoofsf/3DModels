@@ -8,7 +8,7 @@ slot_width = 13.5;
 wall_thickness = 2.5;
 bracket_width = 60;
 bracket_height = slot_height + (2 * wall_thickness);
-bracket_thickness = 17;
+bracket_thickness = 21.5;
 bracket_leg_width = 10;
 bracket_top_height = 4;
 bracket_back_leg_shorten = 20;
@@ -20,14 +20,23 @@ cutout_thickness = bracket_thickness - 2  * wall_thickness;
 cutout_cylinder_diameter = bracket_thickness - 2 * wall_thickness;
 cutout_y_offset = (bracket_thickness - cutout_thickness)/2;
 
-slot_depth = 40;
+slot_depth = 55;
+
+module phone_box_back_cutout()
+{
+   cutout_height = slot_height*0.65;
+
+   translate([bracket_width-slot_width-wall_thickness*2, slot_depth/1.98, cutout_height + (slot_height - cutout_height)/2])
+     rotate([0, 90, -20])
+        cube([cutout_height, slot_depth/2, wall_thickness*3]);
+}
 
 module phone_box_cutout()
 {
    lip_height = bracket_height / 15;
-   translate([(bracket_width-slot_width)/2-wall_thickness, bracket_thickness/1.45, wall_thickness])
+   translate([(bracket_width-slot_width)/2-2*wall_thickness, bracket_thickness/1.45, wall_thickness])
      rotate([0, 0, -20])
-        cube([wall_thickness, slot_depth, slot_height-lip_height]);
+        cube([wall_thickness*2, slot_depth+wall_thickness, slot_height-lip_height]);
 }
 
 module phone_box()
@@ -63,6 +72,7 @@ difference()
       cube_with_rounded_top();
       phone_slot();
       phone_box_cutout();
+      phone_box_back_cutout();
    }
       
    union() /* cutout with rounded top */
