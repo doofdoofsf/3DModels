@@ -3,12 +3,12 @@
  */
 
 slot_height = 77;
-slot_width = 15;
+slot_width = 13.5;
 
 wall_thickness = 2.5;
 bracket_width = 100;
 bracket_height = slot_height + (2 * wall_thickness);
-bracket_thickness = 14;
+bracket_thickness = 16;
 bracket_leg_width = 10;
 bracket_top_height = 4;
 bracket_back_leg_shorten = 20;
@@ -26,7 +26,7 @@ slot_depth = wall_thickness * 8;
 module phone_box_cutout()
 {
    lip_height = bracket_height / 15;
-   translate([(bracket_width-slot_width)/2-wall_thickness, bracket_thickness/1.5, wall_thickness])
+   translate([(bracket_width-slot_width)/2-wall_thickness, bracket_thickness/1.45, wall_thickness])
      rotate([0, 0, -20])
         cube([wall_thickness, slot_depth, slot_height-lip_height]);
 }
