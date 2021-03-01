@@ -5,7 +5,7 @@ phone_width = 76;
 arm_width = 10;
 
 chair_height = 50;
-chair_width = phone_width + 2 * arm_width;
+chair_width = phone_width + 2 * arm_width + rounding_diameter;
 chair_depth = 80;
 rounding_diameter = 6;
 
@@ -22,7 +22,7 @@ module chair_back() {
 module chair_hole() {
    rotate([back_rotation, 0, 0])
       translate([chair_width / 2, chair_depth / 2.2, -chair_height])
-         cylinder(d=15, h=chair_height*2);
+         cylinder(d=20, h=chair_height*2);
 }
    
 
@@ -40,7 +40,6 @@ module chair_body() {
       chair_hole();
    }
 }
-
 
 minkowski() {
    $fn = 20;
