@@ -4,7 +4,7 @@
 
 $fn=50;
 
-slot_height = 77;
+slot_height = 77.25;
 slot_width = 13.5;
 
 wall_thickness = 2.5;
