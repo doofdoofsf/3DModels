@@ -2,7 +2,7 @@
  * A bracket to mount a phone mount in the van on
  */
 
-slot_height = 76;
+slot_height = 77;
 slot_width = 13.5;
 
 wall_thickness = 2.5;
