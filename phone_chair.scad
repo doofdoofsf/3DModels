@@ -36,9 +36,10 @@ module chair_back() {
 }
 
 module chair_hole() {
+   hole_width = 20;
    rotate([back_rotation, 0, 0])
-      translate([chair_width / 2, chair_depth / 2.3, -chair_height])
-         cylinder(d=20, h=chair_height*0.865);
+      translate([(chair_width - hole_width)/2, chair_depth / 2.6, -chair_height])
+         cube([hole_width, hole_width*0.7, chair_height*0.865]);
 }
 
 module chair_wire_channel() {
@@ -61,11 +62,6 @@ module chair_body() {
    }
 }
 
-module chair_cutouts() {
-   chair_hole();
-   chair_wire_channel();
-}
-
 module chair() {
    union() {
       difference() {
@@ -77,14 +73,16 @@ module chair() {
 
 module rounded_chair() {
    minkowski() {
-      chair();
+      difference() {
+         chair();
+         chair_hole();
+      }
       sphere(d=rounding_diameter, $fn=20);
    }
 }
 
 difference() {
-   // chair();
-   rounded_chair();
-   chair_cutouts();
+  // chair();
+  rounded_chair();
+  chair_wire_channel();
 }
-
