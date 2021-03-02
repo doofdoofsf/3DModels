@@ -39,9 +39,9 @@ module phone_box_back_cutout()
 module phone_box_cutout()
 {
    lip_height = bracket_height / 15;
-   translate([(bracket_width-slot_width)/2-2*wall_thickness, bracket_thickness/1.45, wall_thickness])
+   translate([(bracket_width-slot_width)/2-wall_thickness, bracket_thickness/1.45, wall_thickness])
      rotate([0, 0, -20])
-        cube([wall_thickness*2, slot_depth+wall_thickness, slot_height-lip_height]);
+        cube([wall_thickness*1.2, slot_depth+wall_thickness, slot_height-lip_height]);
 }
 
 module phone_box()
