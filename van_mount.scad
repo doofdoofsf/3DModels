@@ -2,6 +2,8 @@
  * A bracket to mount a phone mount in the van on
  */
 
+$fn=50;
+
 slot_height = 77;
 slot_width = 13.5;
 
@@ -20,8 +22,9 @@ cutout_thickness = bracket_thickness - 2  * wall_thickness;
 cutout_cylinder_diameter = bracket_thickness - 2 * wall_thickness;
 cutout_y_offset = (bracket_thickness - cutout_thickness)/2;
 
-slot_depth = 55;
+rounding_sphere_diameter = 6;
 
+slot_depth = 55;
 
 module phone_box_back_cutout()
 {
@@ -32,16 +35,23 @@ module phone_box_back_cutout()
         minkowski() {
            $fn=50;
            cube([cutout_height, slot_depth/2, wall_thickness*3]);
-	   sphere(3);
+	   sphere(d=rounding_sphere_diameter);
         }
+}
+
+module phone_box_cutout_too()
+{
+   lip_height=8;
+   translate([(bracket_width-slot_width)/2-wall_thickness*0.7, bracket_thickness* 0.79, wall_thickness+lip_height])
+     rotate([0, 0, -20])
+        cube([wall_thickness*1.3, slot_depth, slot_height-2*lip_height]);
 }
 
 module phone_box_cutout()
 {
-   lip_height = bracket_height / 15;
    translate([(bracket_width-slot_width)/2-wall_thickness, bracket_thickness/1.45, wall_thickness])
      rotate([0, 0, -20])
-        cube([wall_thickness*1.2, slot_depth+wall_thickness, slot_height-lip_height]);
+        cube([wall_thickness*1.2, slot_depth+wall_thickness-20, slot_height]);
 }
 
 module phone_box()
@@ -56,6 +66,20 @@ module phone_slot()
    translate([(bracket_width-slot_width)/2, bracket_thickness/1.5, wall_thickness])
      rotate([0, 0, -20])
         cube([slot_width, slot_depth+10, slot_height]);
+}
+
+module bracket_back_cutout() {
+   cutout_height = bracket_back_height * 0.6;
+   cutout_width = bracket_width * 0.6;
+
+   minkowski() {
+      $fn=50;
+      translate([(bracket_width - cutout_width)/2, 
+                0, 
+	        (bracket_back_height - cutout_height)/2])
+         cube([cutout_width, wall_thickness, cutout_height]);
+      sphere(d=rounding_sphere_diameter);
+   }
 }
 
 module cube_with_rounded_top()
@@ -75,8 +99,10 @@ difference()
    difference()
    {
       cube_with_rounded_top();
+      bracket_back_cutout();
       phone_slot();
       phone_box_cutout();
+      phone_box_cutout_too();
       phone_box_back_cutout();
    }
       
