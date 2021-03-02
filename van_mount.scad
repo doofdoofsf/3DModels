@@ -22,13 +22,18 @@ cutout_y_offset = (bracket_thickness - cutout_thickness)/2;
 
 slot_depth = 55;
 
+
 module phone_box_back_cutout()
 {
    cutout_height = slot_height*0.65;
 
    translate([bracket_width-slot_width-wall_thickness*2, slot_depth/1.98, cutout_height + (slot_height - cutout_height)/2])
      rotate([0, 90, -20])
-        cube([cutout_height, slot_depth/2, wall_thickness*3]);
+        minkowski() {
+           $fn=50;
+           cube([cutout_height, slot_depth/2, wall_thickness*3]);
+	   sphere(3);
+        }
 }
 
 module phone_box_cutout()
