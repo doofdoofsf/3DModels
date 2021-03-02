@@ -1,5 +1,3 @@
-// https://i0.wp.com/sourcing.co.uk/wp-content/uploads/2019/03/Promotional-Bamboo-Desktop-Mobile-Phone-Stand-Holder.jpg
-
 rounding_diameter = 6;
 phone_width = 76;
 
