@@ -41,7 +41,7 @@ module phone_box_back_cutout()
 
 module phone_box_cutout_too()
 {
-   lip_height=8;
+   lip_height=4;
    translate([(bracket_width-slot_width)/2-wall_thickness*0.7, bracket_thickness* 0.79, wall_thickness+lip_height])
      rotate([0, 0, -20])
         cube([wall_thickness*1.3, slot_depth, slot_height-2*lip_height]);
