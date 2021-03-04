@@ -9,7 +9,7 @@ slot_width = 13.5;
 
 wall_thickness = 2.5;
 bracket_width = 60;
-bracket_height = slot_height + (2 * wall_thickness);
+bracket_height = slot_height + (3 * wall_thickness);
 bracket_thickness = 21.5;
 bracket_leg_width = 10;
 bracket_top_height = 4;
