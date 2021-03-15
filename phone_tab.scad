@@ -17,9 +17,9 @@ loophole_radius = loop_radius - 2;
 
 module loophole()
 {
-   translate([0, tab_width / 2, tab_length + stalk_length + loop_radius])
+   translate([-thickness, tab_width / 2, tab_length + stalk_length + loop_radius])
       rotate([0, 90, 0])
-         # cylinder(h=thickness, r=loophole_radius);
+         cylinder(h=thickness*3, r=loophole_radius);
 }
 
 module loop()
