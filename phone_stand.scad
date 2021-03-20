@@ -8,7 +8,7 @@ module delete_hands() {
 module hands_cutout() {
    rotate([0, -25, 0])
       translate([23.1,0,-22])
-         cube([30,30.2,24], center=true);
+         cube([40,30.2,24], center=true);
 }
 
 module new_hands() {
@@ -17,15 +17,15 @@ module new_hands() {
    width = 67;
 
    rotate([0, -25, 0])
-      translate([25,0,-24.15])
+      translate([27,0,-24.15])
          union() {
-            cube([20, width, wall_thickness], center=true);
+            cube([23, width, wall_thickness], center=true);
 	    hull() {
 	       rotate([90,90,0])
-	          translate([-7, 7.5, 0])
+	          translate([-7, 9, 0])
 	             cylinder(h=width, d=wall_thickness, center=true);
 	       rotate([0,90,0])
-	          translate([-4, 0, 7.45])
+	          translate([-4, 0, 8.9])
 	             cube([5, width, wall_thickness], center=true);
             }
 		      
