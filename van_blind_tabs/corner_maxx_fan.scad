@@ -4,7 +4,7 @@
 
 $fn=50;
 
-rounding_sphere_diameter=1;
+rounding_sphere_diameter=3;
 thickness=1.1;
 wall_length=14;
 height=7;
@@ -29,7 +29,7 @@ module cube_corder_cutout() {
    true_wall_length = wall_length + rounding_sphere_diameter;
    cutout_wall_length = true_wall_length - 3 * thickness;
 
-   translate([thickness, thickness, -thickness])
+   translate([thickness/4, thickness/4, -2*thickness])
       cube([cutout_wall_length, cutout_wall_length, thickness*2]);
 }
 
