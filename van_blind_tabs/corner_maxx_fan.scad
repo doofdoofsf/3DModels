@@ -6,7 +6,7 @@ $fn=50;
 
 rounding_sphere_diameter=3;
 thickness=1.1;
-wall_length=14;
+wall_length=10;
 height=7;
 
 module base_cube() {
