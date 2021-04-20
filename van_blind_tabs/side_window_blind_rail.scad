@@ -1,5 +1,5 @@
 /*
- * a tab to hold the maxxair fan blind up
+ * a rail for the van side window to hold the blind in
  */
 
 $fn=50;

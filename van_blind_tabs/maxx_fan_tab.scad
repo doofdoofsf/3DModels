@@ -4,8 +4,8 @@
 
 $fn=50;
 
-back_size = 5;
-thickness = 1.2;
+back_size = 6;
+thickness = 1.1;
 
 module back() {
    translate([back_size/2, thickness, thickness])
