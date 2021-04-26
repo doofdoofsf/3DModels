@@ -5,8 +5,8 @@
 $fn=50;
 
 rounding_sphere_diameter=3;
-thickness=1.1;
-wall_length=10;
+thickness=1.2;
+wall_length=11;
 height=7;
 
 module base_cube() {
@@ -33,7 +33,16 @@ module cube_corder_cutout() {
       cube([cutout_wall_length, cutout_wall_length, thickness*2]);
 }
 
-difference() {
-   cube_corner();
-   cube_corder_cutout();
+module tab() {
+   difference() {
+      cube_corner();
+      cube_corder_cutout();
+   }
+}
+
+offsets = [0, 20, 40, 60];
+
+for (offset = offsets) {
+   translate([offset, 0, 0])
+      tab();
 }

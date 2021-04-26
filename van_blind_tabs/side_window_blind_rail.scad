@@ -6,9 +6,9 @@ $fn=50;
 
 rounding_sphere_diameter = 1;
 
-rail_length = 12;
-rail_width = 5;
-thickness = 1.1;
+rail_length = 18;
+rail_width = rail_length / 2.4;
+thickness = 1.5;
 
 module base() {
    cube([rail_length, rail_width, thickness]);
@@ -38,5 +38,14 @@ module back() {
    }
 }
 
-sculpted_back();
-base();
+module tab() {
+   sculpted_back();
+   base();
+}
+
+offsets = [0, 20, 40];
+
+for (offset = offsets) {
+   translate([offset, 0, 0])
+      tab();
+}

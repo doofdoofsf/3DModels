@@ -4,8 +4,8 @@
 
 $fn=50;
 
-back_size = 6;
-thickness = 1.1;
+back_size = 8;
+thickness = 1.3;
 
 module back() {
    translate([back_size/2, thickness, thickness])
@@ -19,8 +19,16 @@ module back_cutoff() {
       cube(back_size);
 }
 
-cube([back_size, back_size, thickness]);
-difference() {
-   back();
-   back_cutoff();
+module tab() {
+   cube([back_size, back_size, thickness]);
+
+   difference() {
+      back();
+      back_cutoff();
+   }
+}
+
+for (offset = [0:10:70]) {
+   translate([offset, 0, 0])
+      tab();
 }
