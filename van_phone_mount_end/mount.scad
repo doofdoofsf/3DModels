@@ -4,9 +4,10 @@
 
 $fn=80;
 
-width=12.5;
-length=18.5;
+width=12.3;
+length=18.0;
 wall_thickness = 3;
+base_side = 35;
 
 module receiver_shape(width, length) {
    hull() {
@@ -23,9 +24,39 @@ module receiver_2d() {
    }
 }
 
+module base_2d() {
+   minkowski() {
+      square(32);
+      circle(3);
+   }
+}
+
+module receiver_hole() {
+   linear_extrude(base_side+wall_thickness)
+      receiver_shape(width, length);
+}
+
+module base() {
+   linear_extrude(wall_thickness*2)
+      base_2d();
+}
+
 module receiver() {
-   linear_extrude(3)
+   linear_extrude(wall_thickness)
+      receiver_shape(width+2*wall_thickness, length+2*wall_thickness);
+   linear_extrude(base_side)
       receiver_2d();
 }
 
-receiver();
+difference() {
+   hull() {
+      translate([13.0, 0, 10])
+         rotate([-70, 0, 0])
+            receiver();
+      base();
+   }
+
+   translate([13.0, 0, 10])
+      rotate([-70, 0, 0])
+         receiver_hole();
+}
