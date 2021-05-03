@@ -8,6 +8,7 @@ width=12.3;
 length=18.0;
 wall_thickness = 3;
 base_side = 35;
+rounding_sphere = 3;
 
 module receiver_shape(width, length) {
    hull() {
@@ -27,7 +28,7 @@ module receiver_2d() {
 module base_2d() {
    minkowski() {
       square(32);
-      circle(3);
+      circle(rounding_sphere);
    }
 }
 
@@ -48,15 +49,29 @@ module receiver() {
       receiver_2d();
 }
 
-difference() {
-   hull() {
+module main_mount() {
+   difference() {
+      hull() {
+         translate([13.0, 0, 10])
+            rotate([-70, 0, 0])
+               receiver();
+         base();
+      }
+   
       translate([13.0, 0, 10])
          rotate([-70, 0, 0])
-            receiver();
-      base();
+            receiver_hole();
    }
+}
 
-   translate([13.0, 0, 10])
-      rotate([-70, 0, 0])
-         receiver_hole();
+module base_cutout() {
+   radius = 280;
+   translate([-base_side/2, base_side, -radius+2.7])
+      rotate([0, 90, 0])
+         cylinder(r=radius, base_side*2);
+}
+
+difference() {
+   main_mount();
+   base_cutout();
 }
