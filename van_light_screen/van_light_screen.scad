@@ -6,39 +6,45 @@ $fn=50;
 
 rounding_sphere_diameter = 1;
 
-thickness = 1.5;
-screen_length = 100;
+screen_length = 200;
 screen_width = 20;
 
+tab_length = 10;
+
 module screen() {
-   cube([screen_length, screen_width, thickness]);
+   cube([screen_length, screen_width, 1.5]);
 }
 
-module tab() {
+module tab(thickness) {
    cube([10, 8, thickness]);
 }
 
-module tabs() {
-   offsets = [26.6, 63.4];
+module tabs(thickness) {
+   offset_spacing = screen_length/3;
+   offsets = [offset_spacing - tab_length/2, offset_spacing*2 - tab_length/2];
 
    for (offset = offsets) {
       translate([offset, thickness, 0]) {
          rotate([90, 0, 0]) {
-            tab();
+            tab(thickness);
          }
       }
    }
 }
 
-module full_screen() {
+module full_screen(thickness) {
    screen();
-   tabs();
+   tabs(thickness);
 }
 
-offsets = [0, 25, 50, 75];
+spacing = 25;
 
-for (offset = offsets) {
-   translate([0, offset, 0]) {
-      full_screen();
-   }
+translate([0, spacing*0, 0]) {
+   full_screen(1.5);
 }
+
+translate([0, spacing*1, 0]) {
+   full_screen(2.5);
+}
+
+
