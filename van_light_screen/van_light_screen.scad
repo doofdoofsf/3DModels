@@ -39,12 +39,16 @@ module full_screen(thickness) {
 
 spacing = 25;
 
-translate([0, spacing*0, 0]) {
-   full_screen(1.5);
+//for(s = [0, spacing*1]) {
+for(s = [0]) {
+   translate([0, s, 0]) {
+      full_screen(1.5);
+   }
 }
 
-translate([0, spacing*1, 0]) {
-   full_screen(2.5);
+//for(s = [spacing*2, spacing*3]) {
+for(s = [spacing]) {
+   translate([0, s, 0]) {
+      full_screen(2.5);
+   }
 }
-
-
