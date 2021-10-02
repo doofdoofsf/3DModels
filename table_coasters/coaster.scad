@@ -3,13 +3,13 @@
  */
 
 $fn=50;
-foot_size = 30;
+foot_size = 45;
 foot_depth = 1.5;
 hole_size = 16;
 hole_depth = 5;
 center = true;
 
-thickness = 2;
+thickness = 2.5;
 radius = 1;
 
 include <../lib/rounding.scad>
@@ -30,8 +30,10 @@ module coaster() {
    }
 }
 
-// for (offset = [0:35:70]) {
-for (offset = [0]) {
+spacing=foot_size+5;
+
+for (offset = [0,spacing,spacing*2,spacing*3]) {
+//for (offset = [0]) {
    translate([offset, 0, 0])
       coaster();
 }
