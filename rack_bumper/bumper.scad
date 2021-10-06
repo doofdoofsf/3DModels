@@ -12,7 +12,7 @@ hole_x_offset=19;
 hole_y_offset=14;
 
 length=75;
-width=40;
+width=42;
 
 module hole(x,y) {
    translate([x, y, -thickness*2]) {
