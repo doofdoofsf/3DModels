@@ -1,5 +1,5 @@
 /*
- * a tab to hold the maxxair fan blind up
+ * coaster for table
  */
 
 $fn=50;
