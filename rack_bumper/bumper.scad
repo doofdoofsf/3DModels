@@ -7,11 +7,11 @@ $fn=50;
 include <../lib/rounding.scad>
 
 thickness=2;
-hole_dia=5;
+hole_dia=6;
 hole_x_offset=19;
 hole_y_offset=14;
 
-length=75;
+length=77;
 width=42;
 
 module hole(x,y) {
