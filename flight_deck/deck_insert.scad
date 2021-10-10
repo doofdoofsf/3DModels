@@ -1,5 +1,5 @@
 /*
- * flight deck platform
+ * flight deck bag insert
  */
 
 $fn=200;
