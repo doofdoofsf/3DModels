@@ -7,15 +7,15 @@ $fn=100;
 jig_width=33;
 border=10;
 
-slot_width=3.8;
+slot_width=4.0;
 slot_length=75;
 jig_length=slot_length+2*border;
-jig_thickness=1.2;
+jig_thickness=1.3;
 bump_diameter = 1.6;
 bump_height=0.2;
 
 module help_text() {
-   translate([jig_width/2, jig_length-5, jig_thickness]) {
+   translate([jig_width/2, jig_length-7, jig_thickness]) {
       linear_extrude(bump_height) {
          text("BOTTOM", size=3, halign="center");
       }
@@ -25,6 +25,7 @@ module help_text() {
 module raised_bumps() {
    bump_count = 10;
    bump_spacing = (jig_length-2*bump_diameter) / bump_count;
+
    x_sequence = [bump_diameter, jig_width-bump_diameter];
    y_sequence = [ for (y = [bump_diameter : bump_spacing : jig_length]) y ];
 
