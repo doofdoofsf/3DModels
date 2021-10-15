@@ -7,12 +7,36 @@ $fn=200;
 jig_width=33;
 border=10;
 
-slot_width=1.2;
-slot_length=100;
+slot_width=3.8;
+slot_length=75;
+jig_length=slot_length+2*border;
 jig_thickness=1.2;
+bump_diameter = 1.6;
 
-module jig() {
-   cube([jig_width, slot_length+2*border, jig_thickness]);
+module raised_bumps() {
+   bump_count = 10;
+   bump_spacing = (jig_length-2*bump_diameter) / bump_count;
+   x_sequence = [bump_diameter, jig_width-bump_diameter];
+   y_sequence = [ for (y = [bump_diameter : bump_spacing : jig_length]) y ];
+
+   echo(y_sequence);
+
+   for (x = x_sequence) {
+      for (y = y_sequence) {
+         translate([x, y, 0])
+	    jig_raised_bump();
+      }
+   }
+}
+
+module jig_raised_bump() {
+   translate([0,0,jig_thickness]) {
+      cylinder(0.2, d=bump_diameter);
+   }
+}
+
+module jig(thickness) {
+   cube([jig_width, jig_length, thickness]);
 }
 
 module slot() {
@@ -22,6 +46,8 @@ module slot() {
 }
 
 difference() {
-   jig();
+   jig(jig_thickness);
    slot();
 }
+
+raised_bumps();
