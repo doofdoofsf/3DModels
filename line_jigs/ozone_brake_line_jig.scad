@@ -12,7 +12,8 @@ slot_length=75;
 jig_length=slot_length+2*border;
 jig_thickness=1.3;
 bump_diameter = 1.6;
-bump_height=0.2;
+bump_height=0.6;
+slot_indent = slot_width * 0.5;
 
 module help_text() {
    translate([jig_width/2, jig_length-7, jig_thickness]) {
@@ -49,15 +50,26 @@ module jig(thickness) {
    cube([jig_width, jig_length, thickness]);
 }
 
-module slot() {
-   translate([jig_width/2-slot_width/2, border, -1]) {
-      cube([slot_width, slot_length, jig_thickness+2]);
+module tapered_slot() {
+   slot_polygon=[[slot_indent, 0], [slot_width+slot_indent, 0], [slot_width+2*slot_indent, jig_thickness+1], [0, jig_thickness+1]];
+
+   linear_extrude(height=slot_length) {
+      polygon(slot_polygon);
+   }
+};
+
+
+module positioned_tapered_slot() {
+   translate([jig_width/2-slot_width/2-slot_indent, border+slot_length, -0.5]) {
+      rotate([90,0,0]) {
+         tapered_slot();
+      }
    }
 }
 
 difference() {
    jig(jig_thickness);
-   slot();
+   positioned_tapered_slot();
 }
 
 raised_bumps();
