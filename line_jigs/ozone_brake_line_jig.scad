@@ -51,7 +51,8 @@ module jig(thickness) {
 }
 
 module tapered_slot() {
-   slot_polygon=[[slot_indent, 0], [slot_width+slot_indent, 0], [slot_width+2*slot_indent, jig_thickness+1], [0, jig_thickness+1]];
+   // slot_polygon=[[slot_indent, 0], [slot_width+slot_indent, 0], [slot_width+2*slot_indent, jig_thickness+1], [0, jig_thickness+1]];
+   slot_polygon=[[0,0], [slot_width+2*slot_indent, 0], [slot_width+slot_indent, jig_thickness], [slot_indent, jig_thickness]];
 
    linear_extrude(height=slot_length) {
       polygon(slot_polygon);
@@ -60,7 +61,7 @@ module tapered_slot() {
 
 
 module positioned_tapered_slot() {
-   translate([jig_width/2-slot_width/2-slot_indent, border+slot_length, -0.5]) {
+   translate([jig_width/2-slot_width/2-slot_indent, border+slot_length, 0]) {
       rotate([90,0,0]) {
          tapered_slot();
       }
