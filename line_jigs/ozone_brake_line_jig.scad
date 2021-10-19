@@ -23,6 +23,16 @@ module help_text() {
    }
 }
 
+module size_text() {
+   translate([17, 7, jig_thickness]) {
+      rotate([0,0,180]) {
+         linear_extrude(bump_height) {
+            text("4mm", size=3, halign="center");
+         }
+      }
+   }
+}
+
 module raised_bumps() {
    bump_count = 10;
    bump_spacing = (jig_length-2*bump_diameter) / bump_count;
@@ -51,7 +61,6 @@ module jig(thickness) {
 }
 
 module tapered_slot() {
-   // slot_polygon=[[slot_indent, 0], [slot_width+slot_indent, 0], [slot_width+2*slot_indent, jig_thickness+1], [0, jig_thickness+1]];
    slot_polygon=[[0,0], [slot_width+2*slot_indent, 0], [slot_width+slot_indent, jig_thickness], [slot_indent, jig_thickness]];
 
    linear_extrude(height=slot_length) {
@@ -75,3 +84,4 @@ difference() {
 
 raised_bumps();
 help_text();
+size_text();
