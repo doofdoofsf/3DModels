@@ -2,32 +2,25 @@
  * a sewing jig for ozone brake lines
  */
 
-$fn=100;
+$fn = 100;
 
-jig_width=33;
-border=10;
+jig_width = 33;
+border = 10;
 
-slot_width=4.0;
-slot_length=75;
-jig_length=slot_length+2*border;
-jig_thickness=1.3;
-bump_diameter = 1.6;
-bump_height=0.6;
-slot_indent = slot_width * 0.5;
-
-module help_text() {
-   translate([jig_width/2, jig_length-7, jig_thickness]) {
-      linear_extrude(bump_height) {
-         text("BOTTOM", size=3, halign="center");
-      }
-   }
-}
+slot_width = 4.0;
+slot_length = 75;
+jig_length = slot_length+2*border;
+jig_thickness = 1.3;
+bump_diameter = 2;
+bump_height = 0.5;
+text_depth = 3.0;
+slot_indent = 1;
 
 module size_text() {
-   translate([17, 7, jig_thickness]) {
+   translate([16, 7, -text_depth/2]) {
       rotate([0,0,180]) {
-         linear_extrude(bump_height) {
-            text("4mm", size=3, halign="center");
+         linear_extrude(text_depth) {
+            text("4mm", size=4, halign="center");
          }
       }
    }
@@ -80,8 +73,7 @@ module positioned_tapered_slot() {
 difference() {
    jig(jig_thickness);
    positioned_tapered_slot();
+   size_text();
 }
 
 raised_bumps();
-help_text();
-size_text();
