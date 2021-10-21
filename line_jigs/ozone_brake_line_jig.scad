@@ -7,7 +7,7 @@ $fn = 100;
 jig_width = 33;
 border = 10;
 
-slot_width = 4.0;
+slot_width = 3.7;
 slot_length = 75;
 jig_length = slot_length+2*border;
 jig_thickness = 1.3;
@@ -17,10 +17,10 @@ text_depth = 3.0;
 slot_indent = 1;
 
 module size_text() {
-   translate([16, 7, -text_depth/2]) {
-      rotate([0,0,180]) {
+   translate([16, 7, text_depth/2]) {
+      rotate([0,180,180]) {
          linear_extrude(text_depth) {
-            text("4mm", size=4, halign="center");
+            text(str(slot_width,"mm"), size=4, halign="center", font="DejaVu Sans:style=Bold");
          }
       }
    }
