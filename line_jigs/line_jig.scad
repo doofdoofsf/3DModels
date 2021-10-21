@@ -1,5 +1,5 @@
 /*
- * a sewing jig for ozone brake lines
+ * a sewing jig for lines
  */
 
 $fn = 100;
@@ -10,11 +10,15 @@ border = 10;
 slot_width = 6.5;
 slot_length = 75;
 jig_length = slot_length+2*border;
-jig_thickness = 1.3;
+
 bump_diameter = 2;
 bump_height = 0.5;
 text_depth = 3.0;
 slot_indent = 1;
+
+jig_thickness = slot_width*0.48 - bump_height;
+
+echo(jig_thickness);
 
 module size_text() {
    translate([16, 7, text_depth/2]) {
