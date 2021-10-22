@@ -7,7 +7,7 @@ $fn = 100;
 jig_width = 33;
 border = 10;
 
-slot_width = 6.5;
+slot_width = 6.5;     // change this for different diameters of line
 slot_length = 75;
 jig_length = slot_length+2*border;
 
@@ -15,7 +15,10 @@ bump_diameter = 2;
 bump_height = 0.5;
 slot_indent = 1;
 
-jig_thickness = slot_width*0.48 - bump_height;
+projected_jig_thickness = slot_width*0.40 - bump_height;
+jig_thickness = projected_jig_thickness < 1.3 ? 1.3 : projected_jig_thickness;
+
+echo(jig_thickness);
 text_depth = jig_thickness + 2;
 
 
