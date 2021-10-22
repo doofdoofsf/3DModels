@@ -13,15 +13,14 @@ jig_length = slot_length+2*border;
 
 bump_diameter = 2;
 bump_height = 0.5;
-text_depth = 3.0;
 slot_indent = 1;
 
 jig_thickness = slot_width*0.48 - bump_height;
+text_depth = jig_thickness + 2;
 
-echo(jig_thickness);
 
 module size_text() {
-   translate([16, 7, text_depth/2]) {
+   translate([16, 7, text_depth/2+1]) {
       rotate([0,180,180]) {
          linear_extrude(text_depth) {
             text(str(slot_width,"mm"), size=4, halign="center", font="DejaVu Sans:style=Bold");
