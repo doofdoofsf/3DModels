@@ -15,12 +15,10 @@ bump_diameter = 2;
 bump_height = 0.5;
 slot_indent = 1;
 
-projected_jig_thickness = slot_width*0.40 - bump_height;
+projected_jig_thickness = slot_width*0.35 - bump_height;
 jig_thickness = projected_jig_thickness < 1.3 ? 1.3 : projected_jig_thickness;
 
-echo(jig_thickness);
 text_depth = jig_thickness + 2;
-
 
 module size_text() {
    translate([16, 7, text_depth/2+1]) {
@@ -66,7 +64,6 @@ module tapered_slot() {
       polygon(slot_polygon);
    }
 };
-
 
 module positioned_tapered_slot() {
    translate([jig_width/2-slot_width/2-slot_indent, border+slot_length, 0]) {
