@@ -24,7 +24,7 @@ module size_text() {
    translate([16, 7, text_depth/2+1]) {
       rotate([0,180,180]) {
          linear_extrude(text_depth) {
-            text(str(slot_width,"mm"), size=4, halign="center", font="DejaVu Sans:style=Bold");
+            text(str(slot_width,"mm"), size=5, halign="center", font="DejaVu Sans:style=Bold");
          }
       }
    }
