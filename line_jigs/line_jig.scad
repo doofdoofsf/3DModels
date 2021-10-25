@@ -22,7 +22,6 @@ jig_set_count = 6;
 // ***************************************************
 
 slot_width_increment = (max_slot_width - min_slot_width) / jig_set_count;
-// echo(slot_width_increment);
 
 slot_widths = [ for (w = [min_slot_width : slot_width_increment : max_slot_width]) w ];
 
@@ -97,7 +96,6 @@ module render_jigs() {
    indexed_slot_widths = [for (i = [0 : jig_set_count]) [i, slot_widths[i]] ];
    for(i = indexed_slot_widths) {
       translate([i[0] * (jig_width + 3), 0, 0]) {
-         echo(i);
          render_jig(i[1]);
       }
    }
