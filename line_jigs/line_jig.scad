@@ -6,7 +6,7 @@ $fn = 100;
 
 jig_width = 33;
 slot_indent = 1;
-slot_length = 75;
+slot_length = 65;
 border = 10;
 jig_length = slot_length+2*border;
 bump_diameter = 2;
