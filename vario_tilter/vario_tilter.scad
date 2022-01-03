@@ -37,7 +37,7 @@ module render_mounts() {
    angles = [ for (a = [20 : 5 : 35]) a ];
    indexed_angles = [for (i = [0 : len(angles)-1]) [i, angles[i]] ];
    for(a = indexed_angles) {
-      translate([0, a[0] * 50, 0]) {
+      translate([0, a[0] * 40, 0]) {
          render_mount(a[1]);
       }
    }
