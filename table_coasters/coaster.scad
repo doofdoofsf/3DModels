@@ -4,8 +4,8 @@
 
 $fn=50;
 foot_depth = 1.5;
-hole_x = 13;
-hole_y = 65;
+hole_x = 21;
+hole_y = 21;
 flange = 25;
 hole_depth = 5;
 center = true;
