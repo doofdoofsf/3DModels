@@ -4,8 +4,8 @@
 
 $fn = 100;
 
-mount_width = 100;
-mount_height = 60;
+mount_width = 58;
+mount_height = 58;
 mount_thickness = 2.2;
 
 module mount_plane() {
@@ -34,7 +34,8 @@ module render_mount(mount_angle) {
 }
 
 module render_mounts() {
-   angles = [ for (a = [20 : 5 : 35]) a ];
+   // angles = [ for (a = [20 : 5 : 35]) a ];
+   angles = [25];
    indexed_angles = [for (i = [0 : len(angles)-1]) [i, angles[i]] ];
    for(a = indexed_angles) {
       translate([0, a[0] * 40, 0]) {
