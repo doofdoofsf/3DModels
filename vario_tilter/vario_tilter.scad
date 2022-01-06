@@ -25,7 +25,7 @@ module mount_plane() {
 }
 
 module corner_plane() {
-   cube([mount_width, mount_thickness, mount_height/6]);
+   cube([mount_width, mount_thickness, mount_height/5]);
 }
 
 module corner(mount_angle) {
@@ -46,11 +46,11 @@ module render_mount(mount_angle) {
 }
 
 module render_mounts() {
-   // angles = [ for (a = [5 : 5 : 20]) a ];
-   angles = [15];
+   angles = [ for (a = [10 : 10 : 40]) a ];
+   // angles = [15];
    indexed_angles = [for (i = [0 : len(angles)-1]) [i, angles[i]] ];
    for(a = indexed_angles) {
-      translate([0, a[0] * 40, 0]) {
+      translate([0, a[0] * 50, 0]) {
          render_mount(a[1]);
       }
    }
