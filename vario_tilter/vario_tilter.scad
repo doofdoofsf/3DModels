@@ -4,11 +4,12 @@
 
 $fn = 300;
 
-mount_width = 58;
+normal_mount_width = 58;
+extended_mount_width = 150;
 mount_height = 58;
 mount_thickness = 2.2;
 
-module curved_mount_plane() {
+module curved_mount_plane(mount_width) {
    distance_from_center = 60;
 
    translate([mount_width/2, 0, 0])
@@ -20,29 +21,28 @@ module curved_mount_plane() {
                      square(size = [mount_thickness, mount_width], center = true);
 }
 
-module mount_plane() {
+module mount_plane(mount_width) {
    cube([mount_width, mount_thickness, mount_height]);
 }
 
-module corner_plane() {
+module corner_plane(mount_width) {
    cube([mount_width, mount_thickness, mount_height/5]);
 }
 
-module corner(mount_angle) {
+module corner(mount_angle, mount_width) {
    hull() {
-      corner_plane();
-      rotate([mount_angle, 0, 0]) {
-         corner_plane();
-      }
+      corner_plane(mount_width);
+      rotate([mount_angle, 0, 0]) corner_plane(mount_width);
+      rotate([mount_angle/2, 0, 0]) corner_plane(mount_width);
    }
 }
 
-module render_mount(mount_angle) {
-   mount_plane();
+module render_mount(mount_angle, mount_width) {
+   mount_plane(mount_width);
    rotate([mount_angle, 0, 0]) {
-      curved_mount_plane();
+      curved_mount_plane(mount_width);
    }
-   corner(mount_angle);
+   corner(mount_angle, mount_width);
 }
 
 module render_mounts() {
@@ -56,4 +56,7 @@ module render_mounts() {
    }
 }
 
-render_mounts();
+// render_mounts();
+mount_angle = 45;
+render_mount(mount_angle, normal_mount_width);
+translate([0, 60, 0]) render_mount(mount_angle, extended_mount_width);
