@@ -26,10 +26,12 @@ module body_cylinder() {
 }
 
 module body() {
+   cube_height = sphere_diameter*0.1;
+
    hull() {
       body_cylinder();
-      translate([0, -sphere_diameter*0.2, 0]) {
-         cube([sphere_diameter*1.1, sphere_diameter*1.05, sphere_diameter*0.1], center=true);
+      translate([0, -sphere_diameter*0.2, cube_height/2]) {
+         cube([sphere_diameter*1.1, sphere_diameter*1.05, cube_height], center=true);
       }
    }
 }
