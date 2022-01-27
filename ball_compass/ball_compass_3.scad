@@ -29,7 +29,7 @@ module body() {
    hull() {
       body_cylinder();
       translate([0, -sphere_diameter*0.2, 0]) {
-         cube([sphere_diameter*1.1, sphere_diameter*1.1, sphere_diameter*0.1], center=true);
+         cube([sphere_diameter*1.1, sphere_diameter*1.05, sphere_diameter*0.1], center=true);
       }
    }
 }
