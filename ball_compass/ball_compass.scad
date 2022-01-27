@@ -2,14 +2,14 @@
  * a mount for a keychain ball compass for paragliding
  */
 
-$fn=50;
+$fn=60;
 
 include <../lib/rounding.scad>
 
-sphere_diameter = 20;
+sphere_diameter = 25.4;
 
 cube_side_length=sphere_diameter*1.2;
-cube_height=sphere_diameter/1.8;
+cube_height=sphere_diameter/1.6;
 
 rounding_diameter=sphere_diameter/5;
 
