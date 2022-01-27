@@ -34,7 +34,7 @@ module base() {
 }
 
 module ball_depression() {
-   translate([0, 0, sphere_diameter/4.0]) {
+   translate([0, 0, sphere_diameter/4.5]) {
       sphere(d=sphere_diameter);
    }
 }
