@@ -21,6 +21,16 @@ module access_hole() {
 
 module body() {
    roundedcube([cube_side_length, cube_side_length, cube_height], true, rounding_diameter, "zmax");
+   base();
+}
+
+module base() {
+   height=cube_side_length/12;
+   side_length = cube_side_length*1.1;
+
+   translate([0, 0, -cube_height/2+height/2]) {
+      roundedcube([side_length, side_length, height], true, rounding_diameter/5, "zmax");
+   }
 }
 
 module ball_depression() {
@@ -32,7 +42,7 @@ module ball_depression() {
 module mount() {
    difference() {
       body();
-      ball_depression();
+      # ball_depression();
       access_hole();
    }
 }
