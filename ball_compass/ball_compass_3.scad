@@ -10,11 +10,11 @@ sphere_diameter = 25.4;
 
 module lanyard_loop() {
    loop_thickness = 3;
-   translate([0, sphere_diameter/2, 0]) {
+   translate([0, sphere_diameter*0.53, 0]) {
       difference() {
-         cylinder(h=3, d=sphere_diameter/2);
+         cylinder(h=3, d=sphere_diameter/3);
 	 translate([0, 0, -1]) {
-            cylinder(h=3+2, d=sphere_diameter/2-loop_thickness);
+            cylinder(h=3+2, d=sphere_diameter/3-loop_thickness);
          }
       }
    }
@@ -28,9 +28,9 @@ module access_hole() {
 
 module body_cylinder() {
    difference() {
-      cylinder(d=sphere_diameter*1.1, sphere_diameter*0.5);
-      rotate([30, 0, 0]) {
-         translate([0, 0, sphere_diameter*0.6]) {
+      cylinder(d=sphere_diameter*1.1, sphere_diameter*0.6);
+      rotate([20, 0, 0]) {
+         translate([0, 0, sphere_diameter*0.7]) {
             cube([sphere_diameter*1.3, sphere_diameter*1.3, sphere_diameter/3], center=true);
          }
       }
@@ -43,14 +43,14 @@ module body() {
    hull() {
       body_cylinder();
       translate([0, -sphere_diameter*0.2, cube_height/2]) {
-         cube([sphere_diameter*1.1, sphere_diameter*1.05, cube_height], center=true);
+         cube([sphere_diameter*1.1, sphere_diameter*1.2, cube_height], center=true);
       }
    }
    lanyard_loop();
 }
 
 module ball_depression() {
-   translate([0, 0, sphere_diameter/2.1]) {
+   translate([0, 0, sphere_diameter/1.9]) {
       sphere(d=sphere_diameter);
    }
 }
