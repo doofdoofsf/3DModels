@@ -38,7 +38,7 @@ module body_cylinder() {
 }
 
 module body() {
-   cube_height = sphere_diameter*0.1;
+   cube_height = sphere_diameter*0.16;
 
    hull() {
       body_cylinder();
