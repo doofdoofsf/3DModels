@@ -29,8 +29,8 @@ module access_hole() {
 module body_cylinder() {
    difference() {
       cylinder(d=sphere_diameter*1.1, sphere_diameter*0.6);
-      rotate([20, 0, 0]) {
-         translate([0, 0, sphere_diameter*0.7]) {
+      rotate([24, 0, 0]) {
+         translate([0, 0, sphere_diameter*0.76]) {
             cube([sphere_diameter*1.3, sphere_diameter*1.3, sphere_diameter/3], center=true);
          }
       }
