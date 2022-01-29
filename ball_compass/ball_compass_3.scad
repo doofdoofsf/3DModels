@@ -6,7 +6,7 @@
 
 $fn=180;
 
-sphere_diameter = 25.4;
+sphere_diameter = 28.5;
 
 module lanyard_loop() {
    loop_thickness = 3;
