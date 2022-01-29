@@ -22,8 +22,14 @@ module lanyard_loop() {
 }
 
 module access_hole() {
-   translate([0, 0, -sphere_diameter/2]) {
-      cylinder(d=8, sphere_diameter);
+   length = sphere_diameter * 2;
+   diameter = 10;
+   translate([0, 0, sphere_diameter*0.5]) {
+      rotate([23, 0, 0]) {
+         translate([0, 0, -length/2]) {
+            cylinder(d=diameter, length);
+         }
+      }
    }
 }
 
