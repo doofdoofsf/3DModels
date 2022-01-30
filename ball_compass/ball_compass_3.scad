@@ -10,7 +10,7 @@ sphere_diameter = 29.2;
 
 module lanyard_loop() {
    loop_thickness = 4;
-   translate([0, sphere_diameter*0.6, 0]) {
+   translate([0, sphere_diameter*0.55, 0]) {
       difference() {
          diameter = sphere_diameter * 0.5;
          cylinder(h=3, d=diameter);
@@ -35,7 +35,7 @@ module access_hole() {
 
 module body_cylinder() {
    difference() {
-      cylinder(d=sphere_diameter*1.2, sphere_diameter*0.65);
+      cylinder(d=sphere_diameter*1.2, sphere_diameter*0.68);
       rotate([15, 0, 0]) {
          translate([0, 0, sphere_diameter*0.76]) {
             cube([sphere_diameter*1.3, sphere_diameter*1.3, sphere_diameter/3], center=true);
@@ -57,7 +57,7 @@ module body() {
 }
 
 module ball_depression() {
-   translate([0, 0, sphere_diameter/1.7]) {
+   translate([0, 0, sphere_diameter/1.6]) {
       sphere(d=sphere_diameter);
    }
 }
