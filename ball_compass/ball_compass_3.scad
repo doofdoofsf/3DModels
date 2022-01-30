@@ -25,9 +25,9 @@ module access_hole() {
    length = sphere_diameter * 2;
    diameter = 10;
    translate([0, 0, sphere_diameter*0.5]) {
-      rotate([23, 0, 0]) {
+      rotate([21, 0, 0]) {
          translate([0, 0, -length/2]) {
-            cylinder(d=diameter, length);
+            # cylinder(d=diameter, length);
          }
       }
    }
@@ -57,7 +57,7 @@ module body() {
 }
 
 module ball_depression() {
-   translate([0, 0, sphere_diameter/1.6]) {
+   translate([0, 0, 2+sphere_diameter/1.6]) {
       sphere(d=sphere_diameter);
    }
 }
