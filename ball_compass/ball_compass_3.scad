@@ -6,11 +6,21 @@
 
 $fn=180;
 
-sphere_diameter = 29.2;
+sphere_diameter = 29;
+
+module lanyard_hole() {
+   length = sphere_diameter;
+   diameter = 4;
+   translate([0, -sphere_diameter*0.73, 0]) {
+         translate([0, 0, -length/2]) {
+            cylinder(d=diameter, length);
+      }
+   }
+}
 
 module lanyard_loop() {
    loop_thickness = 4;
-   translate([0, sphere_diameter*0.55, 0]) {
+   translate([0, -sphere_diameter*0.86, 0]) {
       difference() {
          diameter = sphere_diameter * 0.5;
          cylinder(h=3, d=diameter);
@@ -27,7 +37,7 @@ module access_hole() {
    translate([0, 0, sphere_diameter*0.5]) {
       rotate([21, 0, 0]) {
          translate([0, 0, -length/2]) {
-            # cylinder(d=diameter, length);
+            cylinder(d=diameter, length);
          }
       }
    }
@@ -67,6 +77,7 @@ module mount() {
       body();
       # ball_depression();
       access_hole();
+      // lanyard_hole();
    }
 }
 
