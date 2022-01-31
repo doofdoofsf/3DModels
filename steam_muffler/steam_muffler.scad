@@ -64,11 +64,13 @@ module holy_face() {
 module inside_mount() {
    taper=1;
 
+   inside_depth = depth-2;
+
    difference() {
       bottom_diameter=mount_diameter-taper;
       top_diameter=mount_diameter;
-      cylinder(h=depth, d1=bottom_diameter, d2=top_diameter, center=true);
-      cylinder(h=depth+fiddle, d1=bottom_diameter-thickness*2, d2=top_diameter-thickness*2, center=true);
+      cylinder(h=inside_depth, d1=bottom_diameter, d2=top_diameter, center=true);
+      cylinder(h=inside_depth+fiddle, d1=bottom_diameter-thickness*2, d2=top_diameter-thickness*2, center=true);
    }
 }
 
@@ -92,7 +94,7 @@ module muffler() {
       vent_cutout();
    }
    enclosure();
-   catch();
+   // catch();
 }
 
 muffler();
