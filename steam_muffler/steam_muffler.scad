@@ -10,6 +10,27 @@ depth=16;
 thickness=3;
 fiddle=2;
 
+module catch() {
+   catch_depth=depth*0.6;
+   catch_width=thickness*2;
+   distance_to_mount = mount_diameter/2-thickness/2;
+   distance_to_catch = distance_to_mount-thickness/3;
+   catch_cylinder_diameter = 2.5;
+
+   hull() {
+      translate([0, distance_to_catch, 0]) {
+         cube([catch_width, 1.5, catch_depth], center=true);
+      }
+
+      translate([0, distance_to_catch-catch_cylinder_diameter/3, catch_depth/2-catch_cylinder_diameter/2]) {
+         rotate([0, 90, 0]) {
+            cylinder(h=catch_width, d=catch_cylinder_diameter, center=true);
+         }
+      }
+   }
+
+}
+
 module vent_holes() {
    hole_diameter=9;
    distance_from_hole=face_diameter*0.35;
@@ -71,6 +92,7 @@ module muffler() {
       vent_cutout();
    }
    enclosure();
+   catch();
 }
 
 muffler();
