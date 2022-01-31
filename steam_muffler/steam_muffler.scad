@@ -2,11 +2,11 @@
  * a muffler for a steam shower vent
  */
 
-$fn=120;
+$fn=200;
 
-mount_diameter=50.5;
+mount_diameter=50.3;
 face_diameter=mount_diameter*2;
-depth=14;
+depth=16;
 thickness=3;
 fiddle=2;
 
