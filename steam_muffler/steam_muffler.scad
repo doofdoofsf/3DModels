@@ -4,9 +4,9 @@
 
 $fn=200;
 
-mount_diameter=51.0;
+mount_diameter=50.5;
 face_diameter=mount_diameter*2;
-depth=16;
+depth=15;
 thickness=3;
 fiddle=2;
 
@@ -88,12 +88,12 @@ module vent_cutout() {
 }
 
 module muffler() {
-   holy_face();
+   // holy_face();
    difference() {
       inside_mount();
       vent_cutout();
    }
-   enclosure();
+   // enclosure();
    // catch();
 }
 
