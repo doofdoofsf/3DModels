@@ -4,7 +4,7 @@
 
 $fn=200;
 
-mount_diameter=50.3;
+mount_diameter=51.0;
 face_diameter=mount_diameter*2;
 depth=16;
 thickness=3;
