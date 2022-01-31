@@ -88,12 +88,12 @@ module vent_cutout() {
 }
 
 module muffler() {
-   // holy_face();
+   holy_face();
    difference() {
       inside_mount();
       vent_cutout();
    }
-   // enclosure();
+    enclosure();
    // catch();
 }
 
