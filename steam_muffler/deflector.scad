@@ -16,12 +16,12 @@ module disc_body() {
 }
 
 module mount_pin() {
-   pin_height=13;
+   pin_height=15;
    pin_diameter=thickness+1;
 
-   translate([external_mount_diameter/2+1.5, 0, 0]) {
+   translate([external_mount_diameter/2+1, 0, 0]) {
       translate([0, 0, pin_height/2]) {
-         rotate([0, 5, 0]) {
+         rotate([0, 4, 0]) {
             cylinder(h=pin_height, d=pin_diameter, center=true);
          }
       }
