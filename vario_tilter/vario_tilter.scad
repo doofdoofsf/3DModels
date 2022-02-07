@@ -21,8 +21,20 @@ module curved_mount_plane(mount_width) {
                      square(size = [mount_thickness, mount_width], center = true);
 }
 
+module mount_plane_holes(mount_width) {
+   height=30;
+   translate([20, height/2, 20]) {
+      rotate([90, 0, 0]) {
+         cylinder(h=height, d=10);
+      }
+   }
+}
+
 module mount_plane(mount_width) {
-   cube([mount_width, mount_thickness, mount_height]);
+   difference() {
+      cube([mount_width, mount_thickness, mount_height]);
+      mount_plane_holes(mount_width);
+   }
 }
 
 module corner_plane(mount_width) {
@@ -58,5 +70,5 @@ module render_mounts() {
 
 // render_mounts();
 mount_angle = 45;
-render_mount(mount_angle, normal_mount_width);
+// render_mount(mount_angle, normal_mount_width);
 translate([0, 60, 0]) render_mount(mount_angle, extended_mount_width);
