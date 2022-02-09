@@ -11,15 +11,16 @@ thickness=3;
 fiddle=2;
 
 module vent_holes() {
-   hole_diameter=9;
-   distance_from_hole=face_diameter*0.35;
-   cylinder_height=thickness*10;
-   hole_angles=[-60, -30, 0, 30, 60];
+   hole_diameter=8;
+   cylinder_height=thickness*5;
+   hole_angles=[-120 : 30 : 120];
 
    for (hole_angle = hole_angles) {
       rotate([0, 0, hole_angle]) {
-         translate([0, -distance_from_hole, 0]) {
-            cylinder(h=cylinder_height, d=hole_diameter, center=true);
+         translate([0, face_diameter/2, 0]) {
+	    rotate([90, 0, 0]) {
+                cylinder(h=cylinder_height, d=hole_diameter, center=true);
+            }
          }
       }
    }
@@ -33,10 +34,16 @@ module face() {
    }
 }
 
-module holy_face() {
+module baffle() {
+   baffle_diameter = face_diameter * 0.75;
    difference() {
-      face();
-      vent_holes();
+      difference() {
+         cylinder(h=depth, d=baffle_diameter, center=true);
+         cylinder(h=depth+3, d=baffle_diameter-2*thickness, center=true);
+      }
+      translate([0, -baffle_diameter/2, 0]) {
+         cube([baffle_diameter/2, baffle_diameter/2, depth+3], center=true);
+      }
    }
 }
 
@@ -56,7 +63,7 @@ module inside_mount() {
 module enclosure() {
    difference() {
       cylinder(h=depth, d=face_diameter, center=true);
-      cylinder(h=depth, d=face_diameter-thickness*2, center=true);
+      cylinder(h=depth+3, d=face_diameter-thickness*2, center=true);
    }
 }
 
@@ -67,12 +74,18 @@ module vent_cutout() {
 }
 
 module muffler() {
-   holy_face();
+   face();
+
    difference() {
       inside_mount();
       vent_cutout();
    }
-    enclosure();
+
+   difference() {
+      enclosure();
+      vent_holes();
+   }
+   baffle();
 }
 
 muffler();
