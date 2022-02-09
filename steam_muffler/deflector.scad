@@ -72,7 +72,7 @@ module deflector() {
 
    difference() {
       disc_body();
-      temp_hole();
+      //temp_hole();
    }
    shield();
 }
