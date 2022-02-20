@@ -36,13 +36,13 @@ module foot() {
 
 module feet() {
    translate([shelf_length/2-foot_length, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
-   translate([shelf_length/2-foot_length-3*x_spar_spacing, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
+   translate([shelf_length/2-foot_length-5*x_spar_spacing, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
    translate([shelf_length/2-foot_length, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
-   translate([shelf_length/2-foot_length-3*x_spar_spacing, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
+   translate([shelf_length/2-foot_length-5*x_spar_spacing, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
    translate([-shelf_length/2+foot_length, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
-   translate([-shelf_length/2+foot_length+3*x_spar_spacing, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
+   translate([-shelf_length/2+foot_length+5*x_spar_spacing, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
    translate([-shelf_length/2+foot_length, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
-   translate([-shelf_length/2+foot_length+3*x_spar_spacing, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
+   translate([-shelf_length/2+foot_length+5*x_spar_spacing, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
 }
 
 module x_hatch() {
