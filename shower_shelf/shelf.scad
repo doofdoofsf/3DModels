@@ -3,8 +3,9 @@
  */
 
 $fn=60;
+thickness = 2.5;
 
-shelf_length=300;
+shelf_length=300+thickness*2;
 shelf_width=115;
 shelf_height=10;
 
@@ -15,7 +16,6 @@ number_y_spars = 4;
 y_spar_spacing = shelf_width / number_y_spars;
 
 corner_radius = 12;
-thickness = 2;
 
 foot_length=shelf_length/10;
 
@@ -36,9 +36,13 @@ module foot() {
 
 module feet() {
    translate([shelf_length/2-foot_length, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
+   translate([shelf_length/2-foot_length-3*x_spar_spacing, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
    translate([shelf_length/2-foot_length, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
+   translate([shelf_length/2-foot_length-3*x_spar_spacing, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
    translate([-shelf_length/2+foot_length, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
+   translate([-shelf_length/2+foot_length+3*x_spar_spacing, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
    translate([-shelf_length/2+foot_length, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
+   translate([-shelf_length/2+foot_length+3*x_spar_spacing, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
 }
 
 module x_hatch() {
@@ -83,9 +87,19 @@ module body() {
    overhang_catches();
 }
 
+module half_body() {
+   difference() {
+      body();
+      translate([-shelf_length/2-thickness/2, 0, 0]) {
+         cube([shelf_length, shelf_width+10, shelf_height+30], center=true);
+      }
+   }
+}
+
+
 difference() {
-   body();
-   translate([0, 0, 13]) {
+   half_body();
+   translate([0, 0, 12]) {
       cube([shelf_length+10, shelf_width+10, 30], center=true);
    }
 }
