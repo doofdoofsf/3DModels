@@ -9,10 +9,10 @@ shelf_length=300+thickness*2;
 shelf_width=115;
 shelf_height=10;
 
-number_x_spars = 10;
+number_x_spars = 18;
 x_spar_spacing = shelf_length / number_x_spars;
 
-number_y_spars = 4;
+number_y_spars = 8;
 y_spar_spacing = shelf_width / number_y_spars;
 
 corner_radius = 12;
