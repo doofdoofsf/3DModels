@@ -5,9 +5,9 @@
 $fn=60;
 thickness = 2.5;
 
-shelf_length=300+thickness*2;
+shelf_length=298+thickness*2;
 shelf_width=115;
-shelf_height=10;
+shelf_height=5;
 
 number_x_spars = 18;
 x_spar_spacing = shelf_length / number_x_spars;
@@ -100,6 +100,6 @@ module half_body() {
 difference() {
    half_body();
    translate([0, 0, 12]) {
-      cube([shelf_length+10, shelf_width+10, 30], center=true);
+      // cube([shelf_length+10, shelf_width+10, 30], center=true);
    }
 }
