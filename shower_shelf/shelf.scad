@@ -21,7 +21,7 @@ foot_length=shelf_length/10;
 
 module overhang_catch() {
    translate([0, 0, -shelf_height+3]) {
-      cube([thickness, shelf_width/2, shelf_height], center=true);
+      cube([thickness, shelf_width/2, shelf_height*0.9], center=true);
    }
 }
 
