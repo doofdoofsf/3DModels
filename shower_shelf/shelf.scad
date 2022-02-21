@@ -21,7 +21,7 @@ foot_length=shelf_length/10;
 
 module overhang_catch() {
    translate([0, 0, -shelf_height+3]) {
-      cube([thickness, shelf_width/2, shelf_height*0.9], center=true);
+      cube([thickness, shelf_width/2, shelf_height], center=true);
    }
 }
 
@@ -31,7 +31,7 @@ module overhang_catches() {
 }
 
 module foot() {
-   cube([foot_length, thickness, shelf_height/2], center=true);
+   cube([foot_length, thickness, shelf_height*0.6], center=true);
 }
 
 module feet() {
@@ -39,10 +39,7 @@ module feet() {
    translate([shelf_length/2-foot_length-5*x_spar_spacing, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
    translate([shelf_length/2-foot_length, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
    translate([shelf_length/2-foot_length-5*x_spar_spacing, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
-   translate([-shelf_length/2+foot_length, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
-   translate([-shelf_length/2+foot_length+5*x_spar_spacing, -shelf_width/2+y_spar_spacing, -shelf_height/2]) foot();
-   translate([-shelf_length/2+foot_length, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
-   translate([-shelf_length/2+foot_length+5*x_spar_spacing, shelf_width/2-y_spar_spacing, -shelf_height/2]) foot();
+   translate([shelf_length/2-foot_length-2.5*x_spar_spacing, -shelf_width/2+4*y_spar_spacing, -shelf_height/2]) foot();
 }
 
 module x_hatch() {
