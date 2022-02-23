@@ -38,12 +38,8 @@ module clip() {
    }
 }
 
-/*
 for(spacing = [0 : 10 : 50]) {
    translate([0,  spacing, 0]) {
       clip();
    }
 }
-*/
-
-clip();
