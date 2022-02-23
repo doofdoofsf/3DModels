@@ -7,7 +7,7 @@ thickness = 1.0;
 
 inside_clip_length = 11;
 inside_clip_width = 6;
-inside_clip_height = 5;
+inside_clip_height = 5.2;
 
 clip_length = inside_clip_length;
 clip_width = inside_clip_width + 2*thickness;
