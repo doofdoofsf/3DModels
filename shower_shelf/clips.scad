@@ -3,7 +3,7 @@
  */
 
 $fn=60;
-thickness = 1.3;
+thickness = 1.0;
 
 inside_clip_length = 11;
 inside_clip_width = 6;
@@ -24,7 +24,7 @@ module clip_cutout() {
 module clip_break() {
    height = thickness+3;
    translate([0, 0, (inside_clip_height+2*thickness)/2]) {
-      cube([inside_clip_length+3, 1, height], center=true);
+      cube([inside_clip_length+3, inside_clip_width*0.7, height], center=true);
    }
 }
 
