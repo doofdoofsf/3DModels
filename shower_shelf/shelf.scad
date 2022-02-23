@@ -5,7 +5,7 @@
 $fn=60;
 thickness = 2.5;
 
-shelf_length=298+thickness*2;
+shelf_length=300+thickness*2;
 shelf_width=115;
 shelf_height=5;
 
@@ -26,12 +26,11 @@ module overhang_catch() {
 }
 
 module overhang_catches() {
-   translate([shelf_length/2-thickness/2, 0, 0]) overhang_catch();
-   translate([-shelf_length/2+thickness/2, 0, 0]) overhang_catch();
+   translate([shelf_length/2-thickness/2, 0, -2]) overhang_catch();
 }
 
 module foot() {
-   cube([foot_length, thickness, shelf_height*0.6], center=true);
+   cube([foot_length, thickness, shelf_height*0.7], center=true);
 }
 
 module feet() {
@@ -95,8 +94,10 @@ module half_body() {
 
 
 difference() {
-   half_body();
-   translate([0, 0, 12]) {
-      // cube([shelf_length+10, shelf_width+10, 30], center=true);
+   rotate([180, 0, 0]) {
+      half_body();
+      translate([0, 0, 12]) {
+         // cube([shelf_length+10, shelf_width+10, 30], center=true);
+      }
    }
 }

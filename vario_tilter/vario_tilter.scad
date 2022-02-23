@@ -5,7 +5,7 @@
 $fn = 300;
 
 normal_mount_width = 58;
-extended_mount_width = 150;
+extended_mount_width = 100;
 mount_height = 58;
 mount_thickness = 2.2;
 
@@ -23,7 +23,7 @@ module curved_mount_plane(mount_width) {
 
 module mount_plane_holes(mount_width) {
    height=30;
-   translate([20, height/2, 20]) {
+   translate([12, height/2, 20]) {
       rotate([90, 0, 0]) {
          cylinder(h=height, d=10);
       }
@@ -69,6 +69,6 @@ module render_mounts() {
 }
 
 // render_mounts();
-mount_angle = 45;
+mount_angle = 12;
 // render_mount(mount_angle, normal_mount_width);
 translate([0, 60, 0]) render_mount(mount_angle, extended_mount_width);
