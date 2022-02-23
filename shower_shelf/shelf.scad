@@ -5,7 +5,7 @@
 $fn=60;
 thickness = 2.5;
 
-shelf_length=300+thickness*2;
+shelf_length=298+thickness*2;
 shelf_width=115;
 shelf_height=5;
 
