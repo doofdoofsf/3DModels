@@ -19,8 +19,8 @@ module lanyard_hole() {
 }
 
 module lanyard_loop() {
-   loop_thickness = 4;
-   translate([0, -sphere_diameter*0.86, 0]) {
+   loop_thickness = 7;
+   translate([sphere_diameter*0.65, -sphere_diameter*0.86, sphere_diameter*0.05]) {
       difference() {
          diameter = sphere_diameter * 0.5;
          cylinder(h=3, d=diameter);
@@ -63,7 +63,6 @@ module body() {
          cube([sphere_diameter*1.3, sphere_diameter*1.35, cube_height], center=true);
       }
    }
-   lanyard_loop();
 }
 
 module ball_depression() {
@@ -75,8 +74,9 @@ module ball_depression() {
 module mount() {
    difference() {
       body();
-      # ball_depression();
+      ball_depression();
       access_hole();
+      lanyard_loop();
       // lanyard_hole();
    }
 }
