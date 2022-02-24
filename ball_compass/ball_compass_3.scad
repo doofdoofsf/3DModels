@@ -7,6 +7,20 @@
 $fn=180;
 
 sphere_diameter = 29;
+width = sphere_diameter * 1.3;
+
+module engrave(text) {
+   text_depth = 1;
+   text_size = 5;
+
+   translate([-width/2+text_depth, -sphere_diameter*0.2, text_size*0.13]) {
+      rotate([90, 0, 270]) {
+         linear_extrude(text_depth+1) {
+            text(text, size=text_size, halign="center", font="DejaVu Sans:style=Bold");
+         }
+      }
+   }
+}
 
 module lanyard_hole() {
    length = sphere_diameter;
@@ -60,7 +74,7 @@ module body() {
    hull() {
       body_cylinder();
       translate([0, -sphere_diameter*0.2, cube_height/2]) {
-         cube([sphere_diameter*1.3, sphere_diameter*1.35, cube_height], center=true);
+         cube([width, sphere_diameter*1.35, cube_height], center=true);
       }
    }
 }
@@ -77,6 +91,7 @@ module mount() {
       ball_depression();
       access_hole();
       lanyard_loop();
+      engrave("M.B");
       // lanyard_hole();
    }
 }
