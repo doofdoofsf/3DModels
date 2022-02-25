@@ -10,11 +10,11 @@ sphere_diameter = 29;
 width = sphere_diameter * 1.3;
 
 module engrave(text) {
-   text_depth = 1;
-   text_size = 5;
+   text_depth = 2.0;
+   text_size = 6;
 
-   translate([-width/2+text_depth, -sphere_diameter*0.2, text_size*0.13]) {
-      rotate([90, 0, 270]) {
+   translate([0, sphere_diameter*0.50, text_size*0.7]) {
+      rotate([90, 0, 180]) {
          linear_extrude(text_depth+1) {
             text(text, size=text_size, halign="center", font="DejaVu Sans:style=Bold");
          }
@@ -91,7 +91,7 @@ module mount() {
       ball_depression();
       access_hole();
       lanyard_loop();
-      engrave("M.B");
+      engrave("R.M");
       // lanyard_hole();
    }
 }
