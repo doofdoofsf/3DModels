@@ -1,19 +1,26 @@
-$fn=100;
+$fn=200;
 
 cut_width = 10;
 
-disc_diameter=150;
-disc_thickness=10;
+disc_diameter=80;
+disc_thickness=5;
 
-rounding_radius=5;
+
+rounding_radius=disc_thickness*0.75;
 
 module cut() {
-    cut_length=disc_diameter*0.4;
-    translate([disc_diameter*0.4, 0, 0]) {
-        rotate([0, 90, 30]) {
-            #cube([disc_thickness*3, cut_width, cut_length], 
+    cut_length=disc_diameter*0.5;
+    translate([disc_diameter*0.35, 0, 0]) {
+        rotate([0, 90, 20]) {
+            cube([disc_thickness+2*rounding_radius, cut_width, cut_length], 
             center=true);
         }
+    }
+}
+
+module hole() {
+    translate([-disc_diameter*0.4, 0, 0]) {
+        cylinder(h=disc_thickness*4, r=5, center=true);
     }
 }
 
@@ -28,6 +35,7 @@ module opener() {
     difference() {
         disc();
         cut();
+        hole();
     }
 }
 
