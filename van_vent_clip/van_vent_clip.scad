@@ -28,10 +28,9 @@ module body() {
     translate([clip_length, 0, 2.4*thickness]) rotate([0, 0, 180]) hollowed_clip_shape();
 }
 
-spacing = 15;
+spacing = 9;
 
-offsets = [0*spacing, 1*spacing, 2*spacing, 3*spacing, 4*spacing, 5*spacing];
-offsets = [0];
+offsets = [0*spacing, 1*spacing, 2*spacing];
 
 for (offset = offsets) {
   translate([offset, 0, 0])
