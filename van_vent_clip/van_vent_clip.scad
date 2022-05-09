@@ -16,9 +16,9 @@ module clip_shape(height, width, length) {
 }
 
 module clip_loop() {
-    height=clip_length/7;
-    translate([clip_length-height/2, 0, thickness*2.5]) {
-        rotate([90, 0, 90]) {
+    height=clip_width;
+    translate([clip_length-thickness*2, 0, thickness*2.6]) {
+        rotate([90, 0, 0]) {
             difference() {
                 cylinder(h=height, d=thickness*3.5, center=true);
                 cylinder(h=height+fiddle, d=thickness*2.5, center=true);
@@ -29,8 +29,8 @@ module clip_loop() {
 
 module hollowed_clip_shape() {
     difference() {
-       clip_shape(2.5*thickness, clip_width, clip_length);
-       clip_shape(1.5*thickness, clip_width+fiddle, clip_length+fiddle);
+       clip_shape(2.8*thickness, clip_width, clip_length);
+       clip_shape(1.8*thickness, clip_width+fiddle, clip_length+fiddle);
     }
 }
 
