@@ -1,8 +1,8 @@
-$fn=50;
+$fn=100;
 
-thickness=1.5;
-clip_length=20;
-clip_width=8;
+thickness=2.5;
+clip_length=thickness*12;
+clip_width=thickness*5;
 fiddle=1;
 
 module clip_shape(height, width, length) {
