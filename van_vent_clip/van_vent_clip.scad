@@ -35,10 +35,18 @@ module hollowed_clip_shape() {
 }
 
 module body() {
-    rotate([90, 0, 0]) {
-        hollowed_clip_shape();
-        clip_loop();
-    }
+    hollowed_clip_shape();
+    clip_loop();
 }
 
-body();
+spacing = 15;
+
+offsets = [0*spacing, 1*spacing, 2*spacing, 3*spacing, 4*spacing, 5*spacing];
+offsets = [0];
+
+for (offset = offsets) {
+  translate([offset, 0, 0])
+        rotate([90, 0, 90]) body();
+}
+
+
