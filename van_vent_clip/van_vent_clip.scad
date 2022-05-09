@@ -20,8 +20,8 @@ module clip_loop() {
     translate([clip_length-height/2, 0, thickness*2.5]) {
         rotate([90, 0, 90]) {
             difference() {
-                cylinder(h=height, d=thickness*3, center=true);
-                cylinder(h=height+fiddle, d=thickness*2, center=true);
+                cylinder(h=height, d=thickness*3.5, center=true);
+                cylinder(h=height+fiddle, d=thickness*2.5, center=true);
             }
         }
     }
