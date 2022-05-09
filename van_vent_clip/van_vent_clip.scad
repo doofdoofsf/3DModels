@@ -2,7 +2,7 @@ $fn=100;
 
 thickness=2.5;
 clip_length=thickness*12;
-clip_width=thickness*5;
+clip_width=8;
 fiddle=1;
 
 module clip_shape(height, width, length) {
@@ -15,28 +15,17 @@ module clip_shape(height, width, length) {
     }
 }
 
-module clip_loop() {
-    height=clip_width;
-    translate([clip_length-thickness*2, 0, thickness*2.6]) {
-        rotate([90, 0, 0]) {
-            difference() {
-                cylinder(h=height, d=thickness*3.5, center=true);
-                cylinder(h=height+fiddle, d=thickness*2.5, center=true);
-            }
-        }
-    }
-}
 
 module hollowed_clip_shape() {
     difference() {
-       clip_shape(2.8*thickness, clip_width, clip_length);
-       clip_shape(1.8*thickness, clip_width+fiddle, clip_length+fiddle);
+       clip_shape(2.9*thickness, clip_width, clip_length);
+       clip_shape(1.9*thickness, clip_width+fiddle, clip_length+fiddle);
     }
 }
 
 module body() {
     hollowed_clip_shape();
-    clip_loop();
+    translate([clip_length, 0, 2.4*thickness]) rotate([0, 0, 180]) hollowed_clip_shape();
 }
 
 spacing = 15;
