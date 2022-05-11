@@ -55,7 +55,7 @@ module body() {
 
 spacing = 15;
 
-offsets = [0*spacing, 1*spacing, 2*spacing];
+offsets = [0*spacing, 1*spacing, 2*spacing, 3*spacing, 4*spacing];
 // offsets = [0];
 
 for (offset = offsets) {
