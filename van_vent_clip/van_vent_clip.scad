@@ -23,14 +23,40 @@ module hollowed_clip_shape() {
     }
 }
 
-module body() {
-    hollowed_clip_shape();
-    translate([clip_length, 0, 2.4*thickness]) rotate([0, 0, 180]) hollowed_clip_shape();
+module clip_cut() {
+    cut=10;
+    translate([clip_length*0.95, 0, -thickness*2]) {
+       cube([clip_length, 10, 10], center=true);
+    }
 }
 
-spacing = 9;
+module body() {
+    difference() {
+        union() {
+            hollowed_clip_shape();
+            translate([clip_length/4, 0, 0]) {
+                difference() {
+                    hollowed_clip_shape();
+                    translate([clip_length, 0, 0]) {
+                        cube([clip_length/2, 10, 10], center=true);
+                    }
+                }           
+            }
+        }
+        clip_cut();
+    }
+    
+    translate([clip_length, 0, 2.4*thickness]) {
+        rotate([0, 0, 180]) {
+            hollowed_clip_shape();
+        }
+    }
+}
+
+spacing = 15;
 
 offsets = [0*spacing, 1*spacing, 2*spacing];
+// offsets = [0];
 
 for (offset = offsets) {
   translate([offset, 0, 0])
