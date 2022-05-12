@@ -31,10 +31,10 @@ module plate_hole() {
 module base_plate() {  
     linear_extrude(height=plate_thickness, center=true) {
         minkowski() {
-           square([plate_length-rounding_radius, 
-            plate_width-rounding_radius],
+           square([plate_length-rounding_radius*2, 
+            plate_width-rounding_radius*2],
             center=true);
-           circle(r=rounding_radius, center=true);
+           circle(r=rounding_radius);
         }
     }
 }
