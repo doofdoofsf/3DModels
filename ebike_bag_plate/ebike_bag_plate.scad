@@ -55,10 +55,9 @@ module holes() {
 
 module alignment_holes() {
     hole_diameter = 1;
-    for(x=[plate_length/2-plate_thickness, -plate_length/2-plate_thickness]) {
-        for(y=[plate_width/2-plate_thickness]) {           
-            translate([x, y, 0]) {
-                echo(x);
+    for(x=[plate_length/2-plate_thickness, -plate_length/2+plate_thickness]) {
+        for(y=[plate_width/2-plate_thickness, -plate_width/2+plate_thickness]) {        translate([x, y, 0]) {
+                echo(x,y);
                 cylinder(h = plate_thickness + 2*fiddle, d=hole_diameter, center=true);
             }
         }
