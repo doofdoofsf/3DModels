@@ -2,9 +2,9 @@ $fn=100;
 
 plate_width=37;
 plate_thickness=1;
-plate_length=60;
+plate_length=47;
 cable_hole_diameter=18;
-cable_hole_x_offset = -plate_length/5;
+cable_hole_x_offset = -plate_length/5.5;
 charge_port_diameter=12;
 fiddle=1;
 hole_height=plate_thickness+fiddle*2;
@@ -59,7 +59,6 @@ module alignment_holes() {
     for(x=[plate_length/2-indent, -plate_length/2+indent]) {
         for(y=[plate_width/2-indent, -plate_width/2+indent]) {        
             translate([x, y, 0]) {
-                echo(x,y);
                 cylinder(h = plate_thickness + 2*fiddle, d=hole_diameter, center=true);
             }
         }
