@@ -1,10 +1,11 @@
 $fn=100;
-clip_width=3;
-clip_height=49;
+clip_width=12;
+clip_width=8;
+clip_height=53;
 clip_back_height=7;
-grab_height=3.5;
+grab_height=6.5;
 grab_depth=13;
-clip_depth=10;
+clip_depth=13;
 thickness=2;
 fiddle=1;
 
@@ -40,4 +41,12 @@ module clip() {
     clip_grabber();
 }
 
-clip();
+spacing = 15;
+
+//offsets = [0*spacing, 1*spacing, 2*spacing, 3*spacing];
+offsets = [0];
+
+for (offset = offsets) {
+  translate([offset, 0, 0])
+        rotate([0, 90, 90]) clip();
+}
