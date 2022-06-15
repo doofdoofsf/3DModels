@@ -11,7 +11,7 @@ width = sphere_diameter * 1.3;
 
 module engrave(text) {
    text_depth = 2.0;
-   text_size = 6;
+   text_size = 7;
 
    translate([0, sphere_diameter*0.50, text_size*0.7]) {
       rotate([90, 0, 180]) {
@@ -91,7 +91,7 @@ module mount() {
       ball_depression();
       access_hole();
       lanyard_loop();
-      engrave("AVA");
+      engrave("C.G");
       // lanyard_hole();
    }
 }
