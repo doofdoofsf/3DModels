@@ -1,5 +1,3 @@
-// !! taper end
-
 $fn=100;
 wall_thickness = 2;
 section_length = 20;
