@@ -9,19 +9,6 @@ $fn=180;
 sphere_diameter = 29;
 width = sphere_diameter * 1.3;
 
-module lanyard_loop() {
-   loop_thickness = 7;
-   translate([sphere_diameter*0.65, -sphere_diameter*0.86, sphere_diameter*0.05]) {
-      difference() {
-         diameter = sphere_diameter * 0.5;
-         cylinder(h=3, d=diameter);
-	 translate([0, 0, -1]) {
-            cylinder(h=3+2, d=diameter-loop_thickness);
-         }
-      }
-   }
-}
-
 module body_cylinder() {
    difference() {
       cylinder(d=sphere_diameter*1.2, sphere_diameter*0.68);
@@ -54,7 +41,6 @@ module mount() {
    difference() {
       body();
       ball_depression();
-      lanyard_loop();
    }
 }
 
