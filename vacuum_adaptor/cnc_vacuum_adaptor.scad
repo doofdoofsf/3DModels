@@ -1,0 +1,66 @@
+$fn=100;
+wall_thickness = 2;
+section_length = 20;
+
+start_int_dia = 33;
+start_ext_dia = start_int_dia + 2 * wall_thickness;
+end_ext_dia = 59.5;
+end_int_dia = end_ext_dia - 2 * wall_thickness;
+flange_dia = end_ext_dia * 1.5;
+
+mounting_hole_dia = 5;
+
+
+module start_tube() {
+    difference() {
+        cylinder(section_length, d = start_ext_dia);
+        cylinder(section_length, d = start_int_dia);
+    }
+}
+
+module middle_tube() {
+    difference() {
+        cylinder(section_length, d1 = start_ext_dia, d2 = end_ext_dia);
+        cylinder(section_length, d1 = start_int_dia, d2 = end_int_dia);
+    }
+}
+
+module end_flange_hole() {
+    translate([end_int_dia/2 + (flange_dia/2 - end_int_dia/2)/2, 0, 0])
+        # cylinder(wall_thickness, d = mounting_hole_dia);
+}
+
+module end_flange_holes() {
+    angles = [ for (a = [0 : 360 : 90]) a ];
+        
+    for(a = angles) {
+        rotate(a) end_flange_hole();
+    }
+}
+
+module end_flange() {
+    difference() {
+        cylinder(wall_thickness, d = flange_dia);
+        cylinder(wall_thickness, d = end_int_dia);
+    }
+}
+
+module adaptor() {
+    start_tube();
+    translate([0, 0, section_length]) middle_tube();
+    translate([0, 0, section_length*2]) end_flange();
+}
+
+module holy_adaptor() {
+    difference() {
+        adaptor();
+        translate([0, 0, section_length*2]) end_flange_holes();
+    }
+}
+        
+
+
+holy_adaptor();
+    
+    
+
