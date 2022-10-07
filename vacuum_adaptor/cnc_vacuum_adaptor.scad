@@ -2,8 +2,8 @@ $fn=100;
 wall_thickness = 2;
 section_length = 20;
 
-start_ext_dia = 36;
-start_int_dia = start_ext_dia - 2 * wall_thickness;
+start_int_dia = 36.5;
+start_ext_dia = start_int_dia + 2 * wall_thickness;
 end_ext_dia = 59.5;
 end_int_dia = end_ext_dia - 2 * wall_thickness;
 flange_dia = end_ext_dia * 1.5;
