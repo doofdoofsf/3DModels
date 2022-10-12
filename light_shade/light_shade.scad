@@ -21,7 +21,7 @@ module cutout_shade() {
        main_shade();
        translate([0, 0, outside_dia/2]) cutout();
        translate([0, 0, -outside_dia * 0.8]) cutout();
-       translate([-outside_dia/2, 0, -outside_dia/2-wall_thickness*3]) #cutout();
+       translate([-outside_dia/2*1.3, 0, -outside_dia/2-wall_thickness*3]) cutout();
    }
 }
 
