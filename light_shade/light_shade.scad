@@ -1,4 +1,4 @@
-$fn=100;
+$fn=160;
 
 outside_dia = 144;
 height = 70;
@@ -20,8 +20,7 @@ module cutout_shade() {
    difference() { 
        main_shade();
        translate([0, 0, outside_dia/2]) cutout();
-       translate([0, 0, -outside_dia * 0.88]) cutout();
-       translate([-outside_dia/2, 0, -outside_dia/2-wall_thickness*3]) cutout();
+       rotate([0, 20, 0]) translate([0, 0, -outside_dia * 0.82]) cutout();
    }
 }
 
