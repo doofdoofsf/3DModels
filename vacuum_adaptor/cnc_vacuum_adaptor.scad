@@ -1,12 +1,12 @@
 // 54mm hole
 
-$fn=10;
+$fn=100;
 wall_thickness = 2;
 section_length = 20;
 
 start_int_dia = 36.5;
 start_ext_dia = start_int_dia + 2 * wall_thickness;
-end_ext_dia = 54;
+end_ext_dia = 50.8;
 end_int_dia = end_ext_dia - 2 * wall_thickness;
 flange_dia = end_ext_dia * 1.5;
 
@@ -30,7 +30,6 @@ module end_flange_hole() {
     translate([33, 0, 0])
     {
         cylinder(wall_thickness*2, d = mounting_hole_dia);
-        translate([0, 0, wall_thickness]) #cylinder(wall_thickness, d = mounting_hole_dia*2);
     }
 }
 
