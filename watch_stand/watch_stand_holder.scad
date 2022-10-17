@@ -6,13 +6,14 @@ core_thickness = 6;
 
 core_ext_dia = core_dia * 1.3;
 body_thickness = core_thickness * 1.6;
+cable_allowance = 6;
 
 module power_cutout() {
     slot_dia = core_dia * 0.1;
     cylinder(body_thickness, d = core_dia * 0.4);
-    hull() {
+    #hull() {
         cylinder(body_thickness, d = slot_dia);
-        translate([0, core_dia * 0.5 - slot_dia/2, 0]) cylinder(body_thickness, d = slot_dia);
+        translate([0, core_dia * 0.5 - slot_dia/2 + cable_allowance, 0]) cylinder(body_thickness, d = slot_dia);
     }
 }
 
