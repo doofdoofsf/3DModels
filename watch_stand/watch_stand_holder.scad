@@ -21,11 +21,15 @@ module gravestone() {
     translate([-core_ext_dia/2, 0, 0]) cube([core_ext_dia, core_ext_dia, body_thickness]);
 }
 
+module charger_cutout() {
+    translate([0, 0, body_thickness - core_thickness]) cylinder(core_thickness, d = core_dia);
+        power_cutout();
+}
+
 module body() {
     difference() {
         gravestone();
-        translate([0, 0, body_thickness - core_thickness]) cylinder(core_thickness, d = core_dia);
-        power_cutout();
+        charger_cutout();
     }
 }
 
