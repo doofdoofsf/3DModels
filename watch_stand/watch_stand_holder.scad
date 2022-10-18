@@ -4,18 +4,21 @@ actual_core_dia = 27.7;
 core_dia = actual_core_dia * 1.02;
 core_thickness = 6;
 
+stand_height = 80;
+stand_width = 50;
+stand_depth = 25;
+
 core_ext_dia = core_dia * 1.3;
-body_thickness = core_thickness * 1.6;
+body_thickness = stand_depth;
 cable_allowance = 6;
 cable_thickness = 3;
 
 connector_width = 13;
 
-module rounded_box() {
-    minkowski() {
-        cube([10, 10, 10]);
-        sphere(3);
-    }
+
+
+module stand() {
+    cube([stand_width, stand_height, stand_depth]);
 }
 
 module power_cutout() {
@@ -27,22 +30,18 @@ module power_cutout() {
     }
 }
 
-module gravestone() {
-    cylinder(body_thickness, d = core_ext_dia);
-    translate([-core_ext_dia/2, 0, 0]) cube([core_ext_dia, core_ext_dia*0.75, body_thickness]);
-}
-
 module charger_cutout() {
-    translate([0, 0, body_thickness - core_thickness]) cylinder(core_thickness, d = core_dia);
-        power_cutout();
+    translate([0, 0, body_thickness - core_thickness]) {
+        cylinder(core_thickness, d = core_dia);
+    }
+    power_cutout();
 }
 
 module body() {
     difference() {
-        gravestone();
-        charger_cutout();
+        stand();
+        translate([stand_width/2, stand_height*0.30, 0]) charger_cutout();
     }
 }
 
 body();
-//rounded_box();
