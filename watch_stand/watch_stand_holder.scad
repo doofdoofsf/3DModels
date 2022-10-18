@@ -1,4 +1,4 @@
-$fn=50;
+$fn=100;
 
 actual_core_dia = 27.7;
 core_dia = actual_core_dia * 1.02;
@@ -19,8 +19,8 @@ module rounded_box() {
 }
 
 module power_cutout() {
-    slot_dia = cable_thickness;
-    #cylinder(body_thickness, d = connector_width);
+    slot_dia = cable_thickness + 0.5;
+    cylinder(body_thickness, d = connector_width+1);
     hull() {
         cylinder(body_thickness, d = slot_dia);
         translate([0, core_dia * 0.5 - slot_dia/2 + cable_allowance, 0]) cylinder(body_thickness, d = slot_dia);
