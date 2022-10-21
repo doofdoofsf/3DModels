@@ -9,6 +9,8 @@ body_thickness = core_thickness * 1.6;
 cable_allowance = 6;
 cable_thickness = 3;
 
+gravestone_shaft_height = 40;
+
 connector_width = 13;
 
 module rounded_box() {
@@ -29,7 +31,7 @@ module power_cutout() {
 
 module gravestone() {
     cylinder(body_thickness, d = core_ext_dia);
-    translate([-core_ext_dia/2, 0, 0]) cube([core_ext_dia, core_ext_dia*0.75, body_thickness]);
+    translate([-core_ext_dia/2, 0, 0]) cube([core_ext_dia, gravestone_shaft_height, body_thickness]);
 }
 
 module charger_cutout() {
