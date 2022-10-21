@@ -1,4 +1,4 @@
-$fn=100;
+$fn=10;
 
 actual_core_dia = 27.7;
 core_dia = actual_core_dia * 1.02;
@@ -15,9 +15,8 @@ cable_thickness = 3;
 
 connector_width = 13;
 
-
-
 module stand() {
+    translate([stand_width/2, stand_height/2, stand_depth]) rotate([0, 0, 0]) resize([stand_width, stand_height, 2]) scale([0.1, 0.1, 0.1]) import("WP2.stl");
     cube([stand_width, stand_height, stand_depth]);
 }
 
