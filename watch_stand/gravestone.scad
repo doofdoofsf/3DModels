@@ -14,7 +14,7 @@ slot_dia = cable_thickness + 0.5;
 gravestone_shaft_height = 40;
 
 top_of_stone_down_to_bar_top = 35.3;
-bar_height = 5;
+bar_height = 5-1.27;
 bar_depth = 3;
 
 connector_width = 13;
@@ -43,7 +43,7 @@ module bar() {
 
 module power_cutout() {
     cylinder(body_thickness, d = connector_width+1);
-    #hull() {
+    hull() {
         cylinder(body_thickness, d = slot_dia);
         translate([0, core_dia * 0.5 - slot_dia/2 + cable_allowance, 0]) cylinder(body_thickness, d = slot_dia);
     }
