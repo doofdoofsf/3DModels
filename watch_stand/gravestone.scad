@@ -9,7 +9,7 @@ body_thickness = core_thickness * 1.6;
 cable_allowance = 6;
 cable_thickness = 3;
 
-slot_dia = cable_thickness + 0.5;
+slot_dia = cable_thickness + 1;
 
 gravestone_shaft_height = 40;
 
