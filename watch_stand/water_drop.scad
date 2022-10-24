@@ -16,14 +16,13 @@ shaft_width = core_ext_dia/3;
 connector_width = 13;
 
 module bar() {
-    bar_height = 5-1.27;
-    bar_depth = 3.5;
     top_of_stone_down_to_bar_top = 35.3;
+    bar_dia = 6;
 
     translate([-shaft_width/2,
             top_of_stone_down_to_bar_top-core_ext_dia/2,
             body_thickness])
-    cube([shaft_width, bar_depth, bar_height]);
+    translate([0, bar_dia/2+0.5, 0]) rotate([0, 90 ,0]) cylinder(shaft_width, d=bar_dia);
 }
 
 module power_cutout() {
