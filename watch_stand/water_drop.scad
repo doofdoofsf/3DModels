@@ -13,18 +13,17 @@ slot_dia = cable_thickness + 1;
 
 shaft_height = 50;
 shaft_width = core_ext_dia/3;
-
-top_of_stone_down_to_bar_top = 35.3;
-bar_height = 5-1.27;
-bar_depth = 3;
-
 connector_width = 13;
 
-module rounded_box() {
-    minkowski() {
-        cube([10, 10, 10]);
-        sphere(3);
-    }
+module bar() {
+    bar_height = 5-1.27;
+    bar_depth = 3.5;
+    top_of_stone_down_to_bar_top = 35.3;
+
+    translate([-shaft_width/2,
+            top_of_stone_down_to_bar_top-core_ext_dia/2,
+            body_thickness])
+    cube([shaft_width, bar_depth, bar_height]);
 }
 
 module power_cutout() {
@@ -34,7 +33,7 @@ module power_cutout() {
         cylinder(body_thickness, d = slot_dia);
         translate([0, top_end_y, 0]) cylinder(body_thickness, d = slot_dia);
     }
-    #hull() {
+        hull() {
         translate([0, top_end_y, 0]) cylinder(body_thickness/2, d = slot_dia);
         translate([0, top_end_y+shaft_height-core_ext_dia/2, 0]) cylinder(body_thickness/2, d = slot_dia);
     }   
@@ -52,10 +51,12 @@ module charger_cutout() {
 
 module body() {
     difference() {
-        shaft();
+        union() {
+            shaft();
+            bar();
+        }
         charger_cutout();
     }
 }
 
 body();
-//rounded_box();
