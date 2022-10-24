@@ -39,8 +39,17 @@ module power_cutout() {
     }   
 }
 
+module head() {
+    hull() {
+        translate([6, -core_ext_dia, 0]) {
+            cylinder(body_thickness, d = 4);
+        }
+        cylinder(body_thickness, d = core_ext_dia);
+    }
+}
+
 module shaft() {
-    cylinder(body_thickness, d = core_ext_dia);
+    head();
     translate([-shaft_width/2, 0, 0]) cube([shaft_width, shaft_height, body_thickness]);
 }
 
