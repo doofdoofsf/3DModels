@@ -1,16 +1,19 @@
 pi = 3.14159265358979;
 e = 2.71828182845904;
 
-base_width = 110;
+$fn = 80;
+
+base_width = 90;
 base_depth = 13;
 z_undersize = 9;
-grid_size = 200;
+ grid_size = 200;
 //grid_size = 70;
 
 ripple_depth = 40;
 plug_diameter = 15;
 
-range = 6*pi;
+ripples = 7;
+range = ripples * pi;
 x_range = [-range, +range];
 y_range = x_range;
 
@@ -39,8 +42,8 @@ module platform() {
 }
 
 module shaft_base() {
-    base_depth = 8.2;
-    translate([0, 0, base_depth/2]) cylinder(d=36, base_depth);
+    base_depth = 8.25;
+    translate([0, 0, base_depth/2]) cylinder(d=26.5, base_depth);
 }
 
 module shaft_cut() {
