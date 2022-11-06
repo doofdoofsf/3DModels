@@ -3,18 +3,21 @@ e = 2.71828182845904;
 
 base_width = 110;
 base_depth = 13;
-z_undersize = 10;
-//grid_size = 100;
-grid_size = 70;
+z_undersize = 9;
+grid_size = 100;
+//grid_size = 70;
 
-ripple_depth = 20;
+ripple_depth = 40;
 plug_diameter = 15;
 
 range = 6*pi;
 x_range = [-range, +range];
 y_range = x_range;
 
-function z(x,y) = ripple_depth*cos(180*sqrt(x*x+y*y)/pi)/sqrt(2+x*x+y*y);
+shaft_x = 12;
+shaft_y = 9;
+
+function z(x,y) = ripple_depth*cos(180*sqrt(x*x+y*y)/pi)/sqrt(100+x*x+y*y);
 
 module uncut_base() {
     cube([base_width, base_width, base_depth]);
@@ -30,25 +33,30 @@ module ripples() {
         
 }
 
-module base_bottom_cut() {
-    translate([0, 0, -base_depth/2]) {
-        cube([base_width, base_width, base_depth], center=true);
-    }
+module platform() {
+    ripples();
+    shaft_base();
 }
 
-module plug_hole_cut() {
-    //cylinder(30, d = plug_diameter);
+module shaft_base() {
+    base_depth = 8.2;
+    translate([0, 0, base_depth/2]) cylinder(d=36, base_depth);
+}
+
+module shaft_cut() {
+    shaft_z = 40;
+    translate([0, 0, shaft_z/2]) {
+        cube([shaft_x, shaft_y, shaft_z], center=true);
+    }    
 }
 
 module plug_hole() {
 }
 
 module body() {
-    ripples();
-    plug_hole_cut();
-    *difference() {
-        ripples();
-        base_bottom_cut();
+    difference() {
+        platform();
+        shaft_cut();
     }
 }
 
