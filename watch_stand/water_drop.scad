@@ -32,7 +32,7 @@ module power_cutout() {
         cylinder(body_thickness, d = slot_dia);
         translate([0, top_end_y, 0]) cylinder(body_thickness, d = slot_dia);
     }
-        hull() {
+    hull() {
         translate([0, top_end_y, 0]) cylinder(body_thickness/2, d = slot_dia);
         translate([0, top_end_y+shaft_height-core_ext_dia/2, 0]) cylinder(body_thickness/2, d = slot_dia);
     }   
@@ -40,7 +40,7 @@ module power_cutout() {
 
 module head() {
     hull() {
-        translate([6, -core_ext_dia, 0]) {
+        translate([12, -core_ext_dia*0.9, 0]) {
             cylinder(body_thickness, d = 4);
         }
         cylinder(body_thickness, d = core_ext_dia);
