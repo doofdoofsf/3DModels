@@ -4,7 +4,7 @@ e = 2.71828182845904;
 base_width = 110;
 base_depth = 13;
 z_undersize = 9;
-grid_size = 100;
+grid_size = 200;
 //grid_size = 70;
 
 ripple_depth = 40;
