@@ -6,19 +6,19 @@ $fn = 80;
 base_width = 90;
 base_depth = 13;
 z_undersize = 9;
- grid_size = 200;
-//grid_size = 70;
+//grid_size = 200;
+grid_size = 70;
 
-ripple_depth = 40;
+ripple_depth = 42;
 plug_diameter = 15;
 
-ripples = 7;
+ripples = 5;
 range = ripples * pi;
 x_range = [-range, +range];
 y_range = x_range;
 
-shaft_x = 12;
-shaft_y = 9;
+shaft_x = 13;
+shaft_y = 10;
 
 function z(x,y) = ripple_depth*cos(180*sqrt(x*x+y*y)/pi)/sqrt(100+x*x+y*y);
 
@@ -42,8 +42,8 @@ module platform() {
 }
 
 module shaft_base() {
-    base_depth = 8.25;
-    translate([0, 0, base_depth/2]) cylinder(d=26.5, base_depth);
+    base_depth = 8.2;
+    translate([0, 0, base_depth/2]) cylinder(d=37, base_depth*1.02);
 }
 
 module shaft_cut() {
@@ -64,7 +64,7 @@ module body() {
 }
 
 body();
-//uncut_base();
+//#uncut_base();
 
 // ---------------------------
 
