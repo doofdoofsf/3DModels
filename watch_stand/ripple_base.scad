@@ -5,7 +5,7 @@ $fn = 80;
 
 base_width = 90;
 base_depth = 13;
-z_undersize = 9;
+z_undersize = 9.5;
 //grid_size = 200;
 grid_size = 70;
 
@@ -64,7 +64,7 @@ module body() {
 }
 
 body();
-//#uncut_base();
+#uncut_base();
 
 // ---------------------------
 
