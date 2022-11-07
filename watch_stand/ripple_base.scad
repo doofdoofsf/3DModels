@@ -43,7 +43,7 @@ module platform() {
 
 module shaft_base() {
     base_depth = 8.2;
-    translate([0, 0, base_depth/2]) cylinder(d=37, base_depth*1.02);
+    translate([0, 0, base_depth/2]) cylinder(d=37, base_depth*1.08);
 }
 
 module shaft_cut() {
@@ -64,7 +64,7 @@ module body() {
 }
 
 body();
-#uncut_base();
+//#uncut_base();
 
 // ---------------------------
 
