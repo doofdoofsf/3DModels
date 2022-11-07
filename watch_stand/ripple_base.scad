@@ -17,13 +17,13 @@ range = ripples * pi;
 x_range = [-range, +range];
 y_range = x_range;
 
-shaft_x = 13;
-shaft_y = 10;
+shaft_x = 12.5;
+shaft_y = 9.5;
 
 function z(x,y) = ripple_depth*cos(180*sqrt(x*x+y*y)/pi)/sqrt(100+x*x+y*y);
 
 module uncut_base() {
-    cube([base_width, base_width, base_depth]);
+    cube([base_width/2, base_width/2, base_depth]);
 }
 
 module ripples() {
