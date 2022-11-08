@@ -10,16 +10,16 @@ cable_allowance = 6;
 cable_thickness = 3;
 
 slot_dia = cable_thickness + 1;
+bar_dia = 6;
+shaft_length_past_bar=11;
 
-shaft_height = 50;
-shaft_tip_height = 30;
+shaft_height = core_ext_dia/2+bar_dia+shaft_length_past_bar;
 shaft_width = core_ext_dia/3;
 rounding_radius = 3;
 connector_width = 13;
 
 module bar() {
     top_of_stone_down_to_bar_top = 35.3;
-    bar_dia = 6;
 
     translate([-shaft_width/2,
             top_of_stone_down_to_bar_top-core_ext_dia/2,
@@ -50,19 +50,11 @@ module head() {
 }
 
 module shaft() {
-    translate([-shaft_width/2, 0, 0]) { 
-        cube([shaft_width, 
-        shaft_height - shaft_tip_height,
-        body_thickness]);
-    }
-}
-
-module shaft_tip() {
-    translate([-shaft_width/2 + rounding_radius, shaft_height - shaft_tip_height, rounding_radius]) {
+    translate([-shaft_width/2 + rounding_radius, rounding_radius, rounding_radius]) {
         minkowski() {
             cube([shaft_width - 2 * rounding_radius,
-            shaft_tip_height - 2 * rounding_radius,
-            body_thickness - 2  * rounding_radius]);
+            shaft_height - 2 * rounding_radius,
+            body_thickness - 2 * rounding_radius]);
             sphere(rounding_radius);
         }             
     }
@@ -76,10 +68,7 @@ module charger_cutout() {
 module body() {
     difference() {
         union() {
-            hull() {
-                shaft();
-                shaft_tip();
-            }
+            shaft();
             head();
             bar();
         }
