@@ -15,7 +15,7 @@ shaft_length_past_bar=11;
 
 shaft_height = core_ext_dia/2+bar_dia+shaft_length_past_bar;
 shaft_width = core_ext_dia/3;
-rounding_radius = 3;
+rounding_radius = 1.5;
 connector_width = 13;
 
 module bar() {
@@ -76,4 +76,4 @@ module body() {
     }
 }
 
-body();
+rotate([0, 0, 270]) body();
