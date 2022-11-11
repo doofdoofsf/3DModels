@@ -1,11 +1,12 @@
 $fn=100;
 wall_thickness = 2;
-section_length = 20;
+section_length = 10;
 end_taper = 1.5;
 
-start_int_dia = 33;
-start_ext_dia = start_int_dia + 2 * wall_thickness;
-end_ext_dia = 59.5;
+start_ext_dia = 42;
+start_int_dia = start_ext_dia - 2 * wall_thickness;
+
+end_ext_dia = 33.5;
 end_int_dia = end_ext_dia - 2 * wall_thickness;
 
 
@@ -25,8 +26,8 @@ module middle_tube() {
 
 module end_tube() {
     difference() {
-        cylinder(section_length*1.5, d1 = end_ext_dia, d2 = end_ext_dia-end_taper);
-        cylinder(section_length*1.5, d1 = end_int_dia, d2 = end_int_dia-end_taper);
+        cylinder(section_length*1.3, d1 = end_ext_dia, d2 = end_ext_dia-end_taper);
+        cylinder(section_length*1.3, d1 = end_int_dia, d2 = end_int_dia-end_taper);
     }
 }
 
