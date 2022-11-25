@@ -1,9 +1,8 @@
-// make very bottom untapered
 $fn=100;
 big_shaft_length=40;
 base_shaft_length = 20;
-shaft_start_radius = 3.5;
-shaft_end_radius = shaft_start_radius - 0.7;
+shaft_start_radius = 3.0;
+shaft_end_radius = shaft_start_radius - 0.3;
 shaft_angle = 70;
 
 module big_shaft() {
