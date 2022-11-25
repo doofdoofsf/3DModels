@@ -45,7 +45,9 @@ module pot_topper() {
 
 module shaft_cutout() {
     cutout_height = pot_base_height * 0.4;
-    translate([-pot_topper_size * 0.15, 0, pot_topper_z - cutout_height]) cylinder(cutout_height, r=shaft_radius, center=true);
+    cutout_radius = shaft_radius * 1.04;
+        
+    translate([-pot_topper_size * 0.15, 0, pot_topper_z - cutout_height]) cylinder(cutout_height, r=cutout_radius, center=true);
 }
 
 module pot() {
