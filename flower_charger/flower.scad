@@ -1,3 +1,7 @@
+// todo: bigger back plate hole area
+
+include <definitions.scad>
+
 $fn=30;
 internal_core_diameter=58.8;
 core_diameter = internal_core_diameter * 1.18;
@@ -6,7 +10,6 @@ num_petals = 9;
 core_thickness=3.6;
 back_plate_thickness = core_thickness/2;
 wire_radius = 1.2;
-shaft_end_radius = 4;
 
 module petal(height_scale) {
     scale([0.8, 0.2, height_scale]) {
@@ -56,12 +59,14 @@ module back_plate_hole() {
 }
 
 module back_plate() {
-    translate([0, -core_thickness-back_plate_thickness/2, 0]) {
-        rotate([90, 0, 0]) {
-            cylinder(h=back_plate_thickness, r=core_diameter/2);
-        }
-    }   
-    back_plate_hole();
+    difference() {
+        translate([0, -core_thickness-back_plate_thickness/2, 0]) {
+            rotate([90, 0, 0]) {
+                cylinder(h=back_plate_thickness, r=core_diameter/2);
+            }
+        }   
+        back_plate_hole();
+    }
 }
 
 module ring_wire_cut() {

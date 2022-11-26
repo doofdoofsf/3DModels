@@ -1,4 +1,4 @@
-//https://cdn-tp3.mozu.com/24645-37138/cms/37138/files/951f8afc-140d-49d5-8d02-ca46c08575c9?quality=60&_mzcb=_1649148331752
+include <definitions.scad>
 
 $fn=100;
 
@@ -6,8 +6,6 @@ pot_base_size = 60;
 pot_base_height = pot_base_size * 0.5;
 pot_base_top_size = pot_base_size * 1.2;
 rounding_radius = pot_base_size / 20;
-
-shaft_start_radius = 4.5;
 
 pot_topper_size = pot_base_top_size * 1.1;
 pot_topper_height = pot_base_size / 5;

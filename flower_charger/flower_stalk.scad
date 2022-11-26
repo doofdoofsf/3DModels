@@ -1,8 +1,8 @@
+include <definitions.scad>
+
 $fn=100;
 big_shaft_length=70;
 base_shaft_length = 20;
-shaft_start_radius = 4.5;
-shaft_end_radius = 4;
 shaft_angle = 70;
 
 module big_shaft() {
