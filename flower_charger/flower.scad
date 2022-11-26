@@ -3,13 +3,13 @@
 include <definitions.scad>
 
 $fn=30;
-internal_core_diameter=58.8;
+internal_core_diameter=59.2;
 core_diameter = internal_core_diameter * 1.18;
 sphere_diameter=30;
 num_petals = 9;
 core_thickness=3.6;
 back_plate_thickness = core_thickness/2;
-wire_radius = 1.5;
+wire_radius = 2.25;
 
 module petal(height_scale) {
     scale([0.8, 0.2, height_scale]) {
@@ -101,5 +101,5 @@ module back_petal_ring() {
 }
 
 front_petal_ring();
-back_petal_ring();
+//back_petal_ring();
 //translate([0, 3, 0]) color("black") core(core_thickness, internal_core_diameter);
