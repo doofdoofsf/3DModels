@@ -9,7 +9,7 @@ sphere_diameter=30;
 num_petals = 9;
 core_thickness=3.6;
 back_plate_thickness = core_thickness/2;
-wire_radius = 1.2;
+wire_radius = 1.5;
 
 module petal(height_scale) {
     scale([0.8, 0.2, height_scale]) {
@@ -58,18 +58,22 @@ module back_plate_hole() {
     rotate([90, 0, 0]) cylinder(h=hole_length, r=shaft_end_radius, center=true);
 }
 
+module back_plate_reenforcement() {
+    rotate([90, 0, 0]) cylinder(h=back_plate_thickness*3, r=core_diameter/4);
+}
+
 module back_plate() {
     difference() {
         translate([0, -core_thickness-back_plate_thickness/2, 0]) {
-            rotate([90, 0, 0]) {
-                cylinder(h=back_plate_thickness, r=core_diameter/2);
-            }
+            rotate([90, 0, 0]) cylinder(h=back_plate_thickness, r=core_diameter/2);
+            back_plate_reenforcement();
         }   
         back_plate_hole();
     }
 }
 
 module ring_wire_cut() {
+    !!@ cylinder(h=5, r=wire_radius*10);
 }
 
 module front_petal_ring() {
@@ -81,5 +85,5 @@ module back_petal_ring() {
     back_plate();
 }
 
-front_petal_ring();
+//front_petal_ring();
 back_petal_ring();

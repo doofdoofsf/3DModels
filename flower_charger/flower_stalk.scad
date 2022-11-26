@@ -1,7 +1,7 @@
 include <definitions.scad>
 
 $fn=100;
-big_shaft_length=70;
+big_shaft_length=50;
 base_shaft_length = 20;
 shaft_angle = 70;
 
@@ -15,7 +15,7 @@ module base_shaft() {
 
 
 module bend() {
-    offset = 33;
+    offset = 53;
     translate([-offset, 0, 0])
     rotate([90, 0, 0])
     rotate_extrude(angle = shaft_angle)
