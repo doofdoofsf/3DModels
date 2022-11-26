@@ -102,9 +102,4 @@ module back_petal_ring() {
 
 front_petal_ring();
 back_petal_ring();
-
-* rotate([90, 0, 0]) {
-    front_petal_ring();
-    back_petal_ring();
-    //translate([0, 3, 0]) color("black") core(core_thickness, internal_core_diameter);
-}
+//translate([0, 3, 0]) color("black") core(core_thickness, internal_core_diameter);
