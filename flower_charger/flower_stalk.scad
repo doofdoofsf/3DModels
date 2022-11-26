@@ -1,8 +1,8 @@
 $fn=100;
-big_shaft_length=40;
+big_shaft_length=70;
 base_shaft_length = 20;
-shaft_start_radius = 3.0;
-shaft_end_radius = shaft_start_radius - 0.3;
+shaft_start_radius = 4.5;
+shaft_end_radius = 4;
 shaft_angle = 70;
 
 module big_shaft() {

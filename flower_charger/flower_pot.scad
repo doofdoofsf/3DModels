@@ -7,14 +7,13 @@ pot_base_height = pot_base_size * 0.5;
 pot_base_top_size = pot_base_size * 1.2;
 rounding_radius = pot_base_size / 20;
 
-shaft_radius = 3.0;
+shaft_start_radius = 4.5;
 
 pot_topper_size = pot_base_top_size * 1.1;
 pot_topper_height = pot_base_size / 5;
 pot_topper_z = pot_base_height + pot_topper_height/2;
 
 module base_rounded_cuboid(side_length, height) {
-    //echo(side_length, height);
     base_side_length = side_length - 2*rounding_radius;
             
     minkowski() {
@@ -45,7 +44,7 @@ module pot_topper() {
 
 module shaft_cutout() {
     cutout_height = pot_base_height * 0.4;
-    cutout_radius = shaft_radius * 1.04;
+    cutout_radius = shaft_start_radius * 1.04;
         
     translate([-pot_topper_size * 0.15, 0, pot_topper_z - cutout_height]) cylinder(cutout_height, r=cutout_radius, center=true);
 }
