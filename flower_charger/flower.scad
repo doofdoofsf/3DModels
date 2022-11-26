@@ -73,9 +73,13 @@ module back_plate() {
 }
 
 module ring_wire_cut() {
-    rotate([0, 360/num_petals/4, 0])
-        translate([0, -core_thickness/2, -core_diameter/2])
-            #cylinder(h=20, r=wire_radius, center=true);
+    cut_length = 12;
+    rotate([0, 0, 0])
+        translate([0, -core_thickness/2, core_diameter/2-cut_length/2])
+            hull () {
+                sphere(wire_radius);
+                translate([0, 0, cut_length]) sphere(wire_radius);
+            }
 }
 
 module front_petal_ring() {
@@ -88,14 +92,19 @@ module front_petal_ring() {
 module back_petal_ring() {
     difference() {
         union() {
-            translate([0, -core_thickness, 0]) rotate([0, 360/num_petals/2, 0]) body(1.8);
-            back_plate();
+            translate([0, -core_thickness, 0])
+                rotate([0, 360/num_petals/2, 0]) body(1.8);
+                    back_plate();
         }
         ring_wire_cut();
     }
 }
 
-rotate([90, -0, 0]) {
+front_petal_ring();
+back_petal_ring();
+
+* rotate([90, 0, 0]) {
     front_petal_ring();
     back_petal_ring();
+    //translate([0, 3, 0]) color("black") core(core_thickness, internal_core_diameter);
 }
