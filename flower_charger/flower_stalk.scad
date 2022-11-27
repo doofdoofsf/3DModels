@@ -1,7 +1,7 @@
 include <definitions.scad>
 
 $fn=100;
-shaft_length=50;
+shaft_length=80;
 shaft_angle = 70;
 wire_radius = 1.5;
 
