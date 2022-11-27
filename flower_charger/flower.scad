@@ -2,7 +2,7 @@
 
 include <definitions.scad>
 
-$fn=30;
+$fn=50;
 internal_core_diameter=59.2;
 core_diameter = internal_core_diameter * 1.18;
 sphere_diameter=30;
