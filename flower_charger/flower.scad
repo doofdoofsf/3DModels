@@ -24,6 +24,15 @@ module petal(height_scale) {
     }
 }
 
+module support_ring(core_diameter, num_petals = 3) {
+    step = 360/num_petals;
+    for(angle = [step/2 : step*2 : 360]) {
+        rotate([0, angle, 0]) translate([0, 0, core_diameter/2]) {
+            cylinder(50, r = 2);
+        }
+    }
+}
+
 module petal_ring(core_diameter, num_petals = 3, height_scale) {
     for(angle = [0 : 360/num_petals : 360]) {
         rotate([0, angle, 0]) translate([0, 0, sphere_diameter*0.4+core_diameter/2]) {
@@ -46,6 +55,9 @@ module body(petal_height_scale) {
             petal_ring(core_diameter = core_diameter, 
                        num_petals=num_petals, 
                        height_scale=petal_height_scale);
+            
+            support_ring(core_diameter = core_diameter, 
+                         num_petals=num_petals);
             core(core_thickness, core_diameter);
         }
         core(core_thickness, internal_core_diameter);
@@ -74,10 +86,9 @@ module back_plate() {
     }
 }
 
-module ring_wire_cut() {
-    cut_length = 12;
+module ring_wire_cut(cut_length) {
     rotate([0, 0, 0])
-        translate([0, -core_thickness/2, core_diameter/2-cut_length/2])
+        translate([0, -core_thickness/2, core_diameter/2-cut_length])
             hull () {
                 sphere(wire_radius);
                 translate([0, 0, cut_length]) sphere(wire_radius);
@@ -87,7 +98,7 @@ module ring_wire_cut() {
 module front_petal_ring() {
     difference() {
         body(1.3);
-        ring_wire_cut();
+        ring_wire_cut(12);
     }
 }
 
@@ -98,10 +109,10 @@ module back_petal_ring() {
                 rotate([0, 360/num_petals/2, 0]) body(1.8);
                     back_plate();
         }
-        ring_wire_cut();
+        ring_wire_cut(5);
     }
 }
 
-//front_petal_ring();
-back_petal_ring();
+front_petal_ring();
+//back_petal_ring();
 //translate([0, 3, 0]) color("black") core(core_thickness, internal_core_diameter);
