@@ -65,8 +65,10 @@ module back_plate_reenforcement() {
 module back_plate() {
     difference() {
         translate([0, -core_thickness-back_plate_thickness/2, 0]) {
-            rotate([90, 0, 0]) cylinder(h=back_plate_thickness, r=core_diameter/2);
-            back_plate_reenforcement();
+            hull() {
+                rotate([90, 0, 0]) cylinder(h=back_plate_thickness, r=core_diameter/2);
+                back_plate_reenforcement();
+            }
         }   
         back_plate_hole();
     }
@@ -100,6 +102,6 @@ module back_petal_ring() {
     }
 }
 
-front_petal_ring();
-//back_petal_ring();
+//front_petal_ring();
+back_petal_ring();
 //translate([0, 3, 0]) color("black") core(core_thickness, internal_core_diameter);
