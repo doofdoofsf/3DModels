@@ -67,7 +67,7 @@ module body(petal_height_scale) {
 
 module back_plate_hole() {
     hole_length = back_plate_thickness * 15;
-    rotate([90, 0, 0]) cylinder(h=hole_length, r=shaft_end_radius, center=true);
+    rotate([90, 0, 0]) cylinder(h=hole_length, r=shaft_radius, center=true);
 }
 
 module back_plate_reenforcement() {

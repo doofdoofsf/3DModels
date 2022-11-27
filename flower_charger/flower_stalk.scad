@@ -3,12 +3,12 @@ include <definitions.scad>
 $fn=100;
 shaft_length=50;
 shaft_angle = 70;
-wire_radius = 1;
+wire_radius = 1.5;
 
 module shaft_slice() {
     difference() {
-        circle(r = shaft_end_radius);
-        translate([shaft_end_radius-wire_radius, 0, 0]) square([wire_radius*2, wire_radius*2], center=true);
+        circle(r = shaft_radius);
+        translate([shaft_radius-wire_radius, 0, 0]) square([wire_radius*2, wire_radius*2], center=true);
     }
 }
 
