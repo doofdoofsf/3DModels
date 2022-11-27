@@ -1,16 +1,20 @@
 include <definitions.scad>
 
 $fn=100;
-big_shaft_length=50;
-base_shaft_length = 20;
+shaft_length=50;
 shaft_angle = 70;
+wire_radius = 1;
 
-module big_shaft() {
-    translate([0, 0, base_shaft_length]) cylinder(h=big_shaft_length-base_shaft_length, r1=shaft_start_radius, r2=shaft_end_radius);
+module shaft_slice() {
+    difference() {
+        circle(r = shaft_end_radius);
+        translate([shaft_end_radius-wire_radius, 0, 0]) square([wire_radius*2, wire_radius*2], center=true);
+    }
 }
 
-module base_shaft() {
-    cylinder(h=base_shaft_length, r=shaft_start_radius);
+module shaft() {
+    linear_extrude(height = shaft_length, convexity = 10)
+      shaft_slice();
 }
 
 
@@ -20,9 +24,13 @@ module bend() {
     rotate([90, 0, 0])
     rotate_extrude(angle = shaft_angle)
         translate([offset, 0, 0])
-            circle(r = shaft_end_radius);
+            shaft_slice();
 }
 
-base_shaft();
-big_shaft();
-translate([0, 0, big_shaft_length]) bend();
+module stalk() {
+    shaft();
+    translate([0, 0, shaft_length]) bend();
+}
+
+stalk();
+
