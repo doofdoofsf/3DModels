@@ -13,7 +13,7 @@ module support_ring(core_diameter, num_petals = 3) {
     step = 360/num_petals;
     for(angle = [step/2 : step : 360]) {
         rotate([0, angle, 0]) translate([0, 0, core_diameter/2]) {
-            cylinder(50, r = 2);
+            cylinder(70, r = 2);
         }
     }
 }
@@ -53,7 +53,7 @@ module body(petal_height_scale) {
                num_petals=num_petals, 
                height_scale=petal_height_scale);
     
-    //support_ring(core_diameter = core_diameter, num_petals=num_petals);
+    support_ring(core_diameter = core_diameter, num_petals=num_petals);
     core(core_thickness, core_diameter);
 
 }       
@@ -92,5 +92,5 @@ module back_petal_ring() {
 }
 
 front_petal_ring();
-back_petal_ring();
+//back_petal_ring();
 //translate([0, 3, 0]) color("black") core(core_thickness, core_diameter);
