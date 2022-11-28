@@ -8,7 +8,7 @@ wire_radius = 1.5;
 module shaft_slice() {
     difference() {
         circle(r = shaft_radius);
-        translate([shaft_radius-wire_radius, 0, 0]) square([wire_radius*2, wire_radius*2], center=true);
+        translate([-shaft_radius+wire_radius, 0, 0]) square([wire_radius*2, wire_radius*2], center=true);
     }
 }
 
@@ -32,5 +32,4 @@ module stalk() {
     translate([0, 0, shaft_length]) bend();
 }
 
-stalk();
-
+shaft_slice();
