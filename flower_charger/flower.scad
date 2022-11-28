@@ -2,13 +2,15 @@
 
 include <definitions.scad>
 
-$fn=30;
+$fn=90;
 core_diameter=59.2;;
 sphere_diameter=30;
 num_petals = 9;
 core_thickness=4;
 back_plate_thickness = core_thickness/2;
 hole_scale_factor = 1.02;
+
+back_raised_radius = 20.0;
 
 module support_ring(core_diameter, num_petals = 3) {
     step = 360/num_petals;
@@ -17,6 +19,15 @@ module support_ring(core_diameter, num_petals = 3) {
             cylinder(70, r = 2);
         }
     }
+}
+
+module glue_grooves() {
+    for(radius = [5 : 2 : back_raised_radius * 0.9]) { 
+        echo(radius);
+        rotate_extrude()
+            translate([radius, 0, 0])
+                circle(r = 0.5);
+    }       
 }
 
 module petal(height_scale) {
@@ -42,19 +53,23 @@ module petal_ring(core_diameter, num_petals = 3, height_scale) {
 }
 
 module core(core_thickness, core_diameter) {
-    translate([0, core_thickness/2, 0]) {
-        rotate([90, 0, 0]) {
-            cylinder(h=core_thickness, r=core_diameter/2);
+    difference() {
+        translate([0, core_thickness/2, 0]) {
+            rotate([90, 0, 0]) {
+                cylinder(h=core_thickness, r=core_diameter/2);
+            }
         }
+        translate([0, -core_thickness/2, 0]) rotate([90, 0, 0]) glue_grooves();
     }
 }
+
 
 module body(petal_height_scale) {
     petal_ring(core_diameter = core_diameter, 
                num_petals=num_petals, 
                height_scale=petal_height_scale);
     
-    //support_ring(core_diameter = core_diameter, num_petals=num_petals);
+    support_ring(core_diameter = core_diameter, num_petals=num_petals);
     core(core_thickness, core_diameter);
 
 }       
@@ -89,5 +104,6 @@ module back_petal_ring() {
 }
 
 front_petal_ring();
-back_petal_ring();
-//translate([0, 3, 0]) color("black") core(core_thickness, core_diameter);
+
+//back_petal_ring();
+// translate([0, 3, 0]) color("black") core(core_thickness, core_diameter);
