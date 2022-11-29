@@ -16,7 +16,7 @@ module support_ring(core_diameter, num_petals = 3) {
     step = 360/num_petals;
     for(angle = [step/2 : step : 360]) {
         rotate([0, angle, 0]) translate([0, 0, core_diameter/2]) {
-            cylinder(70, r = 1.25);
+            cylinder(70, r = 1.75);
         }
     }
 }
