@@ -1,8 +1,8 @@
 inside_base_x = 70.0;
-inside_base_y = 30.5;
+inside_base_y = 31.0;
 inside_base_z = 24.0;
 crade_push_out = 20;
-ledge_indent = 12.0;
+ledge_indent = 8.5;
 tilt = 20;
 thickness = 2.0;
 
