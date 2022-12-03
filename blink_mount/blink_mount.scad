@@ -22,26 +22,31 @@ module inside_cube() {
       inside_base_z], center=true);
 }
 
-module base_cube_with_step() {
-    difference() {
-        base_cube(high=true);
+module step() {
+    translate([0, -inside_base_y/2, -inside_base_z]) 
         translate([0, -(inside_base_y+2*thickness)/2 + ledge_indent/2, -ledge_indent] )
             cube([inside_base_x + 2*thickness,
                   ledge_indent, 
                   outside_base_height_high], center=true);
-    }
 }
 
 module cradle() {
     difference() {
         hull() {
             rotate([tilt, 0, 0]) base_cube();
-            translate([0, -inside_base_y/2, -inside_base_z]) base_cube_with_step();
+            translate([0, -inside_base_y/2, -inside_base_z]) base_cube(high=true);
         }
         rotate([tilt, 0, 0]) translate([0, 0, thickness]) inside_cube();
     }
    
 }
 
-cradle();
+module mount() {
+    difference() {
+        cradle();
+        step();
+    }
+}
+
+mount();
     
