@@ -2,13 +2,16 @@
 
 include <definitions.scad>
 
-$fn=30;
+$fn=50;
 core_diameter=59.2;;
 sphere_diameter=30;
 num_petals = 9;
-core_thickness=4;
+core_thickness=6;
 back_plate_thickness = core_thickness/2;
 hole_scale_factor = 1.02;
+show_supports = false;
+show_front = true;
+show_back = true;
 
 back_raised_radius = 20.0;
 
@@ -23,7 +26,6 @@ module support_ring(core_diameter, num_petals = 3) {
 
 module glue_grooves() {
     for(radius = [5 : 2 : back_raised_radius * 0.9]) { 
-        echo(radius);
         rotate_extrude()
             translate([radius, 0, 0])
                 circle(r = 0.5);
@@ -31,7 +33,7 @@ module glue_grooves() {
 }
 
 module petal(height_scale) {
-    scale([0.9, 0.25, height_scale]) {
+    scale([0.9, 0.45, height_scale]) {
         intersection_for(n = [0 : 60: 360])
         {
             rotate([0, 0, n])
@@ -69,7 +71,8 @@ module body(petal_height_scale) {
                num_petals=num_petals, 
                height_scale=petal_height_scale);
     
-    support_ring(core_diameter = core_diameter, num_petals=num_petals);
+    if (show_supports) 
+        support_ring(core_diameter = core_diameter, num_petals=num_petals);
     core(core_thickness, core_diameter);
 
 }       
@@ -103,7 +106,7 @@ module back_petal_ring() {
     }
 }
 
-front_petal_ring();
+if(show_front) front_petal_ring();
+if(show_back) back_petal_ring();
 
-back_petal_ring();
-// translate([0, 3, 0]) color("black") core(core_thickness, core_diameter);
+//translate([0, core_thickness, 0]) color("black") core(core_thickness, core_diameter);
