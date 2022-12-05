@@ -1,1 +1,1 @@
-shaft_radius = 5;
+shaft_radius = 6;
