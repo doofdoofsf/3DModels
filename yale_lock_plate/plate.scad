@@ -1,4 +1,4 @@
-$fn=50;
+$fn=90;
 
 lock_height = 93.0;
 lock_width = 63.5;
@@ -9,19 +9,21 @@ margin_x = 8;
 plate_height = lock_height + 2 * margin_y;
 plate_width = lock_width + 2 * margin_x;
 
-hole_diameter = 53.5;
+hole_diameter = 53.6;
 hole_top_to_lock_top = 29;
 
-thickness = 2.5;
-rounding_radius = 5;
+thickness = 2.0;
+rounding_radius = 10;
 
 hole_offset = hole_top_to_lock_top - (lock_height/2 - hole_diameter/2);
 echo(lock_height/2 - hole_diameter/2, hole_offset);
 
 module plate() {
     minkowski() {
-        cube([plate_width, plate_height, thickness], center = true);
-        cylinder(r = rounding_radius, h = thickness);
+        cube([plate_width - 2*rounding_radius, 
+        plate_height - 2*rounding_radius, 
+        thickness], center = true);
+        cylinder(r = rounding_radius, h = thickness/1000);
     }
 }
 
