@@ -12,7 +12,7 @@ plate_width = lock_width + 2 * margin_x;
 hole_diameter = 53.6;
 hole_top_to_lock_top = 29;
 
-thickness = 2.0;
+thickness = 1.5;
 rounding_radius = 10;
 
 hole_offset = hole_top_to_lock_top - (lock_height/2 - hole_diameter/2);
