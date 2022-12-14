@@ -7,10 +7,9 @@ core_diameter=59.2;;
 sphere_diameter=30;
 num_petals = 9;
 core_thickness=6;
-back_plate_thickness = core_thickness/2;
 hole_scale_factor = 1.02;
 show_supports = false;
-show_front = false;
+show_front = true;
 show_back = true;
 
 back_raised_radius = 20.0;
@@ -33,7 +32,7 @@ module glue_grooves() {
 }
 
 module petal(height_scale) {
-    scale([0.9, 0.39, height_scale]) {
+    scale([0.9, 0.43, height_scale]) {
         intersection_for(n = [0 : 60: 360])
         {
             rotate([0, 0, n])
@@ -61,7 +60,7 @@ module core(core_thickness, core_diameter) {
                 cylinder(h=core_thickness, r=core_diameter/2);
             }
         }
-        translate([0, -core_thickness/2, 0]) rotate([90, 0, 0]) glue_grooves();
+        translate([0, core_thickness/2, 0]) rotate([90, 0, 0]) glue_grooves();
     }
 }
 
@@ -78,14 +77,8 @@ module body(petal_height_scale) {
 }       
 
 module plate_hole() {
-    hole_length = back_plate_thickness * 15;
+    hole_length = core_thickness * 10;
     rotate([90, 0, 0]) cylinder(h=hole_length, r=shaft_radius*hole_scale_factor, center=true);
-}
-
-module back_plate() {
-    translate([0, -core_thickness-back_plate_thickness/2, 0]) {
-        rotate([90, 0, 0]) cylinder(h=back_plate_thickness, r=core_diameter/2);
-    }
 }
 
 module front_petal_ring() {
@@ -100,7 +93,6 @@ module back_petal_ring() {
         union() {
             translate([0, -core_thickness, 0])
                 rotate([0, 360/num_petals/2, 0]) body(1.8);
-                    #back_plate();
         }
         plate_hole();
     }
