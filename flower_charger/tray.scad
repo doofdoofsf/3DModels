@@ -33,11 +33,11 @@ module cutout_tray() {
 module filled_tray() {
     filled_length = tray_length * 0.7;
     cutout_tray();
-    translate([(tray_length - filled_length)/2, 0, 0]) {
+    translate([tray_length/4-rim_width*2, 0, 0]) {
         stalk();
         difference() {
-            base_tray_form(tray_height, tray_width, filled_length, main_radius);
-            #cylinder(tray_height, r=shaft_radius * shaft_hole_scale);
+            #cylinder(tray_height, r=main_radius, center=true);
+            cylinder(tray_height, r=shaft_radius * shaft_hole_scale);
         }
     }
 }
