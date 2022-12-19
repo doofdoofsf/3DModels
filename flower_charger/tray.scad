@@ -1,5 +1,7 @@
 include <definitions.scad>
 include <flower_stalk.scad>
+include <flower.scad>
+
 $fn=70;
 
 tray_height = 14;
@@ -53,6 +55,7 @@ module complete_tray() {
         filled_tray();
         tray_wire_cut();
     }
+    translate([-10, 0, 130])rotate([90-shaft_angle, 0, 90]) front_petal_ring();
 }
 
 complete_tray();

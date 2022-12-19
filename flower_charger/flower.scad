@@ -9,8 +9,8 @@ num_petals = 9;
 core_thickness=6;
 hole_scale_factor = 1.02;
 show_supports = false;
-show_front = true;
-show_back = true;
+show_front = false;
+show_back = false;
 
 back_raised_radius = 20.0;
 

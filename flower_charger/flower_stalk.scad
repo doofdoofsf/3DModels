@@ -2,7 +2,6 @@ include <definitions.scad>
 
 $fn=100;
 shaft_length=80;
-shaft_angle = 70;
 
 module shaft_slice() {
     difference() {
