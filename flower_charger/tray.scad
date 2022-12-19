@@ -1,32 +1,46 @@
+include <definitions.scad>
 $fn=70;
 
-tray_height = 12;
+tray_height = 14;
 tray_width = 90;
 tray_length = 180;
 rounding_radius = tray_height / 5;
+rim_width = 5;
+main_radius = tray_width/2; 
 
-module base_tray_form(height, width, length) {
-    x_offset = -length/2 + width/2;
+module base_tray_form(height, width, length, radius) {
+    x_offset = length/2 - radius;
     hull() {
-        translate([x_offset, 0, 0]) cylinder(height, r=width/2, center=true);
-        translate([-x_offset, 0, 0]) cylinder(height, r=width/2, center=true);
+        translate([x_offset, 0, 0]) cylinder(height, r=radius, center=true);
+        translate([-x_offset, 0, 0]) cylinder(height, r=radius, center=true);
     }
 }
 
-module tray_with_indent(height, width, length) {
-    indent_scale = 0.5;
+module cutout_tray() {
     difference() {
-        base_tray_form(height, width, length); 
-        translate([-length/5, 0, indent_scale * height/2]) {
-           base_tray_form(height * indent_scale, width * 0.9, length* indent_scale);     
-        }        
-    }    
+        cutout_height = tray_height - rim_width;
+        base_tray_form(tray_height, tray_width, tray_length, main_radius);
+        translate([0, 0, (tray_height - cutout_height)/2]) {            
+            base_tray_form(cutout_height,
+                           tray_height-rim_width, 
+                           tray_length - 2*rim_width, 
+                           tray_width/2 - rim_width);
+        }
+    }
 }
 
-tray_with_indent(tray_height, tray_width, tray_length);
+module filled_tray() {
+    filled_length = tray_length * 0.6;
+    cutout_tray();
+    translate([(tray_length - filled_length)/2, 0, 0]) {
+        difference() {
+            base_tray_form(tray_height, tray_width, filled_length, main_radius);
+            #cylinder(tray_height, r=shaft_radius);
 
-hull() {
-    tray_with_indent(tray_height, tray_width, tray_length);
-
-    sphere(rounding_radius);
+        }
+    }
 }
+    
+
+filled_tray();
+
