@@ -3,7 +3,6 @@ include <definitions.scad>
 $fn=100;
 shaft_length=80;
 shaft_angle = 70;
-wire_radius = 1.5;
 
 module shaft_slice() {
     difference() {
@@ -27,10 +26,17 @@ module bend() {
             shaft_slice();
 }
 
+module bottom_wire_cut() {
+    translate([0, 0, wire_radius])
+        cube([shaft_radius*2, wire_radius*2, wire_radius*2], center=true);
+}
+
 module stalk() {
-    shaft();
+    difference() {
+        shaft();
+        bottom_wire_cut();
+    }
     translate([0, 0, shaft_length]) bend();
 }
 
 //stalk();
-
