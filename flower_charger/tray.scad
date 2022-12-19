@@ -1,9 +1,10 @@
 include <definitions.scad>
+include <flower_stalk.scad>
 $fn=70;
 
 tray_height = 14;
 tray_width = 90;
-tray_length = 180;
+tray_length = 140;
 rounding_radius = tray_height / 5;
 rim_width = 5;
 main_radius = tray_width/2; 
@@ -30,13 +31,13 @@ module cutout_tray() {
 }
 
 module filled_tray() {
-    filled_length = tray_length * 0.6;
+    filled_length = tray_length * 0.7;
     cutout_tray();
     translate([(tray_length - filled_length)/2, 0, 0]) {
+        stalk();
         difference() {
             base_tray_form(tray_height, tray_width, filled_length, main_radius);
-            #cylinder(tray_height, r=shaft_radius);
-
+            #cylinder(tray_height, r=shaft_radius * shaft_hole_scale);
         }
     }
 }

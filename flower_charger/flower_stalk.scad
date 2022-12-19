@@ -32,5 +32,5 @@ module stalk() {
     translate([0, 0, shaft_length]) bend();
 }
 
-stalk();
+//stalk();
 
