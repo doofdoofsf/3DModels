@@ -12,6 +12,8 @@ rim_width = 5;
 main_radius = tray_width/2; 
 tray_depth = tray_height - rim_width;
 
+echo(tray_depth);
+
 module base_tray_form(height, width, length, radius) {
     x_offset = length/2 - radius;
     hull() {
@@ -55,7 +57,10 @@ module complete_tray() {
         filled_tray();
         tray_wire_cut();
     }
-    translate([-10, 0, 130])rotate([90-shaft_angle, 0, 90]) front_petal_ring();
+    * translate([-10, 0, 130])rotate([90-shaft_angle, 0, 90]) {
+        front_petal_ring();
+        back_petal_ring();
+    }
 }
 
 complete_tray();
