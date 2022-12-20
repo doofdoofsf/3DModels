@@ -44,7 +44,7 @@ module filled_tray() {
     filled_length = tray_length * 0.7;
     cutout_tray();
     translate([tray_length/4-rim_width*2, 0, 0]) {
-        stalk();
+        // stalk();
         difference() {
             cylinder(tray_height, r=main_radius-rim_width, center=true);
             cylinder(tray_height, r=shaft_radius * shaft_hole_scale);
@@ -53,11 +53,11 @@ module filled_tray() {
 }
 
 module complete_tray() {    
-    * difference() {
+    difference() {
         filled_tray();
         tray_wire_cut();
     }
-    translate([-10, 0, 130])rotate([90-shaft_angle, 0, 90]) {
+    * translate([-10, 0, 130])rotate([90-shaft_angle, 0, 90]) {
         front_petal_ring();
         back_petal_ring();
     }
