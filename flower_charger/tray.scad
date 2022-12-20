@@ -6,7 +6,7 @@ $fn=70;
 
 tray_height = 14;
 tray_width = 90;
-tray_length = 140;
+tray_length = 125;
 rounding_radius = tray_height / 5;
 rim_width = 5;
 main_radius = tray_width/2; 
@@ -53,11 +53,11 @@ module filled_tray() {
 }
 
 module complete_tray() {    
-    difference() {
+    * difference() {
         filled_tray();
         tray_wire_cut();
     }
-    * translate([-10, 0, 130])rotate([90-shaft_angle, 0, 90]) {
+    translate([-10, 0, 130])rotate([90-shaft_angle, 0, 90]) {
         front_petal_ring();
         back_petal_ring();
     }
