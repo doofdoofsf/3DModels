@@ -2,11 +2,12 @@ include <definitions.scad>
 include <flower_stalk.scad>
 include <flower.scad>
 
-$fn=70;
+$fn=100;
 
+scale_up=1.1;
 tray_height = 14;
-tray_width = 90;
-tray_length = 125;
+tray_width = 90*scale_up;
+tray_length = 125*scale_up;
 rounding_radius = tray_height / 5;
 rim_width = 5;
 main_radius = tray_width/2; 
@@ -43,10 +44,10 @@ module tray_wire_cut() {
 module filled_tray() {
     filled_length = tray_length * 0.7;
     cutout_tray();
-    translate([tray_length/4-rim_width*2, 0, 0]) {
-        // stalk();
+    * translate([tray_length/4-rim_width*2, 0, rim_width/2]) {
+        //stalk();
         difference() {
-            cylinder(tray_height, r=main_radius-rim_width, center=true);
+            cylinder(tray_height - rim_width, r=main_radius-rim_width, center=true);
             cylinder(tray_height, r=shaft_radius * shaft_hole_scale);
         }
     }
