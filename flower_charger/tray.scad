@@ -43,12 +43,16 @@ module tray_wire_cut() {
 
 module filled_tray() {
     filled_length = tray_length * 0.7;
-    cutout_tray();
-    * translate([tray_length/4-rim_width*2, 0, rim_width/2]) {
+    // cutout_tray();
+    translate([tray_length/4-rim_width*2, 0, rim_width/2]) {
         //stalk();
         difference() {
-            cylinder(tray_height - rim_width, r=main_radius-rim_width, center=true);
-            cylinder(tray_height, r=shaft_radius * shaft_hole_scale);
+            radius = main_radius-rim_width;
+            cylinder(tray_height - rim_width, r=radius, center=true);
+            translate([radius/2, 0, (tray_height - rim_width)/2 - wire_radius])
+                cube([radius, wire_radius*2, wire_radius*2], center=true);
+            translate([0, 0, -tray_height/2]) 
+                cylinder(tray_height, r=shaft_radius * shaft_hole_scale);
         }
     }
 }
