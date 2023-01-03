@@ -37,8 +37,12 @@ module cutout_tray() {
 }
 
 module tray_wire_cut() {
-    translate([tray_length/2-rim_width/2, 0, (tray_height-tray_depth)/2])
-        cube([rim_width*1.1, wire_radius*2, tray_depth], center=true);
+    x_values = [tray_length/4-rim_width*2+shaft_radius+wire_radius, tray_length/2-rim_width/2];
+    
+    for (x = x_values) {
+        translate([x, 0, (tray_height-tray_depth)/2])
+            cube([rim_width*1.1, wire_radius*2, tray_depth], center=true);
+    } 
 }
 
 module filled_tray() {
