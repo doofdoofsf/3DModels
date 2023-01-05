@@ -7,9 +7,8 @@ core_diameter=59.2;;
 sphere_diameter=30;
 num_petals = 9;
 core_thickness=6;
-hole_scale_factor = 1.02;
 show_supports = false;
-show_front = false;
+show_front = true;
 show_back = false;
 
 back_raised_radius = 20.0;
@@ -78,7 +77,7 @@ module body(petal_height_scale) {
 
 module plate_hole() {
     hole_length = core_thickness * 10;
-    rotate([90, 0, 0]) cylinder(h=hole_length, r=shaft_radius*hole_scale_factor, center=true);
+    rotate([90, 0, 0]) cylinder(h=hole_length, r=shaft_radius*hole_scale, center=true);
 }
 
 module front_petal_ring() {

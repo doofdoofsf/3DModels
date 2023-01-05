@@ -56,7 +56,7 @@ module filled_tray() {
             translate([radius/2, 0, (tray_height - rim_width)/2 - wire_radius])
                 cube([radius, wire_radius*2, wire_radius*2], center=true);
             translate([0, 0, -tray_height/2]) 
-                cylinder(tray_height, r=shaft_radius * shaft_hole_scale);
+                cylinder(tray_height, r=shaft_radius * hole_scale);
         }
     }
 }

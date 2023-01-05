@@ -6,7 +6,7 @@ shaft_length=80;
 module shaft_slice() {
     difference() {
         circle(r = shaft_radius);
-        translate([-shaft_radius+wire_radius, 0, 0]) square([wire_radius*2, wire_radius*2], center=true);
+        translate([shaft_radius-wire_radius, 0, 0]) square([wire_radius*2, wire_radius*2], center=true);
     }
 }
 
@@ -20,9 +20,9 @@ module bend() {
     offset = 53;
     translate([-offset, 0, 0])
     rotate([90, 0, 0])
-    rotate_extrude(angle = shaft_angle)
-        translate([offset, 0, 0])
-            shaft_slice();
+        rotate_extrude(angle = shaft_angle)
+            translate([offset, 0, 0])
+                shaft_slice();
 }
 
 module bottom_wire_cut() {
@@ -33,9 +33,10 @@ module bottom_wire_cut() {
 module stalk() {
     difference() {
         shaft();
-        bottom_wire_cut();
+        //bottom_wire_cut();
     }
     translate([0, 0, shaft_length]) bend();
 }
 
-//stalk();
+// rotate([0, 90, 0]) stalk();
+stalk();
