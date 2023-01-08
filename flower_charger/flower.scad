@@ -2,14 +2,14 @@
 
 include <definitions.scad>
 
-$fn=30;
+$fn=70;
 core_diameter=59.2;;
 sphere_diameter=30;
 num_petals = 9;
 core_thickness=6;
-show_supports = false;
-show_front = true;
-show_back = false;
+show_supports = true;
+show_front = false;
+show_back = true;
 
 back_raised_radius = 20.0;
 
