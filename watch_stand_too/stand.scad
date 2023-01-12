@@ -60,7 +60,7 @@ module stand_body(hole = true) {
         }
         
         union() { 
-            if (show_charger == false) charger(1.01);
+            if (show_charger == false) charger(1.005);
             if (hole) oval_hole();
         }
     }
