@@ -1,4 +1,4 @@
-$fn=50;
+$fn=90;
 
 watch_charger_core_dia = 27.7;
 watch_charger_core_thickness = 8.1;
@@ -47,7 +47,7 @@ module frame_oval() {
 }
 
 module raised_oval() {
-    base_oval(center_dia * 1.05, holder_thickness);
+    base_oval(center_dia * 1.1, holder_thickness);
 }
     
 module stand_body(hole = true) {
