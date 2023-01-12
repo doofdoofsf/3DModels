@@ -1,17 +1,20 @@
-include <../lib/apple_definitions.scad>
-
 $fn=50;
 
-//watch_charger_core_dia = 27.7;
-//watch_charger_core_thickness = 6;
+watch_charger_core_dia = 27.7;
+watch_charger_core_thickness = 8.1;
 
 core_dia = watch_charger_core_dia * 1.02;
 center_dia = watch_charger_core_dia * 1.2;
 center_gap = center_dia * 0.5;
 center_hole_dia = watch_charger_core_dia * 0.85;
-base_offset = -center_gap*1.5;
+base_z_offset = -center_gap*1.5;
+base_y_offset = 8;
 holder_thickness = 12;
 show_charger = true;
+show_stand = false;
+show_rotated_stand = false;
+show_insert = true;
+show_base = true;
 
 
 module base_oval(dia, thickness) {
@@ -31,7 +34,7 @@ module charger_body(scale) {
 
 
 module charger(scale) {
-    translate([center_gap/2, 0, watch_charger_core_thickness * 0.5 ]) 
+    translate([center_gap/2, 0, watch_charger_core_thickness * 0.2 ]) 
         color("black") 
             charger_body(scale);
 }
@@ -65,15 +68,15 @@ module stand_body() {
 }
 
 module rotated_stand() {
-    rotate([8, 0, 0]) rotate([-90, -90, 0]) stand_body();
+    rotate([9, 0, 0]) rotate([-90, -90, 0]) stand_body();
 }
 
 module base_insert_block() {
     width = center_dia * 1.2;
-    depth = holder_thickness * 2;
-    height = watch_charger_core_thickness * 1.1;
+    depth = holder_thickness * 1.2;
+    height = watch_charger_core_thickness * 1.05;
     
-    translate([-width/2, -depth/2*0.8, base_offset-height])
+    translate([-width/2, base_y_offset - depth, base_z_offset-height])
         cube([width, 
               depth, 
               height]);
@@ -81,23 +84,30 @@ module base_insert_block() {
 
 module base(offset) {
     width = center_dia * 1.7 + offset;
-    depth = holder_thickness * 3 + offset;
-    height = watch_charger_core_thickness * 1.2;
+    depth = holder_thickness * 2.5 + offset;
+    height = watch_charger_core_thickness * 1.3;
     
-    translate([-width/2, -depth/2*0.8, base_offset-height])
+    translate([-width/2, base_y_offset - depth, base_z_offset-height])
         cube([width, 
               depth, 
               height]);
 }
 
-module beveled_base() {
-    hull() {
-        base(0);
-        translate([0, 0, -1]) base(3);
+if (show_stand == true) stand_body();
+if (show_rotated_stand == true) rotated_stand();
+
+    
+if (show_insert == true) {
+    difference() {
+        base_insert_block();
+        rotated_stand();
     }
 }
 
-rotated_stand();
-color("black") base_insert_block();
-beveled_base();
+if (show_base == true) {
+    difference() {
+        base(0);
+        base_insert_block();
+    }
+}
     
