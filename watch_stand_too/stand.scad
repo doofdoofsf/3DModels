@@ -5,7 +5,8 @@ watch_charger_core_thickness = 8.1;
 
 core_dia = watch_charger_core_dia * 1.02;
 center_dia = watch_charger_core_dia * 1.2;
-center_gap = center_dia * 0.7;
+center_gap = center_dia * 0.85;
+echo(center_gap);
 center_hole_dia = watch_charger_core_dia * 0.85;
 base_z_offset = -center_gap * 0.7;
 base_y_offset = 8;
