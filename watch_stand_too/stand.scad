@@ -13,7 +13,7 @@ base_y_offset = 8;
 holder_thickness = 15;
 show_charger = false;
 show_stand = false;
-show_rotated_stand = true;
+show_rotated_stand = false;
 show_base = true;
 
 module base_oval(dia, thickness) {
@@ -88,9 +88,11 @@ if (show_stand == true) stand_body();
 if (show_rotated_stand == true) rotated_stand();
 
 if (show_base == true) {
-    difference() {
-        base(0);
-        rotated_stand();
-    }
+    scale_up = 1.01;
+    scale([scale_up, scale_up, scale_up])
+        difference() {
+            base(0);
+            rotated_stand();
+        }
 }
     
