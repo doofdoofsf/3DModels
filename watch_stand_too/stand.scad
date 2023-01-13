@@ -2,6 +2,8 @@ $fn=90;
 
 watch_charger_core_dia = 27.7;
 watch_charger_core_thickness = 8.1;
+stand_rotation_angle = 14;
+wire_dia = 2.82;
 
 core_dia = watch_charger_core_dia * 1.02;
 center_dia = watch_charger_core_dia * 1.2;
@@ -9,7 +11,7 @@ center_gap = center_dia * 0.85;
 echo(center_gap);
 center_hole_dia = watch_charger_core_dia * 0.85;
 base_z_offset = -center_gap * 0.7;
-base_y_offset = 8;
+base_y_offset = 12;
 holder_thickness = 15;
 show_charger = false;
 show_stand = false;
@@ -67,21 +69,24 @@ module stand_body(hole = true) {
 }
 
 module rotated_stand(hole = true) {
-    rotate([11, 0, 0]) rotate([-90, -90, 0]) stand_body(hole);
+    rotate([stand_rotation_angle, 0, 0]) rotate([-90, -90, 0]) stand_body(hole);
 }
 
 module base(offset) {
     width = center_dia * 1.7 + offset;
     depth = holder_thickness * 2.7 + offset;
     height = watch_charger_core_thickness * 2.3;
-    
-    difference() {
-        translate([-width/2, base_y_offset - depth, base_z_offset-height])
+    cut_depth = wire_dia * 1.5;
+
+    translate([-width/2, base_y_offset - depth, base_z_offset-height]) {
+        difference() {            
             cube([width, 
                   depth, 
                   height]);
-        //rotated_stand(false);
-    }
+            translate([width/2-wire_dia/2, 0, height-cut_depth]) 
+                cube([wire_dia, 25, cut_depth]);
+        }          
+    } 
 }
 
 if (show_stand == true) stand_body();
