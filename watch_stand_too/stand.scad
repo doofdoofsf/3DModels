@@ -11,11 +11,10 @@ center_hole_dia = watch_charger_core_dia * 0.85;
 base_z_offset = -center_gap * 0.7;
 base_y_offset = 8;
 holder_thickness = 15;
-show_charger = true;
+show_charger = false;
 show_stand = false;
 show_rotated_stand = true;
 show_base = true;
-
 
 module base_oval(dia, thickness) {
     length = dia + center_gap;
@@ -68,12 +67,12 @@ module stand_body(hole = true) {
 }
 
 module rotated_stand(hole = true) {
-    rotate([9, 0, 0]) rotate([-90, -90, 0]) stand_body(hole);
+    rotate([11, 0, 0]) rotate([-90, -90, 0]) stand_body(hole);
 }
 
 module base(offset) {
     width = center_dia * 1.7 + offset;
-    depth = holder_thickness * 2.5 + offset;
+    depth = holder_thickness * 2.7 + offset;
     height = watch_charger_core_thickness * 2.3;
     
     difference() {
@@ -81,7 +80,7 @@ module base(offset) {
             cube([width, 
                   depth, 
                   height]);
-        rotated_stand(false);
+        //rotated_stand(false);
     }
 }
 
