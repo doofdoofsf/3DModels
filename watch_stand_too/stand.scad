@@ -18,6 +18,8 @@ show_stand = false;
 show_rotated_stand = false;
 show_base = true;
 
+rounding_radius = 2;
+
 module base_oval(dia, thickness) {
     length = dia + center_gap;
     
@@ -80,11 +82,14 @@ module base(offset) {
 
     translate([-width/2, base_y_offset - depth, base_z_offset-height]) {
         difference() {            
-            cube([width, 
-                  depth, 
-                  height]);
-            translate([width/2-wire_dia/2, 0, height-cut_depth]) 
-                cube([wire_dia, 25, cut_depth]);
+            minkowski() {
+                cube([width - 2 * rounding_radius, 
+                      depth - 2 * rounding_radius, 
+                      height - 2 * rounding_radius]);
+                sphere(r = rounding_radius);
+            }
+            translate([width/2-wire_dia/2, -10, height-cut_depth]) 
+                cube([wire_dia, 35, cut_depth]);
         }          
     } 
 }
