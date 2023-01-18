@@ -15,7 +15,7 @@ base_y_offset = 12;
 holder_thickness = 15;
 show_charger = false;
 show_stand = false;
-show_rotated_stand = false;
+show_rotated_stand = true;
 show_base = true;
 
 rounding_radius = 2;
@@ -80,7 +80,7 @@ module base(offset) {
     height = watch_charger_core_thickness * 2.3;
     cut_depth = wire_dia * 1.5;
 
-    translate([-width/2, base_y_offset - depth, base_z_offset-height]) {
+    translate([-width/2+rounding_radius, base_y_offset - depth, base_z_offset-height + rounding_radius]) {
         difference() {            
             minkowski() {
                 cube([width - 2 * rounding_radius, 
@@ -88,7 +88,7 @@ module base(offset) {
                       height - 2 * rounding_radius]);
                 sphere(r = rounding_radius);
             }
-            translate([width/2-wire_dia/2, -10, height-cut_depth]) 
+            translate([width/2-wire_dia/2-rounding_radius, -10, height-cut_depth]) 
                 cube([wire_dia, 35, cut_depth]);
         }          
     } 
