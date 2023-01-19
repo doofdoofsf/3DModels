@@ -3,7 +3,7 @@ $fn=90;
 watch_charger_core_dia = 27.7;
 watch_charger_core_thickness = 8.1;
 stand_rotation_angle = 14;
-wire_dia = 2.82;
+wire_dia = 2.8;
 
 core_dia = watch_charger_core_dia * 1.02;
 center_dia = watch_charger_core_dia * 1.2;
@@ -15,7 +15,7 @@ base_y_offset = 12;
 holder_thickness = 15;
 show_charger = false;
 show_stand = false;
-show_rotated_stand = true;
+show_rotated_stand = false;
 show_base = true;
 
 rounding_radius = 2;
@@ -88,7 +88,7 @@ module base(offset) {
                       height - 2 * rounding_radius]);
                 sphere(r = rounding_radius);
             }
-            translate([width/2-wire_dia/2-rounding_radius, -10, height-cut_depth]) 
+            translate([width/2-wire_dia/2-rounding_radius, -10, height-cut_depth-rounding_radius]) 
                 cube([wire_dia, 35, cut_depth]);
         }          
     } 
