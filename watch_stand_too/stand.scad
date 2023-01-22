@@ -16,7 +16,8 @@ holder_thickness = 15;
 show_charger = false;
 show_stand = false;
 show_rotated_stand = false;
-show_base = true;
+show_base = false;
+show_double_stand = true;
 
 rounding_radius = 2;
 
@@ -94,15 +95,26 @@ module base(offset) {
     } 
 }
 
-if (show_stand == true) stand_body();
-if (show_rotated_stand == true) rotated_stand();
-
-if (show_base == true) {
+module show_base() {
     scale_up = 1.01;
-    scale([scale_up, scale_up, scale_up])
+    scale([scale_up, scale_up, scale_up]) {
         difference() {
             base(0);
             rotated_stand();
         }
+    }
 }
+
+module show_double_stand() {
+   stand_body(true);
+   translate([78, 0, 0]) stand_body();    
+}
+
+if (show_stand == true) stand_body();
+if (show_rotated_stand == true) rotated_stand();
+if (show_base == true) show_base();
+if (show_double_stand == true) show_double_stand();
+
+
+
     
