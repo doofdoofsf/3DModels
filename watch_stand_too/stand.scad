@@ -107,7 +107,7 @@ module show_base() {
 
 module show_double_stand() {
    stand_body(true);
-   translate([78, 0, 0]) stand_body();    
+   translate([77, 0, 0]) stand_body();    
 }
 
 if (show_stand == true) stand_body();
