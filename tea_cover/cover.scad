@@ -1,16 +1,15 @@
-$fn = 50;
+$fn = 200;
 
 mug_inside_dia = 78;
 mug_thickness = 4.2;
 
 top_overhang = 6;
-//top_thickness = 11;
-top_thickness = 4;
+top_thickness = 10;
 top_diameter = mug_inside_dia + mug_thickness * 2 + top_overhang * 2;
 
 cutout_thickness = top_thickness / 2;
 
-size_over_percent = 2;
+size_over_percent = 3;
 size_up_ratio = (100.0 + size_over_percent) / 100.0;
 size_down_ratio = (100.0 - size_over_percent) / 100.0; 
 
