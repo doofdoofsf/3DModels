@@ -3,9 +3,10 @@ wall_thickness = 2;
 section_length = 20;
 end_taper = 1.5;
 
-start_int_dia = 33;
+start_int_dia = 36.5;
 start_ext_dia = start_int_dia + 2 * wall_thickness;
-end_ext_dia = 59.5;
+
+end_ext_dia = 34.7;
 end_int_dia = end_ext_dia - 2 * wall_thickness;
 
 
