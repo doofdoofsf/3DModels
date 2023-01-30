@@ -1,13 +1,13 @@
 $fn=90;
 
-watch=true;
+watch=false;
 
-stand_design = watch == true ? "watch" : "phone";
+stand_design = watch ? "watch" : "phone";
 
 echo("stand design: ", stand_design);
 
-charger_core_dia = 27.7;
-charger_core_thickness = 8.1;
+charger_core_dia = watch ? 27.7 : 56.0;
+charger_core_thickness = watch ? 8.1 : 5.38;
 stand_rotation_angle = 14;
 wire_dia = 2.8;
 
@@ -81,7 +81,10 @@ module rotated_stand(hole = true) {
     rotate([stand_rotation_angle, 0, 0]) rotate([-90, -90, 0]) stand_body(hole);
 }
 
-module base(offset) {
+module phone_base(offset) {
+}
+
+module watch_base(offset) {
     width = center_dia * 1.7 + offset;
     depth = holder_thickness * 2.7 + offset;
     height = charger_core_thickness * 2.3;
@@ -105,7 +108,7 @@ module show_base() {
     scale_up = 1.01;
     scale([scale_up, scale_up, scale_up]) {
         difference() {
-            base(0);
+            if(watch) {watch_base(0);} else {phone_base(0);}
             rotated_stand();
         }
     }
