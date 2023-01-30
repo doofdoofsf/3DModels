@@ -1,23 +1,29 @@
 $fn=90;
 
-watch_charger_core_dia = 27.7;
-watch_charger_core_thickness = 8.1;
+watch=true;
+
+stand_design = watch == true ? "watch" : "phone";
+
+echo("stand design: ", stand_design);
+
+charger_core_dia = 27.7;
+charger_core_thickness = 8.1;
 stand_rotation_angle = 14;
 wire_dia = 2.8;
 
-core_dia = watch_charger_core_dia * 1.02;
-center_dia = watch_charger_core_dia * 1.2;
+core_dia = charger_core_dia * 1.02;
+center_dia = charger_core_dia * 1.2;
 center_gap = center_dia * 0.85;
 echo(center_gap);
-center_hole_dia = watch_charger_core_dia * 0.85;
+center_hole_dia = charger_core_dia * 0.85;
 base_z_offset = -center_gap * 0.7;
 base_y_offset = 12;
 holder_thickness = 15;
 show_charger = false;
 show_stand = false;
-show_rotated_stand = false;
-show_base = false;
-show_double_stand = true;
+show_rotated_stand = true;
+show_base = true;
+show_double_stand = false;
 
 rounding_radius = 2;
 
@@ -32,13 +38,13 @@ module base_oval(dia, thickness) {
 }
 
 module charger_body(scale) {
-    cylinder(h = watch_charger_core_thickness, 
-             d = watch_charger_core_dia * scale);
+    cylinder(h = charger_core_thickness, 
+             d = charger_core_dia * scale);
 }
 
 
 module charger(scale) {
-    translate([center_gap/2, 0, watch_charger_core_thickness * 0.5 ]) 
+    translate([center_gap/2, 0, charger_core_thickness * 0.5 ]) 
         color("black") 
             charger_body(scale);
 }
@@ -61,7 +67,7 @@ module stand_body(hole = true) {
     difference() {
         hull() {
             frame_oval();
-            translate([0, 0, watch_charger_core_thickness * 0.3]) raised_oval();
+            translate([0, 0, charger_core_thickness * 0.3]) raised_oval();
         }
         
         union() { 
@@ -78,7 +84,7 @@ module rotated_stand(hole = true) {
 module base(offset) {
     width = center_dia * 1.7 + offset;
     depth = holder_thickness * 2.7 + offset;
-    height = watch_charger_core_thickness * 2.3;
+    height = charger_core_thickness * 2.3;
     cut_depth = wire_dia * 1.5;
 
     translate([-width/2+rounding_radius, base_y_offset - depth, base_z_offset-height + rounding_radius]) {
