@@ -16,16 +16,16 @@ center_dia = charger_core_dia * 1.2;
 center_gap = center_dia * 0.85;
 
 center_hole_dia = charger_core_dia * 0.85;
-base_z_offset = -center_gap * 0.7;
-base_y_offset = 12;
+base_z_offset = watch ? -center_gap * 0.7 : -center_gap * 0.7;
+base_y_offset = watch ? 12 : 21;
 holder_thickness = 15;
 show_charger = true;
-show_stand = true;
-show_rotated_stand = false;
+show_stand = false;
+show_rotated_stand = true;
 show_base = true;
 show_double_stand = false;
 
-rounding_radius = 2;
+rounding_radius = watch ? 2 : 3;
 
 module base_oval(dia, thickness) {
     length = dia + center_gap;
@@ -83,13 +83,15 @@ module rotated_stand(hole = true) {
     rotate([stand_rotation_angle, 0, 0]) rotate([-90, -90, 0]) stand_body(hole);
 }
 
-module phone_base(offset) {
-}
-
-module watch_base(offset) {
+module base(offset) {
     width = center_dia * 1.7 + offset;
-    depth = holder_thickness * 2.7 + offset;
-    height = charger_core_thickness * 2.3;
+    
+    depth_scale = watch ? 2.7 : 4.0;
+    depth = holder_thickness * depth_scale + offset;
+    
+    height_scale = watch ? 2.3 : 7.0;
+    height = charger_core_thickness * height_scale;
+    
     cut_depth = wire_dia * 1.5;
 
     translate([-width/2+rounding_radius, base_y_offset - depth, base_z_offset-height + rounding_radius]) {
@@ -110,7 +112,7 @@ module show_base() {
     scale_up = 1.01;
     scale([scale_up, scale_up, scale_up]) {
         difference() {
-            if(watch) {watch_base(0);} else {phone_base(0);}
+            base(0);
             rotated_stand();
         }
     }
