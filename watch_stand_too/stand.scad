@@ -14,14 +14,14 @@ wire_dia = 2.8;
 core_dia = charger_core_dia * 1.02;
 center_dia = charger_core_dia * 1.2;
 center_gap = center_dia * 0.85;
-echo(center_gap);
+
 center_hole_dia = charger_core_dia * 0.85;
 base_z_offset = -center_gap * 0.7;
 base_y_offset = 12;
 holder_thickness = 15;
-show_charger = false;
-show_stand = false;
-show_rotated_stand = true;
+show_charger = true;
+show_stand = true;
+show_rotated_stand = false;
 show_base = true;
 show_double_stand = false;
 
@@ -39,12 +39,14 @@ module base_oval(dia, thickness) {
 
 module charger_body(scale) {
     cylinder(h = charger_core_thickness, 
-             d = charger_core_dia * scale);
+             d = charger_core_dia * scale, center = true);
 }
 
 
 module charger(scale) {
-    translate([center_gap/2, 0, charger_core_thickness * 0.5 ]) 
+    z_offset = holder_thickness/2 + charger_core_thickness/4;
+    
+    translate([center_gap/2, 0, z_offset ]) 
         color("black") 
             charger_body(scale);
 }
