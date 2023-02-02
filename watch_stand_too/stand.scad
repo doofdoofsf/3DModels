@@ -1,8 +1,12 @@
 $fn=90;
 
 watch=false;
+dark_brown = "#964B00";
+light_brown = "#C4A484";
 
 stand_design = watch ? "watch" : "phone";
+charger_color = "white";
+stand_color = dark_brown;
 
 echo("stand design: ", stand_design);
 
@@ -47,7 +51,7 @@ module charger(scale) {
     z_offset = holder_thickness/2 + charger_core_thickness/4;
     
     translate([center_gap/2, 0, z_offset ]) 
-        color("black") 
+        color(charger_color) 
             charger_body(scale);
 }
 
@@ -66,7 +70,7 @@ module raised_oval() {
 module stand_body(hole = true) {
     if (show_charger == true) charger(1.0);
 
-    difference() {
+    color(stand_color) difference() {
         hull() {
             frame_oval();
             translate([0, 0, charger_core_thickness * 0.3]) raised_oval();
@@ -112,7 +116,7 @@ module show_base() {
     scale_up = 1.01;
     scale([scale_up, scale_up, scale_up]) {
         difference() {
-            base(0);
+            color(charger_color) base(0);
             rotated_stand();
         }
     }
