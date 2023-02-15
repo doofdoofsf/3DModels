@@ -23,10 +23,10 @@ center_hole_dia = charger_core_dia * 0.85;
 base_z_offset = watch ? -center_gap * 0.7 : -center_gap * 0.7;
 base_y_offset = watch ? 12 : 21;
 holder_thickness = 15;
-show_charger = true;
-show_stand = false;
-show_rotated_stand = true;
-show_base = true;
+show_charger = false;
+show_stand = true;
+show_rotated_stand = false;
+show_base = false;
 show_double_stand = false;
 
 rounding_radius = watch ? 2 : 3;
