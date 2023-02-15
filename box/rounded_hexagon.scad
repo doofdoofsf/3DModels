@@ -2,7 +2,7 @@ $fn = 100;
 
 module rounded_hexagon(radius, rounding_radius) {
     hull() {
-        for(angle = [0 : 60 : 360 - 60]) {
+        for(angle = [90 : 60 : 360 + 90]) {
             rotate([0, 0, angle]) {
                 translate([radius - rounding_radius, 0, 0]) {
                     circle(rounding_radius);
@@ -27,7 +27,7 @@ module hexagon_cell(radius, rounding_radius, wall_thickness, height) {
 
 radius = 30;
 rounding_radius = 3.17;
-wall_thickness = 0.1;
+wall_thickness = 5;
 height = 25;
 
 module cell() {
@@ -35,22 +35,14 @@ module cell() {
                  wall_thickness = wall_thickness, height = height);
 }
 
-module cell_strip(count) {
-    x_increment = 2 * (radius * 1.5 - wall_thickness/2);
-    x_end = x_increment * (count - 1);
-    for(x = [0, x_increment, x_end]) {
-        translate([x, 0, 0]) {
+cell();
+
+for(angle = [0 : 60 : 360 - 60]) {
+    rotate([0, 0, angle]) {
+        // this math isn't quite right
+        translate([(radius - rounding_radius) * (sqrt(3)) + wall_thickness/2, 0, 0]) {
             cell();
         }
-    }   
+    }
 }
-
-y_increment = (sqrt(3)/2) * radius - wall_thickness/2;
-//cell();
-//translate([0, y_increment, 0]) cell();
-
-cell_strip(3);
-translate([radius * 1.5 - wall_thickness/2, y_increment, 0]) cell_strip(3);
-translate([0, 2*y_increment, 0]) cell_strip(3);
-
-//translate([radius * 1.5 - wall_thickness/2, radius - wall_thickness*1.5, 0]) cell();
+        
