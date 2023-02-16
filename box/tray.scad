@@ -9,7 +9,7 @@ size_down_ratio = (100.0 - size_under_percent) / 100.0;
 
 cell_count = 3;
 
-show_tray = true;
+show_tray = false;
 show_lid = true;
 show_lids = false;
 
@@ -57,7 +57,7 @@ module cell_array(count, radius, rounding_radius, wall_thickness, height, hollow
 }
 
 module lid() {
-   cell(radius+wall_thickness/2, rounding_radius, wall_thickness, wall_thickness, hollow=false);
+    cell(radius, rounding_radius, wall_thickness, wall_thickness, hollow=false);
     translate([0, 0, -wall_thickness]) {
        cell((radius-wall_thickness) * size_down_ratio, rounding_radius, wall_thickness, wall_thickness, hollow=false);    
     }
