@@ -2,8 +2,14 @@ $fn = 100;
 
 radius = 30;
 rounding_radius = 3.17;
-wall_thickness = 4;
+wall_thickness = 5;
 height = 25;
+size_under_percent = 3;
+size_down_ratio = (100.0 - size_under_percent) / 100.0;
+
+show_tray = false;
+show_lid = false;
+show_lids = true;
 
 module rounded_hexagon(radius, rounding_radius) {
     hull() {
@@ -48,14 +54,29 @@ module cell_array(radius, rounding_radius, wall_thickness, height, hollow=true) 
     }
 }
 
+module lid() {
+    translate([0, 0, height/2+wall_thickness/2]) {
+       cell(radius+wall_thickness/2, rounding_radius, wall_thickness, wall_thickness, hollow=false);
+        translate([0, 0, -wall_thickness]) {
+           cell((radius-wall_thickness) * size_down_ratio, rounding_radius, wall_thickness, wall_thickness, hollow=false);    
+        }
+    }
+}
+
 module tray() {
     cell_array(radius, rounding_radius, wall_thickness, height);
-    translate([0, 0, -height/2]) {
+    translate([0, 0, -height/2 + wall_thickness/2]) {
         cell_array(radius, rounding_radius, wall_thickness, wall_thickness, hollow=false);
     }
 }
 
-tray();
+module lids() {
+    rotate([180, 0, 0]) lid();
+}
+
+if(show_tray) tray();
+if(show_lid) lid();
+if(show_lids) lids();
     
     
         
