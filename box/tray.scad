@@ -1,8 +1,8 @@
 $fn = 100;
 
-radius = 30;
+radius = 25;
 rounding_radius = 3.17;
-wall_thickness = 5;
+wall_thickness = 4.5;
 height = 25;
 size_under_percent = 3;
 size_down_ratio = (100.0 - size_under_percent) / 100.0;
