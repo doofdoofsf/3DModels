@@ -1,14 +1,16 @@
 $fn = 100;
 
-radius = 25;
+radius = 30;
 rounding_radius = 3.17;
 wall_thickness = 4.5;
 height = 25;
 size_under_percent = 3;
 size_down_ratio = (100.0 - size_under_percent) / 100.0;
 
+cell_count = 3;
+
 show_tray = true;
-show_lid = false;
+show_lid = true;
 show_lids = false;
 
 module rounded_hexagon(radius, rounding_radius) {
@@ -40,10 +42,10 @@ module cell(radius, rounding_radius, wall_thickness, height, hollow = true) {
     hexagon_cell(radius, rounding_radius, wall_thickness, height, hollow);
 }
 
-module cell_array(radius, rounding_radius, wall_thickness, height, hollow=true) {
+module cell_array(count, radius, rounding_radius, wall_thickness, height, hollow=true) {
     cell(radius, rounding_radius, wall_thickness, height, hollow);
     
-    for(angle = [0 : 60 : 360 - 60]) {
+    for(angle = [0 : 60 : 60 * (count - 2)]) {
         rotate([0, 0, angle]) {
             edge_distance = radius * sqrt(3) * 0.5;
             x_offset = 2 * edge_distance - wall_thickness/2;
@@ -55,18 +57,16 @@ module cell_array(radius, rounding_radius, wall_thickness, height, hollow=true) 
 }
 
 module lid() {
-    translate([0, 0, height/2+wall_thickness/2]) {
-       cell(radius+wall_thickness/2, rounding_radius, wall_thickness, wall_thickness, hollow=false);
-        translate([0, 0, -wall_thickness]) {
-           cell((radius-wall_thickness) * size_down_ratio, rounding_radius, wall_thickness, wall_thickness, hollow=false);    
-        }
+   cell(radius+wall_thickness/2, rounding_radius, wall_thickness, wall_thickness, hollow=false);
+    translate([0, 0, -wall_thickness]) {
+       cell((radius-wall_thickness) * size_down_ratio, rounding_radius, wall_thickness, wall_thickness, hollow=false);    
     }
 }
 
 module tray() {
-    cell_array(radius, rounding_radius, wall_thickness, height);
+    cell_array(cell_count, radius, rounding_radius, wall_thickness, height);
     translate([0, 0, -height/2 + wall_thickness/2]) {
-        cell_array(radius, rounding_radius, wall_thickness, wall_thickness, hollow=false);
+        cell_array(cell_count, radius, rounding_radius, wall_thickness, wall_thickness, hollow=false);
     }
 }
 
@@ -74,8 +74,8 @@ module lids() {
     rotate([180, 0, 0]) lid();
 }
 
-if(show_tray) tray();
-if(show_lid) lid();
+if(show_tray) translate([0, 0, height/2]) tray();
+if(show_lid) translate([radius*3.6, 0, wall_thickness/2]) rotate([180, 0, 00]) lid();
 if(show_lids) lids();
     
     
