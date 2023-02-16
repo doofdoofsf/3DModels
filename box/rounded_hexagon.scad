@@ -27,7 +27,7 @@ module hexagon_cell(radius, rounding_radius, wall_thickness, height) {
 
 radius = 30;
 rounding_radius = 3.17;
-wall_thickness = 5;
+wall_thickness = 4;
 height = 25;
 
 module cell() {
@@ -35,14 +35,19 @@ module cell() {
                  wall_thickness = wall_thickness, height = height);
 }
 
-cell();
-
-for(angle = [0 : 60 : 360 - 60]) {
-    rotate([0, 0, angle]) {
-        // this math isn't quite right
-        translate([(radius - rounding_radius) * (sqrt(3)) + wall_thickness/2, 0, 0]) {
-            cell();
+module cell_array() {
+    cell();
+    
+    for(angle = [0 : 60 : 360 - 60]) {
+        rotate([0, 0, angle]) {
+            edge_distance = radius * sqrt(3) * 0.5;
+            x_offset = 2 * edge_distance - wall_thickness/2;
+            translate([x_offset, 0, 0]) {
+                cell();
+            }
         }
     }
 }
+
+cell_array();
         
