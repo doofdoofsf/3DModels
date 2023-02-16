@@ -7,9 +7,9 @@ height = 25;
 size_under_percent = 3;
 size_down_ratio = (100.0 - size_under_percent) / 100.0;
 
-show_tray = false;
+show_tray = true;
 show_lid = false;
-show_lids = true;
+show_lids = false;
 
 module rounded_hexagon(radius, rounding_radius) {
     hull() {
