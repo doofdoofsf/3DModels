@@ -1,16 +1,16 @@
 $fn = 100;
 
-radius = 30;
+radius = 55;
 rounding_radius = 3.17;
-wall_thickness = 4.5;
-height = 25;
+wall_thickness = 6;
+height = 40;
 size_under_percent = 3;
 size_down_ratio = (100.0 - size_under_percent) / 100.0;
 
 cell_count = 3;
 
-show_tray = false;
-show_lid = true;
+show_tray = true;
+show_lid = false;
 show_lids = false;
 
 module rounded_hexagon(radius, rounding_radius) {
@@ -43,11 +43,12 @@ module cell(radius, rounding_radius, wall_thickness, height, hollow = true) {
 }
 
 module cell_array(count, radius, rounding_radius, wall_thickness, height, hollow=true) {
-    cell(radius, rounding_radius, wall_thickness, height, hollow);
+    #cell(radius, rounding_radius, wall_thickness, height, hollow);
     
     for(angle = [0 : 60 : 60 * (count - 2)]) {
         rotate([0, 0, angle]) {
-            edge_distance = radius * sqrt(3) * 0.5;
+            // this is a kludge ... can't quite get the math right here
+            edge_distance = radius * sqrt(3) * 0.491;
             x_offset = 2 * edge_distance - wall_thickness/2;
             translate([x_offset, 0, 0]) {
                 cell(radius, rounding_radius, wall_thickness, height, hollow);
