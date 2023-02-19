@@ -9,8 +9,8 @@ size_down_ratio = (100.0 - size_under_percent) / 100.0;
 
 cell_count = 3;
 
-show_tray = true;
-show_lid = false;
+show_tray = false;
+show_lid = true;
 show_lids = false;
 
 module rounded_hexagon(radius, rounding_radius) {
@@ -76,7 +76,7 @@ module lids() {
 }
 
 if(show_tray) translate([0, 0, height/2]) tray();
-if(show_lid) translate([radius*3.6, 0, wall_thickness/2]) rotate([180, 0, 00]) lid();
+if(show_lid) translate([0, 0, wall_thickness/2]) rotate([180, 0, 00]) lid();
 if(show_lids) lids();
     
     
