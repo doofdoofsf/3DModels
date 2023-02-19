@@ -20,6 +20,27 @@ module draw_tile_grid(tile_rotation, x_count, y_count, color) {
     }
 }
 
+module draw_tile_circle(num_circles, tile_rotation, color) {
+    scale([scale, scale]) draw_tile(tile_rotation, color);
+    for(circle = [1 : 1 : num_circles]) {
+        for(angle = [90 : 60 : 360 + 90]) {
+            rotate([0, 0, angle]) {
+                translate([1.5*scale * circle, 0, 0]) {
+                    rotate([0, 0, -angle])
+                        scale([scale, scale])
+                            draw_tile(tile_rotation, color);
+                }
+            }
+        }
+    }
+}
+
+scale = 10;
+num_circles = 2;
+scale([scale, scale]) draw_tile_circle(num_circles, 0, "#dddcd9"); 
+scale([scale, scale]) draw_tile_circle(num_circles, 120, "#58504f"); 
+scale([scale, scale]) draw_tile_circle(num_circles, 240, "#b8b6b0"); 
+
 module grid() {
     x_scale = 10;
     y_scale = 8.5;
@@ -34,7 +55,7 @@ module grid() {
 }
 
 
-grid();
+//grid();
 
 //color("#58504f") square(100, 100);
 
