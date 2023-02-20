@@ -35,11 +35,14 @@ module draw_tile_circle(num_circles, tile_rotation, color) {
     }
 }
 
+color("#999999") rotate([0, 0, 30]) circle(300, $fn=6);
+
 scale = 10;
-num_circles = 2;
+num_circles = 1;
 scale([scale, scale]) draw_tile_circle(num_circles, 0, "#dddcd9"); 
 scale([scale, scale]) draw_tile_circle(num_circles, 120, "#58504f"); 
 scale([scale, scale]) draw_tile_circle(num_circles, 240, "#b8b6b0"); 
+
 
 module grid() {
     x_scale = 10;
@@ -53,6 +56,8 @@ module grid() {
     scale([x_scale, y_scale]) draw_tile_grid(240, x_count, y_count, "#58504f");
     scale([x_scale, y_scale]) draw_tile_grid(120, x_count, y_count, "#b8b6b0");
 }
+
+
 
 
 //grid();
