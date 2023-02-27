@@ -9,8 +9,8 @@ joint_width = rr+log_length+triangle_base*sqrt(3);
 
 coaster_size = 120;
 
-show_left = true;
-show_right = false;
+show_left = true; show_right = false;
+//show_left = false; show_right = true;
 
 module quarter_rounder(r) {
     translate([-r, r]) {
@@ -76,7 +76,6 @@ module arrows(count) {
 module centered_arrows(count, object_height) {
     total_length = arrow_y_increment * (count - 1) + triangle_base;
     y_offset = (object_height - total_length)/2 + triangle_base/2;
-    echo(object_height, total_length, y_offset);
     translate([0, y_offset]) arrows(count);
 }
 
@@ -89,24 +88,23 @@ module coaster() {
 
 module left_half_coaster() {
     difference() {
-        translate([-coaster_size/2, 0, 0])
+        echo(coaster_size, joint_width);
+        translate([-coaster_size/2 + joint_width/2, 0])
             coaster();
         square(coaster_size);
     }
 }
 
 module left_half_with_joint() {
-    left_half_coaster();
-    centered_arrows(3, coaster_size);
-}
-
-module right_half_coaster() {
-    rotate([0, 180, 0]) left_half_coaster();
+    translate([-joint_width/2, 0]) {
+        left_half_coaster();
+        centered_arrows(3, coaster_size);
+    }
 }
 
 module right_half_with_joint() {
     difference() {       
-        right_half_coaster();
+        translate([-coaster_size/2, 0]) coaster();
         left_half_with_joint();
     }
 }
