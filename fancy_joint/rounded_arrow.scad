@@ -10,7 +10,7 @@ joint_width = rr+log_length+triangle_base*sqrt(3);
 coaster_size = 120;
 
 show_left = true;
-show_right = true;
+show_right = false;
 
 module quarter_rounder(r) {
     translate([-r, r]) {
@@ -95,13 +95,13 @@ module left_half_coaster() {
     }
 }
 
-module right_half_coaster() {
-    rotate([0, 180, 0]) left_half_coaster();
-}
-
 module left_half_with_joint() {
     left_half_coaster();
     centered_arrows(3, coaster_size);
+}
+
+module right_half_coaster() {
+    rotate([0, 180, 0]) left_half_coaster();
 }
 
 module right_half_with_joint() {
