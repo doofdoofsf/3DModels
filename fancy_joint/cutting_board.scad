@@ -6,6 +6,8 @@ triangle_base = 4*rr;
 arrow_y_increment = triangle_base * 2.7;
 joint_width = rr+shaft_length+triangle_base*sqrt(3);
 
+base_tile_width = 140;
+
 module quarter_rounder(r) {
     translate([-r, r]) {
         difference() {
@@ -74,4 +76,16 @@ module centered_arrows(count, object_height) {
     translate([0, y_offset]) arrows(count);
 }
 
-arrows(shaft_width, shaft_length,3);
+module tile() {
+    square(base_tile_width);
+}
+
+//tile();
+
+num_arrows = 4;
+
+arrows_height = rr*2 + sqrt(3) * triangle_base + arrow_y_increment * (num_arrows - 1);
+
+translate([0, -14]) square([10, arrows_height]);
+
+arrows(shaft_width, shaft_length, num_arrows);
