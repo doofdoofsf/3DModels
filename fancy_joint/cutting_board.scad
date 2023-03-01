@@ -1,9 +1,9 @@
 $fn = 100;
 rr = 3.17;
-shaft_width = rr * 1.3;
-shaft_length = 6*rr;
+shaft_width = rr*2;
+shaft_length = 8*rr;
 triangle_base = 4*rr;
-arrow_y_increment = triangle_base * 3;
+arrow_y_increment = triangle_base * 2.7;
 joint_width = rr+shaft_length+triangle_base*sqrt(3);
 
 module quarter_rounder(r) {
@@ -19,14 +19,6 @@ module quarter_rounder(r) {
     }
 }
 
-
-module log(r, l) {
-    hull() {
-        circle(r);
-        translate([l, 0]) circle(r);
-    }
-}
-
 module triangle(r, l) {
     hull() {
         for(a = [0, 120, 240]) {
@@ -38,32 +30,36 @@ module triangle(r, l) {
 }
 
 module round_triangle_base(shaft_width) {
-    translate([-rr*3, shaft_width]) quarter_rounder(rr);
-    rotate([180, 0, 0]) translate([-rr*3, shaft_width]) quarter_rounder(rr);
+    x_offset = -(triangle_base+rr)*sqrt(3)/2.89;
+    translate([x_offset, shaft_width/2]) quarter_rounder(rr);
+    rotate([180, 0, 0]) translate([x_offset, shaft_width/2]) quarter_rounder(rr);
 }
 
-module round_shaft_base(shaft_width, shaft_length) {
-    translate([-shaft_length*2, 0]) rotate([0, 180, 0]) round_triangle_base(shaft_width);
+module round_shaft(shaft_width, shaft_length) {
+    x_offset = -(triangle_base+rr)*sqrt(3)/2.89;
+    translate([x_offset, shaft_width/2]) quarter_rounder(rr);
+    rotate([180, 0, 0]) translate([x_offset, shaft_width/2]) quarter_rounder(rr);
+    translate([-shaft_length+x_offset, 0]) rotate([0, 180, 0]) round_triangle_base(shaft_width);
 }
 
 module shaft(shaft_width, shaft_length) {
-    translate([-shaft_length*1.5, 0]) log(shaft_width, shaft_length);
+    echo(shaft_width, shaft_length);
+    translate([-shaft_length, -shaft_width/2]) square([shaft_length, shaft_width]);
 }
 
 module arrow(shaft_width, shaft_length) {
     difference() {
         union() {
-        triangle(rr, triangle_base);
-        shaft(shaft_width, shaft_length);
-        round_triangle_base(shaft_width);
-        round_shaft_base(shaft_width, shaft_length);
+            triangle(rr, triangle_base);
+            shaft(shaft_width, shaft_length);
+            round_shaft(shaft_width, shaft_length);
         }
         translate([-shaft_length*1.5-shaft_width*2, -shaft_width]) square(shaft_width*2);
     }
 }
 
 module arrow_at_zero(shaft_width, shaft_length) {
-    translate([shaft_length*1.5, 0]) arrow(shaft_width, shaft_length);
+    translate([shaft_length, 0]) arrow(shaft_width, shaft_length);
 }
 
 module arrows(shaft_width, shaft_length, count) {    
@@ -78,4 +74,4 @@ module centered_arrows(count, object_height) {
     translate([0, y_offset]) arrows(count);
 }
 
-arrows(shaft_width, shaft_length, 4);
+arrows(shaft_width, shaft_length,3);
