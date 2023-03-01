@@ -1,16 +1,10 @@
 $fn = 100;
 rr = 3.17;
-log_width = rr * 1.3;
+shaft_width = rr * 1.3;
 log_length = 6*rr;
 triangle_base = 4*rr;
 arrow_y_increment = triangle_base * 3;
 joint_width = rr+log_length+triangle_base*sqrt(3);
-
-
-coaster_size = 120;
-
-show_left = true; show_right = false;
-//show_left = false; show_right = true;
 
 module quarter_rounder(r) {
     translate([-r, r]) {
@@ -44,8 +38,8 @@ module triangle(r, l) {
 }
 
 module round_triangle_base() {
-    translate([-rr*3, log_width]) quarter_rounder(rr);
-    rotate([180, 0, 0]) translate([-rr*3, log_width]) quarter_rounder(rr);
+    translate([-rr*3, shaft_width]) quarter_rounder(rr);
+    rotate([180, 0, 0]) translate([-rr*3, shaft_width]) quarter_rounder(rr);
 }
 
 module round_shaft_base() {
@@ -53,14 +47,19 @@ module round_shaft_base() {
 }
 
 module shaft() {
-    translate([-log_length*1.5, 0]) log(log_width, log_length);
+    translate([-log_length*1.5, 0]) log(shaft_width, log_length);
 }
 
 module arrow() {
-    triangle(rr, triangle_base);
-    shaft();
-    round_triangle_base();
-    round_shaft_base();
+    difference() {
+        union() {
+        triangle(rr, triangle_base);
+        shaft();
+        round_triangle_base();
+        round_shaft_base();
+        }
+        translate([-log_length*1.5-shaft_width*2, -shaft_width]) square(shaft_width*2);
+    }
 }
 
 module arrow_at_zero() {
@@ -79,41 +78,4 @@ module centered_arrows(count, object_height) {
     translate([0, y_offset]) arrows(count);
 }
 
-module coaster() {    
-    minkowski() {
-        translate([rr, rr]) square(coaster_size - 2 * rr);
-        circle(rr);
-    }
-}
-
-module left_half_coaster() {
-    difference() {
-        echo(coaster_size, joint_width);
-        translate([-coaster_size/2 + joint_width/2, 0])
-            coaster();
-        square(coaster_size);
-    }
-}
-
-module left_half_with_joint() {
-    translate([-joint_width/2, 0]) {
-        left_half_coaster();
-        centered_arrows(3, coaster_size);
-    }
-}
-
-module right_half_with_joint() {
-    difference() {       
-        translate([-coaster_size/2, 0]) coaster();
-        left_half_with_joint();
-    }
-}
-
-if (show_right) #right_half_with_joint();
-
-if (show_left) left_half_with_joint();
-
-
-    
-    
-
+arrow();
