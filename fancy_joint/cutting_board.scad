@@ -1,9 +1,8 @@
 $fn = 100;
 rr = 3.17;
-shaft_width = rr*2;
-shaft_length = 8*rr;
-triangle_base = 4*rr;
-arrow_y_increment = triangle_base * 2.7;
+shaft_width = rr*3;
+shaft_length = 9*rr;
+triangle_base = 5*rr;
 joint_width = rr+shaft_length+triangle_base*sqrt(3);
 
 base_tile_width = 140;
@@ -38,7 +37,7 @@ module round_triangle_base(shaft_width) {
 }
 
 module round_shaft(shaft_width, shaft_length) {
-    x_offset = -(triangle_base+rr)*sqrt(3)/2.89;
+    x_offset = -(triangle_base+rr)*sqrt(3)/2.93;
     translate([x_offset, shaft_width/2]) quarter_rounder(rr);
     rotate([180, 0, 0]) translate([x_offset, shaft_width/2]) quarter_rounder(rr);
     translate([-shaft_length+x_offset, 0]) rotate([0, 180, 0]) round_triangle_base(shaft_width);
@@ -64,28 +63,23 @@ module arrow_at_zero(shaft_width, shaft_length) {
     translate([shaft_length, 0]) arrow(shaft_width, shaft_length);
 }
 
-module arrows(shaft_width, shaft_length, count) {    
-    for(y = [0 : arrow_y_increment : arrow_y_increment * (count - 1)]) {
-        translate([0, y, 0]) arrow_at_zero(shaft_width, shaft_length);
+module spaced_arrows(base_tile_width, num_arrows, shaft_width, shaft_length) {
+    y_spacing = base_tile_width / num_arrows;
+    
+    for(n = [0 : 1 : num_arrows - 1]) {
+        translate([0, y_spacing * 0.5 + n * y_spacing]) {
+            arrow_at_zero(shaft_width, shaft_length);
+        }
     }
 }
 
-module centered_arrows(count, object_height) {
-    total_length = arrow_y_increment * (count - 1) + triangle_base;
-    y_offset = (object_height - total_length)/2 + triangle_base/2;
-    translate([0, y_offset]) arrows(count);
-}
 
 module tile() {
     square(base_tile_width);
 }
 
-//tile();
-
-num_arrows = 4;
-
-arrows_height = rr*2 + sqrt(3) * triangle_base + arrow_y_increment * (num_arrows - 1);
-
-translate([0, -14]) square([10, arrows_height]);
-
-arrows(shaft_width, shaft_length, num_arrows);
+difference() {
+    tile();
+    spaced_arrows(base_tile_width, 1, shaft_width, shaft_length);
+    translate([base_tile_width, 0]) rotate([0, 0, 90]) spaced_arrows(base_tile_width, 1, shaft_width, shaft_length); 
+}
