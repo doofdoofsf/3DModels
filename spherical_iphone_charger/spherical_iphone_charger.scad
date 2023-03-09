@@ -3,7 +3,7 @@ $fn = 200;
 charger_thickness = 5.4;
 charger_diameter = 55.9;
 show_charger = false;
-full_display_charger = false;
+full_display_charger = true;
 show_top = false;
 show_bottom = false;
 show_base = true;
@@ -50,7 +50,7 @@ module charger_with_cut_out() {
 }
 
 module base() {
-    height = charger_diameter/4;
+    height = 18;
     echo(height);
     translate([0, 0, -charger_diameter/2-height/2])
         cylinder(d = body_size, h=height);
