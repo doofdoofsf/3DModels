@@ -6,7 +6,7 @@ show_charger = false;
 full_display_charger = true;
 show_top = false;
 show_bottom = false;
-show_base = true;
+show_base = false;
 
 body_size = charger_diameter * 1.2;
 
@@ -50,7 +50,7 @@ module charger_with_cut_out() {
 }
 
 module base() {
-    height = 18;
+    height = charger_diameter/4;
     echo(height);
     translate([0, 0, -charger_diameter/2-height/2])
         cylinder(d = body_size, h=height);
