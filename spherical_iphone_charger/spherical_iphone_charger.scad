@@ -2,13 +2,13 @@ $fn = 200;
 
 charger_thickness = 5.4;
 charger_diameter = 55.9;
-show_charger = false;
+show_charger = true;
 full_display_charger = true;
 show_top = false;
 show_bottom = false;
 show_base = false;
 
-body_size = charger_diameter * 1.2;
+body_size = charger_diameter * 1.4;
 
 module charger() {
     cylinder(h = charger_thickness, d = charger_diameter, center = true);
@@ -37,7 +37,7 @@ module spherical_body() {
 
 
 module charger_with_cut_out() {
-    head_y_offset = charger_diameter * 0.28;
+    head_y_offset = body_size * 0.31;
     difference() {
         spherical_body();
         translate([0, 0, head_y_offset]) {
@@ -50,9 +50,9 @@ module charger_with_cut_out() {
 }
 
 module base() {
-    height = charger_diameter/4;
+    height = body_size/5;
     echo(height);
-    translate([0, 0, -charger_diameter/2-height/2])
+    translate([0, 0, (-body_size/2-height/2)*0.9])
         cylinder(d = body_size, h=height);
 }
 
