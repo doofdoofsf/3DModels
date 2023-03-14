@@ -1,5 +1,6 @@
 $fn = 200;
 
+
 charger_thickness = 5.4;
 charger_diameter = 55.9;
 show_charger = true;
@@ -8,7 +9,8 @@ show_top = false;
 show_bottom = false;
 show_base = false;
 
-body_size = charger_diameter * 1.4;
+body_size = charger_diameter * 1.36;
+
 
 module charger() {
     cylinder(h = charger_thickness, d = charger_diameter, center = true);
@@ -27,7 +29,7 @@ module charger_head() {
 }
 
 module charger_cut_out() {
-    cylinder(h = charger_thickness * 5, d = charger_diameter);
+    cylinder(h = charger_thickness * 5, d = charger_diameter*1.1);
 }
     
 
@@ -37,7 +39,7 @@ module spherical_body() {
 
 
 module charger_with_cut_out() {
-    head_y_offset = body_size * 0.31;
+    head_y_offset = body_size * 0.25;
     difference() {
         spherical_body();
         translate([0, 0, head_y_offset]) {
@@ -74,8 +76,10 @@ module charger_half(half) {
 }
 
 module full_display_charger() {
-    base();
-    rotate([0, 50, 0]) charger_with_cut_out();
+    rotate([0, 0, $t * 360]) {
+        base();
+        rotate([0, 50, 0]) charger_with_cut_out();
+    }
 }
 
 if (show_bottom) charger_half("bottom");
