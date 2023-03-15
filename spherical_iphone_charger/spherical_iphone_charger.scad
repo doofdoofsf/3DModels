@@ -3,9 +3,9 @@ $fn = 200;
 
 charger_thickness = 5.4;
 charger_diameter = 55.9;
-show_charger = true;
-full_display_charger = true;
-show_top = false;
+show_charger = false;
+full_display_charger = false;
+show_top = true;
 show_bottom = false;
 show_base = false;
 
@@ -82,8 +82,16 @@ module full_display_charger() {
     }
 }
 
-if (show_bottom) charger_half("bottom");
-if (show_top) charger_half("top");
+if (show_bottom) {
+    charger_half("bottom");
+    translate([charger_diameter * 1.45, 0, 0]) charger_half("bottom");
+}
+
+if (show_top) {
+    charger_half("top");
+    translate([charger_diameter * 1.45, 0, 0]) charger_half("top");
+}
+
 if (show_base) show_base();
     
 
