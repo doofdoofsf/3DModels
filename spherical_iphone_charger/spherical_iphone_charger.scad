@@ -5,9 +5,9 @@ charger_thickness = 5.4;
 charger_diameter = 55.9;
 show_charger = false;
 full_display_charger = false;
-show_top = true;
+show_top = false;
 show_bottom = false;
-show_base = false;
+show_base = true;
 
 body_size = charger_diameter * 1.36;
 
