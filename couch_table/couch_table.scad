@@ -4,11 +4,17 @@ top_width = 180.0;
 top_length = 200.0;
 thickness = 19.05;
 
-tab_count = 7;
+side_height = 130;
+
+tab_count = 5;
 tab_height = thickness*1.3;
 tab_depth = 13;
-tab_width = thickness * 0.7;
+tab_width = thickness*0.8;
 tab_length = top_length / (tab_count*2-1);
+
+show_top_projection = false;
+show_top = true;
+show_side = false;
 
 rr = 4;
 
@@ -46,6 +52,18 @@ module cut_top() {
     }
 }
 
-//cut_top();
-projection() cut_top();
+module side() {
+    translate([0, -top_width/2+thickness/2, -side_height/2+thickness/2]) cube([top_length, thickness, side_height], center = true);
+}
+
+module cut_side() {
+    difference() {
+        side();
+        cut_top();
+    }
+}
+
+if(show_top) cut_top();
+if(show_side) translate([0, 0, side_height/2]) rotate([90, 0, 0]) cut_side();
+if(show_top_projection) projection() cut_top();
 
