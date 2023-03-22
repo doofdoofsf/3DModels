@@ -1,0 +1,1 @@
+import("micro_usb_cap_noTab.stl", convexity=3);

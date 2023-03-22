@@ -6,7 +6,7 @@ end_taper = 1.5;
 start_int_dia = 36.5;
 start_ext_dia = start_int_dia + 2 * wall_thickness;
 
-end_ext_dia = 32.0;
+end_ext_dia = 31.0;
 end_int_dia = end_ext_dia - 2 * wall_thickness;
 
 
