@@ -10,8 +10,16 @@ fine = ["n", "n", "r", "s", "r", "n",
         "r", "n", "r", "n", "r", "n", "r", "n", "r", 
         "n", "n", "n", "r", "s"];
         
+x_fine = ["n", "n", "r", "s", "r", "n",
+        "r", "n", "r", "n", "r", "n", "r", "n", "r",
+        "n", "r", "n", "r", "n", "r",
+        "n", "n", "n", "r", "s"];
+        
 module joint_cutout(thickness, height, pattern) {
     component_height = height / len(pattern);
+    rounding_diameter = component_height;
+    
+    echo("rounding diameter (inches): ", rounding_diameter/25.4);
     for (i = [ 0 : len(pattern) - 1 ] ) {
         translate([0, i * component_height]) {
             if(pattern[i] == "s") {
@@ -20,8 +28,8 @@ module joint_cutout(thickness, height, pattern) {
             if(pattern[i] == "r") {
                 hull() {
                     square([thickness, component_height]);
-                    translate([0, component_height/2]) {
-                        circle(d = component_height);
+                    translate([0, rounding_diameter/2]) {
+                        circle(d = rounding_diameter);
                     }
                 }
             }            
