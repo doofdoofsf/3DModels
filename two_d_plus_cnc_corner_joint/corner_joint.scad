@@ -20,7 +20,7 @@ module joint_cutout(thickness, height, pattern) {
             if(pattern[i] == "r") {
                 hull() {
                     square([thickness, component_height]);
-                    translate([-component_height, component_height/2]) {
+                    translate([-component_height/2, component_height/2]) {
                         circle(d = component_height);
                     }
                 }
@@ -28,22 +28,3 @@ module joint_cutout(thickness, height, pattern) {
         }
     }
 }
-
-module joint(thickness, width, height, pattern) {
-    difference() {
-        translate([-width+thickness, 0]) square([width, height]);
-        joint_cutout(thickness, height, pattern);
-    }
-}
-
-test_plate_height = 145;
-test_plate_width = 100;
-thickness = 19.05;
-
-
-module test_plate() {
-    joint(thickness, test_plate_width, test_plate_height, fine);
-}
-
-test_plate();
-translate([$t * thickness*3, test_plate_height]) rotate([180, 180]) test_plate();
