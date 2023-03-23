@@ -20,7 +20,7 @@ module joint_cutout(thickness, height, pattern) {
             if(pattern[i] == "r") {
                 hull() {
                     square([thickness, component_height]);
-                    translate([-component_height/2, component_height/2]) {
+                    translate([0, component_height/2]) {
                         circle(d = component_height);
                     }
                 }
