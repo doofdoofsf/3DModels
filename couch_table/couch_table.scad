@@ -1,10 +1,10 @@
 $fn = 80;
 
-top_width = 180.0;
-top_length = 200.0;
+top_width = 150;
+top_length = 190;
 thickness = 19.05;
 
-side_height = 130;
+side_height = 127;
 
 tab_count = 5;
 tab_height = thickness*1.3;
@@ -12,9 +12,10 @@ tab_depth = 13;
 tab_width = thickness*0.8;
 tab_length = top_length / (tab_count*2-1);
 
-show_top_projection = false;
-show_top = true;
+show_top_projection = true;
+show_top = false;
 show_side = false;
+show_full = false;
 
 rr = 4;
 
@@ -63,6 +64,12 @@ module cut_side() {
     }
 }
 
+module show_full() {
+    cut_top();
+    cut_side();
+}
+
+if(show_full) show_full();
 if(show_top) cut_top();
 if(show_side) translate([0, 0, side_height/2]) rotate([90, 0, 0]) cut_side();
 if(show_top_projection) projection() cut_top();
