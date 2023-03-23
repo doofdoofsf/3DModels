@@ -1,3 +1,5 @@
+// http://mkmra2.blogspot.com/2014/08/cnc-cut-wood-joinery.html
+
 $fn = 100;
 
 // s = square cut
@@ -11,7 +13,6 @@ fine = ["n", "n", "r", "s", "r", "n",
 module joint_cutout(thickness, height, pattern) {
     component_height = height / len(pattern);
     for (i = [ 0 : len(pattern) - 1 ] ) {
-        echo(i, pattern[i]);
         translate([0, i * component_height]) {
             if(pattern[i] == "s") {
                 square([thickness, component_height]);
@@ -35,4 +36,14 @@ module joint(thickness, width, height, pattern) {
     }
 }
 
-joint(19.05, 100, 145, fine);
+test_plate_height = 145;
+test_plate_width = 100;
+thickness = 19.05;
+
+
+module test_plate() {
+    joint(thickness, test_plate_width, test_plate_height, fine);
+}
+
+test_plate();
+translate([$t * thickness*3, test_plate_height]) rotate([180, 180]) test_plate();
