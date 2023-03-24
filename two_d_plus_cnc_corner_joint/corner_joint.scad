@@ -15,6 +15,17 @@ x_fine = ["n", "n", "r", "s", "r", "n",
         "n", "r", "n", "r", "n", "r",
         "n", "n", "n", "r", "s"];
         
+clean = ["r", "n", "r", "n", "r", "n", "r", "n", "r",
+        "n", "r", "n", "r", "n", "r", "n",
+        "r", "n", "r", "n", "r", "n", "r", "n", "r",
+        "n", "r", "n"];
+        
+clean_ends = ["n", "n", "n", "r", "n", "r", "n", "r", "n", "r",
+        "n", "r", "n", "r", "n", "r", "n",
+        "r", "n", "r", "n", "r", "n", "r", "n", "r",
+        "n", "r", "s", "r"]; 
+ 
+        
 module joint_cutout(thickness, height, pattern) {
     component_height = height / len(pattern);
     rounding_diameter = component_height;
