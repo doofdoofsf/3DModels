@@ -17,6 +17,10 @@ side_plate_length = top_plate_length;
 
 joint = clean_ends;
 
+show_table = true;
+show_side_projection = false;
+show_top_projection = false;
+
 module joint(thickness, width, height, pattern) {
     difference() {
         translate([-width+thickness, 0]) square([width, height]);
@@ -24,16 +28,20 @@ module joint(thickness, width, height, pattern) {
     }
 }
 
+module 2D_side() {
+    joint(thickness, side_plate_height, side_plate_length, joint);
+}
+
 module side_plate() {
-    linear_extrude(height = thickness) {
-        joint(thickness, side_plate_height, side_plate_length, joint);
-    }
+    linear_extrude(height = thickness) 2D_side();
+}
+
+module 2D_top() {
+    joint(thickness, top_plate_half_width, top_plate_length, joint);
 }
 
 module top_plate_half() {
-    linear_extrude(height = thickness) {
-        joint(thickness, top_plate_half_width, top_plate_length, joint);
-    }
+    linear_extrude(height = thickness) 2D_top();
 }
 
 module jointed_top_plate_half() {
@@ -55,4 +63,6 @@ module full_table() {
     translate([-top_plate_width+thickness*2, top_plate_length, 0]) rotate([0, 0, 180]) half_table(dark_brown, light_brown);
 }
 
-full_table();
+if (show_table) full_table();
+if (show_side_projection) 2D_side();
+if (show_top_projection) 2D_top();
