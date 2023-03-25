@@ -15,7 +15,7 @@ top_plate_length = top_plate_width;
 side_plate_height = 100;
 side_plate_length = top_plate_length;
 
-joint = clean_ends;
+joint = double;
 
 show_table = true;
 show_side_projection = false;
@@ -65,4 +65,5 @@ module full_table() {
 
 if (show_table) full_table();
 if (show_side_projection) 2D_side();
-if (show_top_projection) 2D_top();
+if (show_top_projection) projection() jointed_top_plate_half();
+    

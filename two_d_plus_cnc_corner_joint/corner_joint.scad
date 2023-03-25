@@ -23,7 +23,14 @@ clean = ["r", "n", "r", "n", "r", "n", "r", "n", "r",
 clean_ends = ["n", "n", "n", "r", "n", "r", "n", "r", "n", "r",
         "n", "r", "n", "r", "n", "r", "n",
         "r", "n", "r", "n", "r", "n", "r", "n", "r",
-        "n", "r", "s", "r"]; 
+        "n", "r", "s"];
+       
+double = ["s", "s", "r", 
+          "n", "n", "n", "r", "s", "r",
+          "n", "n", "n", "r", "s", "r",
+          "n", "n", "n", "r", "s", "r",
+          "n", "n", "n", "r", "s", "r",
+          "n", "n", "n"];
  
         
 module joint_cutout(thickness, height, pattern) {
