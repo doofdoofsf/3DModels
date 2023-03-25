@@ -6,14 +6,14 @@ $fn = 100;
 // r = round cut
 // n = nothing
         
-fine = ["n", "n", "r", "s", "r", "n",
-        "r", "n", "r", "n", "r", "n", "r", "n", "r", 
-        "n", "n", "n", "r", "s"];
-        
-x_fine = ["n", "n", "r", "s", "r", "n",
-        "r", "n", "r", "n", "r", "n", "r", "n", "r",
-        "n", "r", "n", "r", "n", "r",
-        "n", "n", "n", "r", "s"];
+fine = ["n", "n", "n", 
+        "r", "s", "r", 
+        "n", "r", "n", "r", 
+        "n", "r", "n", "r", 
+        "n", "r", "n", "r",
+        "n", "r", "n", "r", 
+        "n", "n", "n", 
+        "r", "s", "s"];
         
 clean = ["r", "n", "r", "n", "r", "n", "r", "n", "r",
         "n", "r", "n", "r", "n", "r", "n",
@@ -31,6 +31,14 @@ double = ["s", "s", "r",
           "n", "n", "n", "r", "s", "r",
           "n", "n", "n", "r", "s", "r",
           "n", "n", "n"];
+          
+fine_double = ["s", "s", "r", 
+               "n", "n", "n", "r", "s", "r",
+               "n", "r", "n", "r", "n", "r",
+               "n", "r", "n", "r", "n", "r",
+               "n", "r", "n", "r", "n", "r",
+               "n", "n", "n", "r", "s", "r",
+               "n", "n", "n"];
  
         
 module joint_cutout(thickness, height, pattern) {

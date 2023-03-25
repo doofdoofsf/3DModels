@@ -15,7 +15,7 @@ top_plate_length = top_plate_width;
 side_plate_height = 100;
 side_plate_length = top_plate_length;
 
-joint = double;
+joint = fine;
 
 show_table = true;
 show_side_projection = false;
