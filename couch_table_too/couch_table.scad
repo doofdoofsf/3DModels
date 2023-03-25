@@ -6,7 +6,10 @@ light_brown = "#C4A484";
 dark_brown = "#964B00";
 
 couch_arm_width = 140;
+
 top_plate_width = couch_arm_width + 2 * thickness;
+top_plate_half_width = top_plate_width/2 + thickness/2;
+
 top_plate_length = top_plate_width;
 
 side_plate_height = 100;
@@ -27,14 +30,29 @@ module side_plate() {
     }
 }
 
-module top_plate() {
+module top_plate_half() {
     linear_extrude(height = thickness) {
-        joint(thickness, top_plate_width, top_plate_length, joint);
+        joint(thickness, top_plate_half_width, top_plate_length, joint);
     }
 }
 
-
-rotate([0, 0, (30*$t)-90]) {
-    color(light_brown) side_plate();
-    color(dark_brown) translate([(1-$t)*thickness*2 , side_plate_length]) rotate([180, 270]) side_plate();
+module jointed_top_plate_half() {
+    intersection() {
+        top_plate_half();
+        translate([-top_plate_half_width+2*thickness, top_plate_length, 0]) {
+            rotate([0, 0, 180]) top_plate_half();
+        }
+    }
 }
+
+module half_table(top_color, side_color) {
+    color(top_color) jointed_top_plate_half();
+    color(side_color) translate([0, side_plate_length]) rotate([180, 270]) side_plate();
+}
+
+module full_table() {
+    half_table(light_brown, dark_brown);
+    translate([-top_plate_width+thickness*2, top_plate_length, 0]) rotate([0, 0, 180]) half_table(dark_brown, light_brown);
+}
+
+full_table();
