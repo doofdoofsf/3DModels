@@ -5,14 +5,19 @@ thickness = 19;
 light_brown = "#C4A484";
 dark_brown = "#964B00";
 
-couch_arm_width = 140;
+// boulder, living room sofa
+// couch_arm_width = 140;
+// side_plate_height = 100;
+
+// crested butte sofa
+couch_arm_width = 145;
+side_plate_height = 130;
 
 top_plate_width = couch_arm_width + 2 * thickness;
 top_plate_half_width = top_plate_width/2 + thickness/2;
 
 top_plate_length = top_plate_width;
 
-side_plate_height = 100;
 side_plate_length = top_plate_length;
 
 joint = fine;
@@ -20,6 +25,7 @@ joint = fine;
 show_table = true;
 show_side_projection = false;
 show_top_projection = false;
+
 
 module joint(thickness, width, height, pattern) {
     difference() {
