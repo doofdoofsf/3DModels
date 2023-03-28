@@ -10,7 +10,11 @@ dark_brown = "#964B00";
 // side_plate_height = 100;
 
 // crested butte sofa
-couch_arm_width = 145;
+// !!
+// !! Note: just make one and try it out, kinda hard to get
+//          an exact width
+// !!
+couch_arm_width = 140;
 side_plate_height = 130;
 
 top_plate_width = couch_arm_width + 2 * thickness;
