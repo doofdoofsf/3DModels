@@ -70,7 +70,7 @@ module half_table(top_color, side_color) {
 
 module full_table() {
     half_table(light_brown, dark_brown);
-    translate([-top_plate_width+thickness*2, top_plate_length, 0]) rotate([0, 0, 180]) half_table(dark_brown, light_brown);
+    translate([-top_plate_width+thickness*2, top_plate_length, -0.1]) rotate([0, 0, 180]) half_table(dark_brown, light_brown);
 }
 
 if (show_table) full_table();
