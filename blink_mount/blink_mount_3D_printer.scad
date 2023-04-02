@@ -3,12 +3,12 @@ inside_base_y = 31.0;
 inside_base_z = 24.0;
 crade_push_out = 20;
 ledge_indent = 8.5;
-tilt = [20, 0, -25];
+tilt = [20, 0, -20];
 thickness = 2.0;
 
-mc_width = 80;
+mc_width = 60;
 mc_height = 50;
-mc_depth = 9.5;
+mc_depth = 8;
 
 outside_base_height_normal = inside_base_z + thickness;
 outside_base_height_high = inside_base_z * 2;
