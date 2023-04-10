@@ -22,14 +22,15 @@ module base_cube(high=false) {
 
 module mount_cubes() {
     y_offset = 25;
+    base_depth = 50;
     
     
     translate([-mc_width/2, y_offset, -mc_height/2]) {
         cube([mc_width, mc_depth, mc_height]);
     }
     
-    translate([-mc_width/2, 0, -mc_height/2]) {
-        cube([mc_width, y_offset, mc_height/2]);
+    translate([-mc_width/2, -20, -mc_height/2]) {
+        cube([mc_width, base_depth, mc_height/2]);
     }
 }
 
