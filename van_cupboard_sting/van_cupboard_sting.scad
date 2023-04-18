@@ -2,15 +2,31 @@ $fn = 60;
 
 base_block_width = 25;
 base_block_height = 50;
-thickness = 6;
-
+thickness = 4;
 hole_radius = 2;
 
-module base_block() {
-    cube([base_block_width, 
-                thickness, 
-                base_block_height], center=true);
+rounding_radius = 4;
 
+module flat_rounded_cube(size, rounding_radius) {
+    x_offset = base_block_width/2 - rounding_radius;
+    z_offset = base_block_height/2 - rounding_radius;
+    
+    hull() {
+        for(x = [x_offset, -x_offset]) {
+            for(z = [z_offset, -z_offset]) {
+                translate([x, 0, z]) {
+                    rotate([90, 0, 0]) {
+                        cylinder(h = thickness, r = rounding_radius, center = true);
+                    }
+                }
+            }
+        }
+    }
+}
+
+module base_block() {
+    size = [base_block_width, thickness, base_block_height];
+    flat_rounded_cube(size, rounding_radius);
 }
 
 module base_block_holes() {
@@ -42,4 +58,5 @@ module mount() {
 }
 
 mount();
-translate([0, 80, 0]) mirror([0, 1, 0]) mount();
+//translate([0, 80, 0]) mirror([0, 1, 0]) mount();
+
