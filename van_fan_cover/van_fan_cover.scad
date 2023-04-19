@@ -4,23 +4,27 @@ hole_depth = 13;
 
 ext_flange_size = 8;
 thickness = 3;
-fin_height = sqrt(2 * hole_depth * hole_depth);
+fin_height = 0.8*sqrt(2 * hole_depth * hole_depth);
 
 external_width = hole_width + 2 * ext_flange_size;
 external_height = hole_height + 2 * ext_flange_size;
 
-echo(external_width/25.4, external_height/25.4); 
-
 internal_width = hole_width - 2 * ext_flange_size;
 internal_height = hole_height - 2 * ext_flange_size;
 
-flange_width = 40; 
-flange_height = 40; 
+blanking_x_offset = 40; 
+blanking_y_offset = 40; 
 
+show_cover = truef;
+show_blanking_plate = true;
+
+module plate(thickness = thickness) {
+    cube([external_width, external_height, thickness], center = true);
+}
 
 module base_plate() {
     difference() {
-        cube([external_width, external_height, thickness], center = true);
+        plate();
         cube([internal_width, internal_height, thickness+1], center = true);
     }
 }
@@ -50,22 +54,14 @@ module cover() {
 
 
 module blanking_plate() {
-    width = external_width/2 + flange_width/2;
-    height = external_height/2 + flange_height/2;
-    
-    x_offset = -external_width/2 + width/2 - flange_width;
-    y_offset = -external_height/2 + height/2 - flange_height;
-    
-    translate([x_offset, y_offset, 0]) 
-        cube([width, height, thickness], center = true);
-}
-
-module cutout_blanking_plate() {
     difference() {
-        blanking_plate();
-        cover();
+        translate([-blanking_x_offset, -blanking_y_offset, 0]) {
+            plate();
+        }
+        plate(thickness+1);
     }
 }
 
-//cover();
-#cutout_blanking_plate();
+if (show_cover) cover();
+
+if (show_blanking_plate) blanking_plate();
