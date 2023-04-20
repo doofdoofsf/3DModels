@@ -12,11 +12,8 @@ external_height = hole_height + 2 * ext_flange_size;
 internal_width = hole_width - 2 * ext_flange_size;
 internal_height = hole_height - 2 * ext_flange_size;
 
-blanking_x_offset = 40; 
-blanking_y_offset = 40; 
-
-show_cover = true;
-show_blanking_plate = false;
+show_cover = false;
+show_blanking_plate = true;
 
 module plate(thickness = thickness) {
     cube([external_width, external_height, thickness], center = true);
@@ -63,9 +60,13 @@ module cover() {
 
 
 module blanking_plate() {
+    offset = 40;
+    width = external_width;
+    height = external_height+offset;
     difference() {
-        translate([-blanking_x_offset, -blanking_y_offset, 0]) {
-            plate();
+        translate([-external_width/2+width/2-offset, 
+                   -external_height/2+height/2-offset, 0]) {
+            cube([width, height, thickness], center = true);;
         }
         plate(thickness+1);
     }
