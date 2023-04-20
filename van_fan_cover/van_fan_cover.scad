@@ -12,7 +12,7 @@ external_height = hole_height + 2 * ext_flange_size;
 internal_width = hole_width - 2 * ext_flange_size;
 internal_height = hole_height - 2 * ext_flange_size;
 
-show_cover = false;
+show_cover = true;
 show_blanking_plate = true;
 
 module plate(thickness = thickness) {
@@ -60,7 +60,7 @@ module cover() {
 
 
 module blanking_plate() {
-    offset = 40;
+    offset = 30;
     width = external_width;
     height = external_height+offset;
     difference() {
@@ -72,6 +72,6 @@ module blanking_plate() {
     }
 }
 
-if (show_cover) cover();
+if (show_cover) #cover();
 
 if (show_blanking_plate) blanking_plate();
