@@ -3,9 +3,8 @@ $fn = 60;
 mount_width = 47;
 mount_height = 55;
 
-hole_size = 28;
-//thickness = 5;
-thickness = 1;
+hole_size = 28.2;
+thickness = 5;
 
 mount_hole_radius = 3.3/2;
 mount_hole_vertical_separation = 9.5;
