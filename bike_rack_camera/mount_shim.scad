@@ -27,9 +27,7 @@ module angled_cutout() {
 
 module shim() {
     difference() {
-        cube([34, 61, 8], center = true);
-        rotate([0, 0, 90]) angled_cutout();
+        cube([34, 61, 16], center = true);
+        translate([0, 0, 3]) rotate([0, 0, 90]) angled_cutout();
     }
 }
-
-shim();
