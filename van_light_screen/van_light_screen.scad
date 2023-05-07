@@ -6,7 +6,8 @@ $fn=50;
 
 rounding_sphere_diameter = 1;
 
-screen_length = 200;
+//screen_length = 200;
+screen_length = 140;
 screen_width = 20;
 
 tab_length = 10;
