@@ -16,7 +16,7 @@ square_hole_z_offset = mount_height/10;
 mount_angle = 37.5;
 
 show_shim = true;
-show_mount = false;
+show_mount = true;
 
 module hole() {
     rotate([90, 0, 0]) cylinder(h = thickness+1, r = mount_hole_radius, center = true);
@@ -84,5 +84,5 @@ module shim_with_mount_hole() {
     }
 }
 
-if(show_shim) shim_with_mount_hole();
-if(show_mount) rotate([90, 0, 0]) complete_mount();
+if(show_shim) translate([0, 0, shim_width/2]) shim_with_mount_hole();
+if(show_mount) translate([0, 40, thickness/2]) rotate([90, 0, 0]) complete_mount();
