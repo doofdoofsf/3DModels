@@ -4,6 +4,7 @@ sheet_height = 1;
 roof_angle = 145;
 shim_length = 61;
 shim_width = 34;
+shim_depth = 38;
     
 module angled_sheet() {
     rotate([0, 90-roof_angle/2, 0]) {
@@ -21,7 +22,7 @@ module angled_roof() {
 module angled_cutout() {
     hull() {
         angled_roof();
-        translate([0, 0, -20]) {
+        translate([0, 0, -23]) {
             cube([sheet_width*2, sheet_depth, sheet_height], center = true);
         }
     }
@@ -29,7 +30,7 @@ module angled_cutout() {
 
 module shim() {
     difference() {
-        cube([shim_width, shim_length, 27], center = true);
+        cube([shim_width, shim_length, shim_depth], center = true);
         translate([0, 0, 3]) rotate([0, 0, 90]) angled_cutout();
     }
 }
