@@ -15,8 +15,11 @@ square_hole_z_offset = mount_height/6;
 
 mount_angle = 37.5;
 
-show_shim = true;
-show_mount = false;
+box_height = 30;
+
+show_shim = false;
+show_mount = true;
+show_box = true;
 
 module hole() {
     rotate([90, 0, 0]) cylinder(h = thickness+1, r = mount_hole_radius, center = true);
@@ -39,6 +42,7 @@ module camera_holes() {
 module flat_rounded_cube(size, rounding_radius) {
     width = size[0];
     height = size[1];
+    thickness = size[2];
     echo(width, height);
     x_offset = width/2 - rounding_radius;
     z_offset = height/2 - rounding_radius;
@@ -55,6 +59,19 @@ module flat_rounded_cube(size, rounding_radius) {
         }
     }
 }
+
+module mount_box() {
+    width = mount_width + thickness/2;
+    height = mount_height + thickness/2;
+    
+    translate([0, -box_height/2+thickness*1.5, 0]) {
+        difference() {
+            flat_rounded_cube([width, height, box_height], 4);
+            flat_rounded_cube([width - 2*thickness, height - 2*thickness, box_height+10], 4);
+        }
+    }
+}   
+    
 
 module mount_square() {
     flat_rounded_cube([mount_width, mount_height, thickness], 4);
@@ -84,5 +101,7 @@ module shim_with_mount_hole() {
     }
 }
 
+if(show_box) #mount_box();
 if(show_shim) translate([0, 0, shim_width/2]) shim_with_mount_hole();
-if(show_mount) translate([0, 55, thickness/2]) rotate([90, 0, 0]) complete_mount();
+//if(show_mount) translate([0, 55, thickness/2]) rotate([90, 0, 0]) complete_mount();
+complete_mount();
