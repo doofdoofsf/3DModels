@@ -15,10 +15,12 @@ square_hole_z_offset = mount_height/6;
 
 mount_angle = 37.5;
 
-box_height = 30;
+box_depth = 33;
+box_width = mount_width + thickness/2;
+box_height = mount_height*0.7;
 
 show_shim = false;
-show_mount = true;
+show_mount = false;
 show_box = true;
 
 module hole() {
@@ -31,7 +33,6 @@ module camera_holes() {
     offsets = [[-offset, 0], [offset, 0]];
     
     for(o = offsets) {
-        echo(o);
         
         translate([o[0], 0, square_hole_z_offset+o[1]]) {
             hole();
@@ -43,7 +44,6 @@ module flat_rounded_cube(size, rounding_radius) {
     width = size[0];
     height = size[1];
     thickness = size[2];
-    echo(width, height);
     x_offset = width/2 - rounding_radius;
     z_offset = height/2 - rounding_radius;
     
@@ -60,17 +60,26 @@ module flat_rounded_cube(size, rounding_radius) {
     }
 }
 
-module mount_box() {
-    width = mount_width + thickness/2;
-    height = mount_height + thickness/2;
-    
-    translate([0, -box_height/2+thickness*1.5, 0]) {
+module mount_box() {    
+    translate([0, -box_depth/2+thickness*1.5, thickness/2+(mount_height-box_height)/2]) {
         difference() {
-            flat_rounded_cube([width, height, box_height], 4);
-            flat_rounded_cube([width - 2*thickness, height - 2*thickness, box_height+10], 4);
+            flat_rounded_cube([box_width, box_height, box_depth], 4);
+            flat_rounded_cube([box_width - 2*thickness, box_height - 2*thickness, box_depth+10], 4);
+            translate([0, -thickness, -box_depth+thickness]) cube([box_width+10, box_height+10, box_depth], center=true);
+        }
+        translate([0, -box_depth/2, 0]) {
+            flat_rounded_cube([box_width, box_height, thickness], 4);
         }
     }
-}   
+
+}
+
+module groovy_mount_box() {
+    difference() {
+        mount_box();
+        mount_square();
+    }
+}
     
 
 module mount_square() {
@@ -91,17 +100,18 @@ module complete_mount() {
         holy_mount_square();
         camera_holes();
     }
+    
+    mount_box();
 }
 
 module shim_with_mount_hole() {
     difference() {
         rotate([0, 90, 90]) shim();
-        #translate([0, 30, 28]) rotate([-mount_angle, 0, 0]) complete_mount();
+        translate([0, 30, 28]) rotate([-mount_angle, 0, 0]) complete_mount();
 
     }
 }
 
-if(show_box) #mount_box();
+if(show_box) groovy_mount_box();
 if(show_shim) translate([0, 0, shim_width/2]) shim_with_mount_hole();
-//if(show_mount) translate([0, 55, thickness/2]) rotate([90, 0, 0]) complete_mount();
-complete_mount();
+if(show_mount) translate([0, 55, thickness/2]) rotate([90, 0, 0]) complete_mount();
