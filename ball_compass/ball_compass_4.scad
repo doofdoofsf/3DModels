@@ -7,43 +7,38 @@
 $fn=180;
 
 sphere_diameter = 29;
-width = sphere_diameter * 1.3;
+cube_width = sphere_diameter*1.3;
 
-module engrave(text) {
-   text_depth = 2.0;
-   text_size = 6;
 
-   translate([0, sphere_diameter*0.50, text_size*0.7]) {
-      rotate([90, 0, 180]) {
-         linear_extrude(text_depth+1) {
-            text(text, size=text_size, halign="center", font="DejaVu Sans:style=Bold");
-         }
-      }
-   }
+module cutout_tool() {
+    width = cube_width * 1.5;
+    difference() {
+        cube([width, width, width/2], center=true);
+        translate([0, 0, -cube_width/4]) sphere(cube_width * 0.65);
+    }
 }
 
 
 module access_hole() {
-   length = sphere_diameter * 2;
-   diameter = 10;
-   translate([0, 0, sphere_diameter*0.5]) {
-      rotate([21, 0, 0]) {
-         translate([0, 0, -length/2]) {
-            cylinder(d=diameter, length);
-         }
-      }
-   }
+    length = sphere_diameter * 2;
+    diameter = 10;
+    translate([0, 0, sphere_diameter*0.5]) {
+       translate([0, 0, -length/2]) {
+           cylinder(d=diameter, length);
+       }
+    }
 }
 
 
 module body() {
-    cube_height = sphere_diameter*0.22;
+    cube_height = sphere_diameter*0.5;
 
-    cube([width, sphere_diameter*1.35, cube_height], center=true);
+    translate([0, 0, cube_height/2])
+        cube([cube_width, cube_width, cube_height], center=true);
 }
 
 module ball_depression() {
-   translate([0, 0, 2+sphere_diameter/1.6]) {
+   translate([0, 0, 2+sphere_diameter/2.0]) {
       sphere(d=sphere_diameter);
    }
 }
@@ -56,4 +51,11 @@ module mount() {
    }
 }
 
-mount();
+module rounded_mount() {
+    difference() {
+        mount();
+        translate([0, 0, sphere_diameter * 0.4]) cutout_tool();
+    }
+}
+
+rounded_mount();
