@@ -4,7 +4,7 @@
 
 // https://www.internet-outdoorshop.com/en/399321-hypersonic-compass-ball-3-cm-black/
 
-$fn=180;
+$fn=120;
 
 sphere_diameter = 29;
 cube_width = sphere_diameter*1.3;
@@ -46,7 +46,7 @@ module ball_depression() {
 module mount() {
    difference() {
       body();
-      #ball_depression();
+      ball_depression();
       access_hole();
    }
 }
