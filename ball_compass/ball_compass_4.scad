@@ -9,6 +9,8 @@ $fn=120;
 sphere_diameter = 29;
 cube_width = sphere_diameter*1.3;
 
+!! make lanyard hold
+
 
 module cutout_tool() {
     width = cube_width * 1.5;
