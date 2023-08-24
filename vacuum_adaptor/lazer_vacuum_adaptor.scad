@@ -1,9 +1,10 @@
 $fn=100;
 wall_thickness = 2;
-section_length = 40;
+section_length = 34;
 end_taper = 1.5;
+middle_shrink = 0.8;
 
-start_ext_dia = 101.0;
+start_ext_dia = 92.25;
 start_int_dia = start_ext_dia - 2 * wall_thickness;
 
 end_ext_dia = 72.5;
@@ -19,8 +20,8 @@ module start_tube() {
 
 module middle_tube() {
     difference() {
-        cylinder(section_length, d1 = start_ext_dia, d2 = end_ext_dia);
-        cylinder(section_length, d1 = start_int_dia, d2 = end_int_dia);
+        cylinder(section_length * middle_shrink, d1 = start_ext_dia, d2 = end_ext_dia);
+        cylinder(section_length * middle_shrink, d1 = start_int_dia, d2 = end_int_dia);
     }
 }
 
@@ -34,7 +35,7 @@ module end_tube() {
 module adaptor() {
     start_tube();
     translate([0, 0, section_length]) middle_tube();
-    translate([0, 0, section_length*2]) end_tube();    
+    translate([0, 0, section_length*(1+middle_shrink)]) end_tube();    
 }
 
 
