@@ -7,6 +7,7 @@ ring_offset = 5;
 
 int_dia = 91.5;
 ext_dia = int_dia + 2 * wall_thickness;
+echo(ext_dia);
 
 
 module tube() {
