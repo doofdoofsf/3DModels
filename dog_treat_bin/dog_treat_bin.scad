@@ -38,7 +38,7 @@ module base() {
 }    
 
 module lid() {
-    translate([0, 0, layer_height * 5]) {
+    translate([0, 0, layer_height * 7]) {
         color(color_dark) cylinder(layer_height, d = lid_diameter, center = true);
         translate([0, 0, -(layer_height/2 + lid_bottom_thickness/2)]) {
             color(color_light) cylinder(lid_bottom_thickness, d = lid_bottom_diameter, center=true);
@@ -52,6 +52,8 @@ module body() {
     color(color_light) wall_layer(2);
     color(color_dark) wall_layer(3);
     color(color_light) wall_layer(4);
+    color(color_dark) wall_layer(5);
+    color(color_light) wall_layer(6);
 }
         
     
@@ -59,4 +61,4 @@ module body() {
 
 
 body();
-lid();
+//lid();
