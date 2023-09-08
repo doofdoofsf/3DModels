@@ -2,6 +2,10 @@ $fn = 90;
 color_dark = "Sienna";
 color_light = "DarkGoldenrod";
 
+show_lid = true;
+show_bin = true;
+
+
 outer_diameter = 135;
 //layer_height = 19.05; // 3/4" wood
 layer_height = 12.7; // 1/2" wood
@@ -14,6 +18,7 @@ bone_size = [578, 276, 50];
 lid_diameter = outer_diameter * 1.05;
 lid_bottom_diameter = inner_diameter * 0.98;
 lid_bottom_thickness = layer_height / 2;
+lid_top_thickness = layer_height;
 
 module bone(width, height) {
     scale = (width/bone_size[0]);
@@ -47,18 +52,39 @@ module base() {
         basic_layer();
         translate([0, 0, wall_thickness]) layer_cutout();
     }
+}
+
+module lid_bottom() {
+    translate([0, 0, -(layer_height/2 + lid_bottom_thickness/2)]) {
+            color(color_light) cylinder(lid_bottom_thickness, d = lid_bottom_diameter, center=true);
+    }
+}
+
+module lid_top() {
+    color(color_dark) cylinder(lid_top_thickness, d = lid_diameter, center = true);
+    lid_bone_handle();
+}
+
+module lid_bone_cutout() {
+    bone_height = lid_top_thickness/3;
+    translate([0, 0, lid_top_thickness/2-bone_height/2+kludge]) 
+        bone(lid_diameter * 0.6, bone_height);
+}
+
+module lid_bone_handle() {
+    bone_height = lid_top_thickness;
+    translate([0, 0, lid_top_thickness/2+bone_height/2]) 
+        bone(lid_diameter * 0.5, bone_height);
 }    
 
 module lid() {
     translate([0, 0, layer_height * 5]) {
-        color(color_dark) cylinder(layer_height, d = lid_diameter, center = true);
-        translate([0, 0, -(layer_height/2 + lid_bottom_thickness/2)]) {
-            color(color_light) cylinder(lid_bottom_thickness, d = lid_bottom_diameter, center=true);
-        }
+        lid_top();
+        lid_bottom();
     }   
 }
 
-module body() {
+module bin() {
     color(color_light) base();
     color(color_dark) wall_layer(1);
     color(color_light) wall_layer(2);
@@ -66,9 +92,6 @@ module body() {
     color(color_light) wall_layer(4);
 
 }
-        
-    
 
-bone(100, 10);
-//body();
-//lid();
+if(show_bin) bin();
+if(show_lid) lid();
