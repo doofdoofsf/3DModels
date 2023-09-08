@@ -1,4 +1,4 @@
-$fn = 90;
+$fn = 120;
 
 show_base = true;
 show_handle = true;
@@ -12,7 +12,7 @@ outer_diameter = 142;
 wall_thickness = 6;
 inner_diameter = outer_diameter - 2 * wall_thickness;
 inset_diameter = inner_diameter * 0.98;
-base_height = 50;
+base_height = 57;
 kludge = 1;
 handle_height = 13;
 
