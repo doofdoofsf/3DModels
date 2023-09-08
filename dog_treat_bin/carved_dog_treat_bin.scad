@@ -1,7 +1,11 @@
 $fn = 90;
+
+show_base = true;
+show_handle = true;
+show_lid = true;
+
 color_dark = "Sienna";
 color_light = "DarkGoldenrod";
-
 
 outer_diameter = 142;
 wall_thickness = 6;
@@ -9,10 +13,12 @@ inner_diameter = outer_diameter - 2 * wall_thickness;
 inset_diameter = inner_diameter * 0.98;
 base_height = 50;
 kludge = 1;
+handle_height = 15;
 
 handle_diameter = outer_diameter * 0.4;
 
 bone_size = [578, 276, 50];
+
 
 module bone(width, height) {
     scale = (width/bone_size[0]);
@@ -55,20 +61,31 @@ module lid_upper() {
 }
 
 module lid_handle() {
-    color(color_light) translate([0, 0, -wall_thickness/2]) bone(70, wall_thickness*4);
+    color(color_light) translate([0, 0, handle_height/2+wall_thickness]) bone(70, handle_height);
     //cylinder(wall_thickness*2, d = handle_diameter, center = true);
 }
 
 module lid() {
     color(color_dark) hull() {
         lid_lower();
-        translate([0, 0, wall_thickness*1.5]) lid_upper();
+        translate([0, 0, wall_thickness*1.5]) {
+            lid_upper();
+        }
     }
     color(color_dark) translate([0, 0, -wall_thickness]) lid_inset();
-
-    translate([0, 0, wall_thickness*2.5]) lid_handle();
 }
 
-color(color_dark) base();
-translate([0, 0, 10+base_height/2+ wall_thickness/2]) lid();
+module show_full_lid() {
+    translate([0, 0, 10+base_height/2+ wall_thickness/2]) {
+        difference() {
+            lid();
+            lid_handle();
+        }
+        if(show_handle) lid_handle();
+    }
+}
+
+if (show_lid) show_full_lid();
+if (show_base) color(color_dark) base();
+
     
