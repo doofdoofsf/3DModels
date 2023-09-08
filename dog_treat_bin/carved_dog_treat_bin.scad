@@ -3,6 +3,7 @@ $fn = 90;
 show_base = true;
 show_handle = true;
 show_lid = true;
+show_standalone_handle = false;
 
 color_dark = "Sienna";
 color_light = "DarkGoldenrod";
@@ -25,7 +26,7 @@ module bone(width, height) {
     scale = (width/bone_size[0]);
     scale([scale, scale, 1]) {
         translate([-bone_size[0]/2, -bone_size[1]/2, 0]) {
-            linear_extrude(height = height, center = true) import("default_bone.svg");
+            linear_extrude(height = height, center = true) import("rounded_default_bone.svg");
         }
     }
     //#cube([bone_size[0], bone_size[1], height], center=true);
@@ -88,5 +89,6 @@ module show_full_lid() {
 
 if (show_lid) show_full_lid();
 if (show_base) color(color_dark) base();
+if(show_standalone_handle) lid_handle();
 
     
