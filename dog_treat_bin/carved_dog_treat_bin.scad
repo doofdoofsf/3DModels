@@ -13,11 +13,12 @@ inner_diameter = outer_diameter - 2 * wall_thickness;
 inset_diameter = inner_diameter * 0.98;
 base_height = 50;
 kludge = 1;
-handle_height = 15;
+handle_height = 13;
 
 handle_diameter = outer_diameter * 0.4;
 
 bone_size = [578, 276, 50];
+bone_width = 70;
 
 
 module bone(width, height) {
@@ -57,12 +58,12 @@ module lid_lower() {
 }
 
 module lid_upper() {
-    cylinder(wall_thickness, d = handle_diameter, center = true);
+    //cylinder(wall_thickness, d = handle_diameter, center = true);
+    translate([0, 0, -wall_thickness/2]) bone(bone_width, wall_thickness);
 }
 
 module lid_handle() {
-    color(color_light) translate([0, 0, handle_height/2+wall_thickness]) bone(70, handle_height);
-    //cylinder(wall_thickness*2, d = handle_diameter, center = true);
+    color(color_light) translate([0, 0, handle_height/2+wall_thickness]) bone(bone_width, handle_height);
 }
 
 module lid() {
