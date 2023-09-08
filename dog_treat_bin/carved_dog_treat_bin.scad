@@ -6,6 +6,7 @@ color_light = "DarkGoldenrod";
 outer_diameter = 142;
 wall_thickness = 6;
 inner_diameter = outer_diameter - 2 * wall_thickness;
+inset_diameter = inner_diameter * 0.98;
 base_height = 50;
 kludge = 1;
 
@@ -37,7 +38,12 @@ module base() {
     difference() {
         base_block();
         base_cutout();
+        translate([0, 0, base_height/2 - wall_thickness/2]) lid_inset();
     }
+}
+
+module lid_inset() {
+    cylinder(wall_thickness, d1 = inset_diameter, d2 = outer_diameter, center = true);
 }
 
 module lid_lower() {
@@ -49,18 +55,20 @@ module lid_upper() {
 }
 
 module lid_handle() {
-    color(color_light) translate([0, 0, kludge]) bone(40, wall_thickness*2);
-    cylinder(wall_thickness*2, d = handle_diameter, center = true);
+    color(color_light) translate([0, 0, -wall_thickness/2]) bone(70, wall_thickness*4);
+    //cylinder(wall_thickness*2, d = handle_diameter, center = true);
 }
 
 module lid() {
-    hull() {
+    color(color_dark) hull() {
         lid_lower();
         translate([0, 0, wall_thickness*1.5]) lid_upper();
     }
+    color(color_dark) translate([0, 0, -wall_thickness]) lid_inset();
+
     translate([0, 0, wall_thickness*2.5]) lid_handle();
 }
 
-color(color_light) base();
-translate([0, 0, base_height/2+ wall_thickness/2]) lid();
+color(color_dark) base();
+translate([0, 0, 10+base_height/2+ wall_thickness/2]) lid();
     
