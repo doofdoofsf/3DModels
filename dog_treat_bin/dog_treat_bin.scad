@@ -9,9 +9,21 @@ wall_thickness = 8;
 inner_diameter = outer_diameter - 2*wall_thickness;
 kludge = 1;
 
-lid_diameter = 143;
+bone_size = [578, 276, 50];
+
+lid_diameter = outer_diameter * 1.05;
 lid_bottom_diameter = inner_diameter * 0.98;
 lid_bottom_thickness = layer_height / 2;
+
+module bone(width, height) {
+    scale = (width/bone_size[0]);
+    scale([scale, scale, 1]) {
+        translate([-bone_size[0]/2, -bone_size[1]/2, 0]) {
+            linear_extrude(height = height, center = true) import("default_bone.svg");
+        }
+    }
+    //#cube([bone_size[0], bone_size[1], height], center=true);
+}
 
 module basic_layer() {
     cylinder(layer_height, d = outer_diameter, center = true);
@@ -38,7 +50,7 @@ module base() {
 }    
 
 module lid() {
-    translate([0, 0, layer_height * 7]) {
+    translate([0, 0, layer_height * 5]) {
         color(color_dark) cylinder(layer_height, d = lid_diameter, center = true);
         translate([0, 0, -(layer_height/2 + lid_bottom_thickness/2)]) {
             color(color_light) cylinder(lid_bottom_thickness, d = lid_bottom_diameter, center=true);
@@ -52,13 +64,11 @@ module body() {
     color(color_light) wall_layer(2);
     color(color_dark) wall_layer(3);
     color(color_light) wall_layer(4);
-    color(color_dark) wall_layer(5);
-    color(color_light) wall_layer(6);
+
 }
         
     
 
-
-
-body();
+bone(100, 10);
+//body();
 //lid();
