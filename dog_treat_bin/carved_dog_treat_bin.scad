@@ -1,9 +1,12 @@
 $fn = 120;
 
-show_base = true;
+show_base = false;
 show_handle = true;
 show_lid = true;
 show_standalone_handle = false;
+show_lid_inset = false;
+show_standalone_inset = false;
+
 
 color_dark = "Sienna";
 color_light = "DarkGoldenrod";
@@ -14,7 +17,7 @@ inner_diameter = outer_diameter - 2 * wall_thickness;
 inset_diameter = inner_diameter * 0.98;
 base_height = 57;
 kludge = 1;
-handle_height = 13;
+handle_height = 15;
 
 handle_diameter = outer_diameter * 0.4;
 
@@ -70,11 +73,11 @@ module lid_handle() {
 module lid() {
     color(color_dark) hull() {
         lid_lower();
-        translate([0, 0, wall_thickness*1.5]) {
+        translate([0, 0, wall_thickness*1.8]) {
             lid_upper();
         }
     }
-    color(color_dark) translate([0, 0, -wall_thickness]) lid_inset();
+    if (show_lid_inset) color(color_dark) translate([0, 0, -wall_thickness]) lid_inset();
 }
 
 module show_full_lid() {
@@ -90,5 +93,6 @@ module show_full_lid() {
 if (show_lid) show_full_lid();
 if (show_base) color(color_dark) base();
 if(show_standalone_handle) lid_handle();
+if(show_standalone_inset) lid_inset();
 
     
