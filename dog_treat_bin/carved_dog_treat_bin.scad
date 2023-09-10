@@ -1,21 +1,24 @@
 $fn = 120;
 
-show_base = false;
+show_base = true;
 show_handle = true;
 show_lid = true;
 show_standalone_handle = false;
-show_lid_inset = false;
+show_lid_inset = true;
 show_standalone_inset = false;
+
+
+//!! maybe colored layers with the lid and the bit below it forming one visual layer?
 
 
 color_dark = "Sienna";
 color_light = "DarkGoldenrod";
 
 outer_diameter = 142;
-wall_thickness = 6;
+wall_thickness = 5;
 inner_diameter = outer_diameter - 2 * wall_thickness;
 inset_diameter = inner_diameter * 0.98;
-base_height = 57;
+base_height = 44; //!! figure out base height
 kludge = 1;
 handle_height = 15;
 
@@ -49,12 +52,11 @@ module base() {
     difference() {
         base_block();
         base_cutout();
-        translate([0, 0, base_height/2 - wall_thickness/2]) lid_inset();
     }
 }
 
 module lid_inset() {
-    cylinder(wall_thickness, d1 = inset_diameter, d2 = outer_diameter, center = true);
+    cylinder(wall_thickness, d = inset_diameter * 0.98, center = true);
 }
 
 module lid_lower() {
