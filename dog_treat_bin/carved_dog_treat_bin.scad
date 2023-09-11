@@ -7,25 +7,24 @@ show_standalone_handle = false;
 show_lid_inset = true;
 show_standalone_inset = false;
 
-
-//!! maybe colored layers with the lid and the bit below it forming one visual layer?
-
-
 color_dark = "Sienna";
 color_light = "DarkGoldenrod";
 
-outer_diameter = 142;
+outer_diameter = 125;
 wall_thickness = 5;
 inner_diameter = outer_diameter - 2 * wall_thickness;
 inset_diameter = inner_diameter * 0.98;
-base_height = 44; //!! figure out base height
+base_height = 43;
 kludge = 1;
-handle_height = 15;
+handle_height = 13;
+
+centering_nub_diameter = 8;
+centering_nub_height = 4;
 
 handle_diameter = outer_diameter * 0.4;
 
 bone_size = [578, 276, 50];
-bone_width = 70;
+bone_width = outer_diameter/2;
 
 
 module bone(width, height) {
@@ -55,8 +54,15 @@ module base() {
     }
 }
 
+module centering_nub() {
+    cylinder(centering_nub_height, d = centering_nub_diameter, center = true);
+}
+
 module lid_inset() {
     cylinder(wall_thickness, d = inset_diameter * 0.98, center = true);
+    translate([0, 0, wall_thickness/2 + centering_nub_height/2]) {
+        centering_nub();
+    }
 }
 
 module lid_lower() {
@@ -79,7 +85,7 @@ module lid() {
             lid_upper();
         }
     }
-    if (show_lid_inset) color(color_dark) translate([0, 0, -wall_thickness]) lid_inset();
+    if (show_lid_inset) color(color_light) translate([0, 0, -wall_thickness]) lid_inset();
 }
 
 module show_full_lid() {
@@ -87,6 +93,7 @@ module show_full_lid() {
         difference() {
             lid();
             lid_handle();
+            translate([0, 0, 0]) cylinder(12, d = centering_nub_diameter, center = true);
         }
         if(show_handle) lid_handle();
     }
