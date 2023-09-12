@@ -1,5 +1,5 @@
 $fn=100;
-wall_thickness = 2;
+wall_thickness = 3;
 section_length = 40;
 end_taper = 1.5;
 
@@ -66,6 +66,7 @@ module adaptor() {
 
 
 adaptor();
+translate([plate_size+5, 0, 0]) mounting_plate();
     
     
 
