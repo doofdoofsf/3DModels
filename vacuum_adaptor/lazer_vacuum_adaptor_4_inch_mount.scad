@@ -28,7 +28,7 @@ module mounting_plate_base() {
 }
 
 module mounting_plate_screw_holes() {
-    hole_dim = plate_size/2 - screw_hole_inset - screw_hole_diameter/2;
+    hole_dim = plate_size/2 - screw_hole_inset;
     holes = [-hole_dim, hole_dim];
     for(x = holes) {
         for(y = holes) {
