@@ -5,7 +5,7 @@ end_taper = 2.0;
 middle_shrink = 0.8;
 end_scale = 1.4;
 
-start_int_dia = 95.2;
+start_int_dia = 95.4;
 start_ext_dia = start_int_dia + 2 * wall_thickness;
 
 end_ext_dia = 99.0;
