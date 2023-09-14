@@ -1,11 +1,11 @@
 $fn = 120;
 
-show_base = true;
-show_handle = true;
-show_lid = true;
-show_standalone_handle = false;
-show_lid_inset = true;
+show_base = false;
+show_handle = false;
+show_lid = false;
+show_lid_inset = false;
 show_standalone_inset = false;
+show_standalone_handle = true;
 
 color_dark = "Sienna";
 color_light = "DarkGoldenrod";
@@ -99,9 +99,14 @@ module show_full_lid() {
     }
 }
 
+module show_standalone_handle() {
+    lid_handle();
+}
+
 if (show_lid) show_full_lid();
 if (show_base) color(color_dark) base();
 if(show_standalone_handle) lid_handle();
 if(show_standalone_inset) lid_inset();
+
 
     
