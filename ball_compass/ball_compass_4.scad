@@ -29,7 +29,7 @@ module access_hole() {
 
 
 module body() {
-    cube_height = sphere_diameter*0.44;
+    cube_height = sphere_diameter*0.40;
     echo(cube_height);
 
     translate([0, 0, cube_height/2])
@@ -57,4 +57,19 @@ module rounded_mount() {
     }
 }
 
-rounded_mount();
+module rounded_mounts() {
+    x_count = 2;
+    y_count = 3;
+    
+    spacing = cube_width + 5;
+    
+    for(x = [0 : 1 : x_count - 1]) {
+        for(y = [0 : 1 : y_count - 1]) {
+            translate([x*spacing, y*spacing, 0]) {
+                rounded_mount();
+            }
+        }
+    }        
+}
+
+rounded_mounts();
