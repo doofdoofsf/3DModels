@@ -8,6 +8,7 @@ $fn=120;
 
 sphere_diameter = 29;
 cube_width = sphere_diameter*1.3;
+
 module cutout_tool() {
     width = cube_width * 1.5;
     difference() {
@@ -29,7 +30,7 @@ module access_hole() {
 
 
 module body() {
-    cube_height = sphere_diameter*0.40;
+    cube_height = sphere_diameter*0.49;
     echo(cube_height);
 
     translate([0, 0, cube_height/2])
@@ -53,13 +54,13 @@ module mount() {
 module rounded_mount() {
     difference() {
         mount();
-        translate([0, 0, sphere_diameter * 0.3]) cutout_tool();
+        translate([0, 0, sphere_diameter * 0.38]) cutout_tool();
     }
 }
 
 module rounded_mounts() {
-    x_count = 2;
-    y_count = 3;
+    x_count = 1;
+    y_count = 1;
     
     spacing = cube_width + 6;
     
