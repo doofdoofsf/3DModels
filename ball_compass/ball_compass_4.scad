@@ -59,10 +59,10 @@ module rounded_mount() {
 }
 
 module rounded_mounts() {
-    x_count = 2;
-    y_count = 4;
+    x_count = 3;
+    y_count = 3;
     
-    spacing = cube_width + 6;
+    spacing = cube_width + 5;
     
     for(x = [0 : 1 : x_count - 1]) {
         for(y = [0 : 1 : y_count - 1]) {
